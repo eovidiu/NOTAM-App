@@ -5,10 +5,10 @@ struct NOTAMDetailView: View {
 
     @State private var selectedTab: DetailTab = .translated
     @State private var showShareSheet = false
+    @State private var translated: TranslatedNOTAM?
+    @State private var isLoadingAI = false
 
-    private var translated: TranslatedNOTAM {
-        NOTAMTranslator.shared.translate(notam)
-    }
+    private let translator = NOTAMTranslator.shared
 
     var body: some View {
         VStack(spacing: 0) {
@@ -40,47 +40,81 @@ struct NOTAMDetailView: View {
                 }
             }
         }
+        .task {
+            // Start with dictionary translation immediately
+            translated = translator.translate(notam)
+
+            // Then fetch AI translation in background if available (iOS 26+)
+            if #available(iOS 26.0, *), translator.isAIAvailable {
+                isLoadingAI = true
+                translated = await translator.translateWithAI(notam)
+                isLoadingAI = false
+            }
+        }
     }
 
     // MARK: - Translated View
 
     private var translatedView: some View {
         VStack(alignment: .leading, spacing: 16) {
-            // Summary card
-            VStack(alignment: .leading, spacing: 8) {
-                Label("Summary", systemImage: "text.alignleft")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+            if let translated {
+                // Summary card
+                VStack(alignment: .leading, spacing: 8) {
+                    Label("Summary", systemImage: "text.alignleft")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
 
-                Text(translated.summary)
-                    .font(.headline)
+                    Text(translated.summary)
+                        .font(.headline)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                // Status indicator
+                statusCard
+
+                // Sections
+                ForEach(translated.sections) { section in
+                    sectionCard(section)
+                }
+
+                // Plain English text
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Label("Plain English", systemImage: "text.bubble")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+
+                        Spacer()
+
+                        if isLoadingAI {
+                            HStack(spacing: 4) {
+                                ProgressView()
+                                    .scaleEffect(0.7)
+                                Text("AI translating...")
+                                    .font(.caption2)
+                            }
+                            .foregroundStyle(.secondary)
+                        } else if translated.aiPlainText != nil {
+                            Label("AI", systemImage: "apple.intelligence")
+                                .font(.caption2)
+                                .foregroundStyle(.purple)
+                        }
+                    }
+
+                    Text(translated.bestTranslation)
+                        .font(.body)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            } else {
+                ProgressView("Loading...")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-
-            // Status indicator
-            statusCard
-
-            // Sections
-            ForEach(translated.sections) { section in
-                sectionCard(section)
-            }
-
-            // Plain English text
-            VStack(alignment: .leading, spacing: 8) {
-                Label("Plain English", systemImage: "text.bubble")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-
-                Text(translated.plainText)
-                    .font(.body)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
         .padding()
     }

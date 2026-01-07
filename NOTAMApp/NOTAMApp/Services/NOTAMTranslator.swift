@@ -1,10 +1,11 @@
 import Foundation
+import FoundationModels
 
-/// Translates NOTAM abbreviations to plain English
+/// Translates NOTAM abbreviations to plain English using on-device AI
 final class NOTAMTranslator {
     static let shared = NOTAMTranslator()
 
-    // MARK: - Main Translation
+    // MARK: - Main Translation (Synchronous - uses abbreviation dictionary)
 
     func translate(_ notam: NOTAM) -> TranslatedNOTAM {
         let sections = parseSections(notam)
@@ -14,8 +15,71 @@ final class NOTAMTranslator {
             original: notam,
             summary: generateSummary(notam, sections: sections),
             plainText: plainText,
+            aiPlainText: nil,
             sections: sections
         )
+    }
+
+    // MARK: - AI Translation (Asynchronous - uses on-device LLM)
+
+    @available(iOS 26.0, *)
+    func translateWithAI(_ notam: NOTAM) async -> TranslatedNOTAM {
+        let sections = parseSections(notam)
+        let dictionaryPlainText = translateText(notam.text)
+
+        // Try AI translation if available
+        var aiPlainText: String? = nil
+
+        // Import FoundationModels at runtime
+        if isAIAvailable {
+            do {
+                let session = await createAISession()
+                let prompt = """
+                    Translate this NOTAM to plain English:
+
+                    \(notam.text)
+
+                    Location: \(notam.location)
+                    Effective: \(notam.effectivePeriodDescription)
+                    """
+                let response = try await session.respond(to: prompt)
+                aiPlainText = response.content
+            } catch {
+                // AI failed, will fall back to dictionary translation
+                print("AI translation failed: \(error.localizedDescription)")
+            }
+        }
+
+        return TranslatedNOTAM(
+            original: notam,
+            summary: generateSummary(notam, sections: sections),
+            plainText: dictionaryPlainText,
+            aiPlainText: aiPlainText,
+            sections: sections
+        )
+    }
+
+    @available(iOS 26.0, *)
+    private func createAISession() async -> FoundationModels.LanguageModelSession {
+        FoundationModels.LanguageModelSession(instructions: """
+            You are an aviation NOTAM translator. Your task is to convert technical aviation
+            NOTAMs (Notices to Air Missions) into clear, plain English that a pilot can quickly understand.
+
+            Rules:
+            - Expand all abbreviations (RWY = Runway, TWY = Taxiway, CLSD = Closed, etc.)
+            - Convert times to readable format
+            - Keep the translation concise but complete
+            - Focus on operational impact for pilots
+            - Do not add information not in the original NOTAM
+            """)
+    }
+
+    /// Check if AI translation is available on this device
+    var isAIAvailable: Bool {
+        if #available(iOS 26.0, *) {
+            return FoundationModels.SystemLanguageModel.default.isAvailable
+        }
+        return false
     }
 
     // MARK: - Section Parsing
@@ -449,8 +513,14 @@ final class NOTAMTranslator {
 struct TranslatedNOTAM {
     let original: NOTAM
     let summary: String
-    let plainText: String
+    let plainText: String      // Dictionary-based translation (always available)
+    let aiPlainText: String?   // AI-generated translation (when available)
     let sections: [NOTAMSection]
+
+    /// Returns the best available translation (AI if available, otherwise dictionary)
+    var bestTranslation: String {
+        aiPlainText ?? plainText
+    }
 }
 
 struct NOTAMSection: Identifiable {
