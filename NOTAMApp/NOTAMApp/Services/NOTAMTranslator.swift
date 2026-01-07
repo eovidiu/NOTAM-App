@@ -240,7 +240,6 @@ final class NOTAMTranslator {
         // C
         "CAT": "Category",
         "CLSD": "Closed",
-        "CLSD": "Closed",
         "CTC": "Contact",
         "CTL": "Control",
         "CTR": "Control zone",

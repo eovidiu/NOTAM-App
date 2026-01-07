@@ -1,99 +1,77 @@
 import Foundation
 
 /// Manages persistence of detected NOTAM changes
-actor ChangeStore {
+@MainActor
+class ChangeStore: ObservableObject {
     static let shared = ChangeStore()
 
     private let fileManager = FileManager.default
     private let changesFileURL: URL
 
-    @MainActor @Published private(set) var changes: [NOTAMChange] = []
-    @MainActor var unreadCount: Int {
+    @Published private(set) var changes: [NOTAMChange] = []
+
+    var unreadCount: Int {
         changes.filter { !$0.isRead }.count
     }
 
     init() {
         let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         changesFileURL = paths[0].appendingPathComponent("notam_changes.json")
-
-        Task {
-            await load()
-        }
+        load()
     }
 
     // MARK: - Operations
 
-    func addChanges(_ newChanges: [NOTAMChange]) async {
-        var current = await MainActor.run { changes }
-        current.insert(contentsOf: newChanges, at: 0)
+    func addChanges(_ newChanges: [NOTAMChange]) {
+        changes.insert(contentsOf: newChanges, at: 0)
 
         // Keep only last 100 changes
-        if current.count > 100 {
-            current = Array(current.prefix(100))
+        if changes.count > 100 {
+            changes = Array(changes.prefix(100))
         }
 
-        await MainActor.run {
-            self.changes = current
-        }
-
-        save(current)
+        save()
     }
 
-    func markAsRead(_ change: NOTAMChange) async {
-        var current = await MainActor.run { changes }
-        if let index = current.firstIndex(where: { $0.id == change.id }) {
-            current[index].isRead = true
-            await MainActor.run {
-                self.changes = current
-            }
-            save(current)
+    func markAsRead(_ change: NOTAMChange) {
+        if let index = changes.firstIndex(where: { $0.id == change.id }) {
+            changes[index].isRead = true
+            save()
         }
     }
 
-    func markAllAsRead() async {
-        var current = await MainActor.run { changes }
-        for index in current.indices {
-            current[index].isRead = true
+    func markAllAsRead() {
+        for index in changes.indices {
+            changes[index].isRead = true
         }
-        await MainActor.run {
-            self.changes = current
-        }
-        save(current)
+        save()
     }
 
-    func clearAll() async {
-        await MainActor.run {
-            self.changes = []
-        }
+    func clearAll() {
+        changes = []
         try? fileManager.removeItem(at: changesFileURL)
     }
 
-    func removeChange(_ change: NOTAMChange) async {
-        var current = await MainActor.run { changes }
-        current.removeAll { $0.id == change.id }
-        await MainActor.run {
-            self.changes = current
-        }
-        save(current)
+    func removeChange(_ change: NOTAMChange) {
+        changes.removeAll { $0.id == change.id }
+        save()
     }
 
     // MARK: - Persistence
 
-    private func load() async {
+    private func load() {
         guard fileManager.fileExists(atPath: changesFileURL.path) else { return }
 
         do {
             let data = try Data(contentsOf: changesFileURL)
             let decoded = try JSONDecoder().decode([NOTAMChange].self, from: data)
-            await MainActor.run {
-                self.changes = decoded
-            }
+            self.changes = decoded
         } catch {
             print("Failed to load changes: \(error)")
         }
     }
 
-    private func save(_ changes: [NOTAMChange]) {
+    private func save() {
         do {
             let data = try JSONEncoder().encode(changes)
             try data.write(to: changesFileURL)

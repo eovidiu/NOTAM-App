@@ -3,480 +3,286 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0001 /* NOTAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001; };
-		0002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1002; };
-		0003 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1003; };
-		0004 /* FIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1004; };
-		0005 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005; };
-		0006 /* NOTAMChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1006; };
-		0007 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1007; };
-		0008 /* NOTAMCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008; };
-		0009 /* NOTAMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1009; };
-		0010 /* BackgroundRefreshManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1010; };
-		0011 /* NOTAMChangeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1011; };
-		0012 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1012; };
-		0013 /* ChangeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1013; };
-		0014 /* NOTAMTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1014; };
-		0015 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015; };
-		0016 /* NOTAMListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1016; };
-		0017 /* NOTAMRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017; };
-		0018 /* NOTAMDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018; };
-		0019 /* ChangesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1019; };
-		0020 /* ChangeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1020; };
-		0021 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1021; };
-		0022 /* AddFIRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022; };
-		0023 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023; };
-		0024 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1024; };
-		0025 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025; };
-		0050 /* NOTAMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050; };
-		0051 /* NOTAMChangeDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1051; };
-		0052 /* NOTAMTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1052; };
-		0060 /* NOTAMAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1060; };
+		049F5C8E77375A2535672970 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4346817BF89EF2F0E0B30 /* NOTAM.swift */; };
+		255A2A8823DC02EFCA7EB075 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E247CC83F7FEF4ADA5829F1 /* ContentView.swift */; };
+		296DB9BAE8363E48DA437CA4 /* NOTAMListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428527AFFFED9581F4C7562 /* NOTAMListView.swift */; };
+		34E6C4D9A043C55452106631 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D091D1CA230B52FC8F906 /* SettingsView.swift */; };
+		38AB691DBB99B57067EDC604 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E4AAE7B2750B842C52D23D /* ErrorView.swift */; };
+		3BF64646694D8A06B5166A32 /* NOTAMChangeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB2DEC8FA88FF9D23A3CF9B /* NOTAMChangeDetector.swift */; };
+		457CFD06CA1D656CD9CCFEBA /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4405DD65162EEF1D3ED570D /* AppSettings.swift */; };
+		5AC5B85E806FD0D6A09AD2CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C063F104388775531EB0C8B4 /* Assets.xcassets */; };
+		5B11647C840BC423A5FAA5CD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868EA3DCB3BE6FD00F415269 /* AppState.swift */; };
+		67DC6AEBB2EE21865682E1B6 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782039089BA899FC9F8B1313 /* EmptyStateView.swift */; };
+		680936F28C73CB31E1719C27 /* FIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE22B1EE7A48D64BCBD4911 /* FIR.swift */; };
+		6B2EDBA9EA5A207CEC249E54 /* NOTAMRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56AECC454BC4598DE3045C5 /* NOTAMRowView.swift */; };
+		72B02B73279DD9975BE175DF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF4102D5405B506176529F /* NotificationManager.swift */; };
+		793FF9662CDF489648115FEB /* ChangesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA65169CDA9AB3D8DFC30CA /* ChangesListView.swift */; };
+		7E371F3EBDE0B16DA7E3F248 /* NOTAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */; };
+		8AAC73B61F36FF096E2E5E0B /* NOTAMChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F27F61073120598BAF9139 /* NOTAMChange.swift */; };
+		8BA0040B5E9AD3E568663858 /* NOTAMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B4C3ACAC73CED23B20A2C /* NOTAMService.swift */; };
+		8E66AE95029D15730D10FD84 /* BackgroundRefreshManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EDEEE6E04060B866CD379E /* BackgroundRefreshManager.swift */; };
+		9C3929116E42DE160324689D /* ChangeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282F7F07CFF381982EA387F2 /* ChangeStore.swift */; };
+		A9C60573E40453F47A4E739F /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12CC2ACC54E54CD5BC63480 /* SettingsStore.swift */; };
+		B1D1AAD0B9FB21945EEDC011 /* NOTAMCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950BFB1FBBB0784740E12C /* NOTAMCache.swift */; };
+		C09EC06E3D5225039D909528 /* AddFIRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1D8DBE22D3310BD0600053 /* AddFIRView.swift */; };
+		D5050FF21DCA10F5EE52A7FB /* NOTAMDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F99420AD9E947887C4ABB7F /* NOTAMDetailView.swift */; };
+		EB979F4CB55E5635397EC2B6 /* NOTAMTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D77C2EDF21A0D1BEF1DCFA /* NOTAMTranslator.swift */; };
+		FA04A69076DFBE35F9B15F83 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18D2D6B342E5B1AAFF62603 /* LoadingView.swift */; };
+		FCD068C161A14269EB480276 /* ChangeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE39DDA7833A34986170042 /* ChangeDetailView.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2001 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3000;
-			proxyType = 1;
-			remoteGlobalIDString = 4001;
-			remoteInfo = NOTAMApp;
-		};
-		2002 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3000;
-			proxyType = 1;
-			remoteGlobalIDString = 4001;
-			remoteInfo = NOTAMApp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		1001 /* NOTAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMApp.swift; sourceTree = "<group>"; };
-		1002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1003 /* NOTAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAM.swift; sourceTree = "<group>"; };
-		1004 /* FIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIR.swift; sourceTree = "<group>"; };
-		1005 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		1006 /* NOTAMChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChange.swift; sourceTree = "<group>"; };
-		1007 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
-		1008 /* NOTAMCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMCache.swift; sourceTree = "<group>"; };
-		1009 /* NOTAMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMService.swift; sourceTree = "<group>"; };
-		1010 /* BackgroundRefreshManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRefreshManager.swift; sourceTree = "<group>"; };
-		1011 /* NOTAMChangeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChangeDetector.swift; sourceTree = "<group>"; };
-		1012 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		1013 /* ChangeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeStore.swift; sourceTree = "<group>"; };
-		1014 /* NOTAMTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMTranslator.swift; sourceTree = "<group>"; };
-		1015 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		1016 /* NOTAMListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMListView.swift; sourceTree = "<group>"; };
-		1017 /* NOTAMRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMRowView.swift; sourceTree = "<group>"; };
-		1018 /* NOTAMDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMDetailView.swift; sourceTree = "<group>"; };
-		1019 /* ChangesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesListView.swift; sourceTree = "<group>"; };
-		1020 /* ChangeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDetailView.swift; sourceTree = "<group>"; };
-		1021 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		1022 /* AddFIRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFIRView.swift; sourceTree = "<group>"; };
-		1023 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		1024 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		1025 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
-		1030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1050 /* NOTAMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMTests.swift; sourceTree = "<group>"; };
-		1051 /* NOTAMChangeDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChangeDetectorTests.swift; sourceTree = "<group>"; };
-		1052 /* NOTAMTranslatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMTranslatorTests.swift; sourceTree = "<group>"; };
-		1060 /* NOTAMAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMAppUITests.swift; sourceTree = "<group>"; };
-		4001 /* NOTAMApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NOTAMApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4002 /* NOTAMAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NOTAMAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4003 /* NOTAMAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NOTAMAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E1D091D1CA230B52FC8F906 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMApp.swift; sourceTree = "<group>"; };
+		18F27F61073120598BAF9139 /* NOTAMChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChange.swift; sourceTree = "<group>"; };
+		1E247CC83F7FEF4ADA5829F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		20F7AB760A39F0EE7E83C3CC /* NOTAMApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NOTAMApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		282F7F07CFF381982EA387F2 /* ChangeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeStore.swift; sourceTree = "<group>"; };
+		2AE22B1EE7A48D64BCBD4911 /* FIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIR.swift; sourceTree = "<group>"; };
+		2C7B4C3ACAC73CED23B20A2C /* NOTAMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMService.swift; sourceTree = "<group>"; };
+		3BE39DDA7833A34986170042 /* ChangeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDetailView.swift; sourceTree = "<group>"; };
+		42D77C2EDF21A0D1BEF1DCFA /* NOTAMTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMTranslator.swift; sourceTree = "<group>"; };
+		6F99420AD9E947887C4ABB7F /* NOTAMDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMDetailView.swift; sourceTree = "<group>"; };
+		782039089BA899FC9F8B1313 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		7F950BFB1FBBB0784740E12C /* NOTAMCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMCache.swift; sourceTree = "<group>"; };
+		81E4AAE7B2750B842C52D23D /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		868EA3DCB3BE6FD00F415269 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		8DA65169CDA9AB3D8DFC30CA /* ChangesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesListView.swift; sourceTree = "<group>"; };
+		A18D2D6B342E5B1AAFF62603 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		B1EDEEE6E04060B866CD379E /* BackgroundRefreshManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRefreshManager.swift; sourceTree = "<group>"; };
+		C063F104388775531EB0C8B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C12CC2ACC54E54CD5BC63480 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		C4405DD65162EEF1D3ED570D /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		C8E4346817BF89EF2F0E0B30 /* NOTAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAM.swift; sourceTree = "<group>"; };
+		DA38FC41A96F52CC43C2BE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E56AECC454BC4598DE3045C5 /* NOTAMRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMRowView.swift; sourceTree = "<group>"; };
+		F428527AFFFED9581F4C7562 /* NOTAMListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMListView.swift; sourceTree = "<group>"; };
+		FA1D8DBE22D3310BD0600053 /* AddFIRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFIRView.swift; sourceTree = "<group>"; };
+		FDB2DEC8FA88FF9D23A3CF9B /* NOTAMChangeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChangeDetector.swift; sourceTree = "<group>"; };
+		FDEF4102D5405B506176529F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFrameworksBuildPhase section */
-		5001 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5002 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5003 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
 /* Begin PBXGroup section */
-		6000 = {
+		109837CE14DF231DA92CA287 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6001 /* NOTAMApp */,
-				6010 /* NOTAMAppTests */,
-				6020 /* NOTAMAppUITests */,
-				6030 /* Products */,
+				20F7AB760A39F0EE7E83C3CC /* NOTAMApp.app */,
 			);
+			name = Products;
 			sourceTree = "<group>";
 		};
-		6001 /* NOTAMApp */ = {
+		15D8440CC19A75EF35B61605 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1001 /* NOTAMApp.swift */,
-				1002 /* ContentView.swift */,
-				1030 /* Info.plist */,
-				6002 /* Models */,
-				6003 /* Services */,
-				6004 /* Views */,
-			);
-			path = NOTAMApp;
-			sourceTree = "<group>";
-		};
-		6002 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				1003 /* NOTAM.swift */,
-				1004 /* FIR.swift */,
-				1005 /* AppSettings.swift */,
-				1006 /* NOTAMChange.swift */,
+				C4405DD65162EEF1D3ED570D /* AppSettings.swift */,
+				2AE22B1EE7A48D64BCBD4911 /* FIR.swift */,
+				C8E4346817BF89EF2F0E0B30 /* NOTAM.swift */,
+				18F27F61073120598BAF9139 /* NOTAMChange.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		6003 /* Services */ = {
+		39C896EF2D847173CF0B0F15 = {
 			isa = PBXGroup;
 			children = (
-				1007 /* SettingsStore.swift */,
-				1008 /* NOTAMCache.swift */,
-				1009 /* NOTAMService.swift */,
-				1010 /* BackgroundRefreshManager.swift */,
-				1011 /* NOTAMChangeDetector.swift */,
-				1012 /* NotificationManager.swift */,
-				1013 /* ChangeStore.swift */,
-				1014 /* NOTAMTranslator.swift */,
-				1015 /* AppState.swift */,
+				6AC9A32ECC96F5F47A7CB63B /* NOTAMApp */,
+				109837CE14DF231DA92CA287 /* Products */,
 			);
-			path = Services;
 			sourceTree = "<group>";
 		};
-		6004 /* Views */ = {
+		430CDA8A1EB79AFC0BBAC633 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6005 /* NOTAM */,
-				6006 /* Changes */,
-				6007 /* Settings */,
-				6008 /* Components */,
+				66DAFD06F2481B08BB6EBA34 /* Changes */,
+				89F67F8EFDBAFB288D18604B /* Components */,
+				70AD913D0D021E021426C7FE /* NOTAM */,
+				49479421A8DCE1ECA9DC2CE3 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		6005 /* NOTAM */ = {
+		49479421A8DCE1ECA9DC2CE3 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				1016 /* NOTAMListView.swift */,
-				1017 /* NOTAMRowView.swift */,
-				1018 /* NOTAMDetailView.swift */,
-			);
-			path = NOTAM;
-			sourceTree = "<group>";
-		};
-		6006 /* Changes */ = {
-			isa = PBXGroup;
-			children = (
-				1019 /* ChangesListView.swift */,
-				1020 /* ChangeDetailView.swift */,
-			);
-			path = Changes;
-			sourceTree = "<group>";
-		};
-		6007 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				1021 /* SettingsView.swift */,
-				1022 /* AddFIRView.swift */,
+				FA1D8DBE22D3310BD0600053 /* AddFIRView.swift */,
+				0E1D091D1CA230B52FC8F906 /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		6008 /* Components */ = {
+		66DAFD06F2481B08BB6EBA34 /* Changes */ = {
 			isa = PBXGroup;
 			children = (
-				1023 /* LoadingView.swift */,
-				1024 /* ErrorView.swift */,
-				1025 /* EmptyStateView.swift */,
+				3BE39DDA7833A34986170042 /* ChangeDetailView.swift */,
+				8DA65169CDA9AB3D8DFC30CA /* ChangesListView.swift */,
+			);
+			path = Changes;
+			sourceTree = "<group>";
+		};
+		6AC9A32ECC96F5F47A7CB63B /* NOTAMApp */ = {
+			isa = PBXGroup;
+			children = (
+				C063F104388775531EB0C8B4 /* Assets.xcassets */,
+				1E247CC83F7FEF4ADA5829F1 /* ContentView.swift */,
+				DA38FC41A96F52CC43C2BE6C /* Info.plist */,
+				0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */,
+				15D8440CC19A75EF35B61605 /* Models */,
+				9A934877F04BC7AE96B5463E /* Services */,
+				430CDA8A1EB79AFC0BBAC633 /* Views */,
+			);
+			path = NOTAMApp;
+			sourceTree = "<group>";
+		};
+		70AD913D0D021E021426C7FE /* NOTAM */ = {
+			isa = PBXGroup;
+			children = (
+				6F99420AD9E947887C4ABB7F /* NOTAMDetailView.swift */,
+				F428527AFFFED9581F4C7562 /* NOTAMListView.swift */,
+				E56AECC454BC4598DE3045C5 /* NOTAMRowView.swift */,
+			);
+			path = NOTAM;
+			sourceTree = "<group>";
+		};
+		89F67F8EFDBAFB288D18604B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				782039089BA899FC9F8B1313 /* EmptyStateView.swift */,
+				81E4AAE7B2750B842C52D23D /* ErrorView.swift */,
+				A18D2D6B342E5B1AAFF62603 /* LoadingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		6010 /* NOTAMAppTests */ = {
+		9A934877F04BC7AE96B5463E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1050 /* NOTAMTests.swift */,
-				1051 /* NOTAMChangeDetectorTests.swift */,
-				1052 /* NOTAMTranslatorTests.swift */,
+				868EA3DCB3BE6FD00F415269 /* AppState.swift */,
+				B1EDEEE6E04060B866CD379E /* BackgroundRefreshManager.swift */,
+				282F7F07CFF381982EA387F2 /* ChangeStore.swift */,
+				7F950BFB1FBBB0784740E12C /* NOTAMCache.swift */,
+				FDB2DEC8FA88FF9D23A3CF9B /* NOTAMChangeDetector.swift */,
+				2C7B4C3ACAC73CED23B20A2C /* NOTAMService.swift */,
+				42D77C2EDF21A0D1BEF1DCFA /* NOTAMTranslator.swift */,
+				FDEF4102D5405B506176529F /* NotificationManager.swift */,
+				C12CC2ACC54E54CD5BC63480 /* SettingsStore.swift */,
 			);
-			path = NOTAMAppTests;
-			sourceTree = "<group>";
-		};
-		6020 /* NOTAMAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				1060 /* NOTAMAppUITests.swift */,
-			);
-			path = NOTAMAppUITests;
-			sourceTree = "<group>";
-		};
-		6030 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4001 /* NOTAMApp.app */,
-				4002 /* NOTAMAppTests.xctest */,
-				4003 /* NOTAMAppUITests.xctest */,
-			);
-			name = Products;
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7001 /* NOTAMApp */ = {
+		C72A6C6F15710668DCD9320C /* NOTAMApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8001;
+			buildConfigurationList = CE9B4A587FC44313A7157579 /* Build configuration list for PBXNativeTarget "NOTAMApp" */;
 			buildPhases = (
-				5001 /* Sources */,
-				5001 /* Frameworks */,
+				87CCB248E5BB5DA19F8C6966 /* Sources */,
+				D7AD3840774C97B16ECE19AC /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = NOTAMApp;
+			packageProductDependencies = (
+			);
 			productName = NOTAMApp;
-			productReference = 4001 /* NOTAMApp.app */;
+			productReference = 20F7AB760A39F0EE7E83C3CC /* NOTAMApp.app */;
 			productType = "com.apple.product-type.application";
-		};
-		7002 /* NOTAMAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8002;
-			buildPhases = (
-				5002 /* Sources */,
-				5002 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7010 /* PBXTargetDependency */,
-			);
-			name = NOTAMAppTests;
-			productName = NOTAMAppTests;
-			productReference = 4002 /* NOTAMAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		7003 /* NOTAMAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8003;
-			buildPhases = (
-				5003 /* Sources */,
-				5003 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7011 /* PBXTargetDependency */,
-			);
-			name = NOTAMAppUITests;
-			productName = NOTAMAppUITests;
-			productReference = 4003 /* NOTAMAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3000 /* Project object */ = {
+		C898020189DFFC45A31EDE08 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					7001 = {
-						CreatedOnToolsVersion = 15.0;
-					};
-					7002 = {
-						CreatedOnToolsVersion = 15.0;
-						TestTargetID = 7001;
-					};
-					7003 = {
-						CreatedOnToolsVersion = 15.0;
-						TestTargetID = 7001;
+					C72A6C6F15710668DCD9320C = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 8000;
+			buildConfigurationList = 923B2DAAEE5FB9B3065B1DFD /* Build configuration list for PBXProject "NOTAMApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
-			mainGroup = 6000;
-			productRefGroup = 6030 /* Products */;
+			mainGroup = 39C896EF2D847173CF0B0F15;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7001 /* NOTAMApp */,
-				7002 /* NOTAMAppTests */,
-				7003 /* NOTAMAppUITests */,
+				C72A6C6F15710668DCD9320C /* NOTAMApp */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		D7AD3840774C97B16ECE19AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AC5B85E806FD0D6A09AD2CB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		5001 /* Sources */ = {
+		87CCB248E5BB5DA19F8C6966 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0001 /* NOTAMApp.swift in Sources */,
-				0002 /* ContentView.swift in Sources */,
-				0003 /* NOTAM.swift in Sources */,
-				0004 /* FIR.swift in Sources */,
-				0005 /* AppSettings.swift in Sources */,
-				0006 /* NOTAMChange.swift in Sources */,
-				0007 /* SettingsStore.swift in Sources */,
-				0008 /* NOTAMCache.swift in Sources */,
-				0009 /* NOTAMService.swift in Sources */,
-				0010 /* BackgroundRefreshManager.swift in Sources */,
-				0011 /* NOTAMChangeDetector.swift in Sources */,
-				0012 /* NotificationManager.swift in Sources */,
-				0013 /* ChangeStore.swift in Sources */,
-				0014 /* NOTAMTranslator.swift in Sources */,
-				0015 /* AppState.swift in Sources */,
-				0016 /* NOTAMListView.swift in Sources */,
-				0017 /* NOTAMRowView.swift in Sources */,
-				0018 /* NOTAMDetailView.swift in Sources */,
-				0019 /* ChangesListView.swift in Sources */,
-				0020 /* ChangeDetailView.swift in Sources */,
-				0021 /* SettingsView.swift in Sources */,
-				0022 /* AddFIRView.swift in Sources */,
-				0023 /* LoadingView.swift in Sources */,
-				0024 /* ErrorView.swift in Sources */,
-				0025 /* EmptyStateView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5002 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0050 /* NOTAMTests.swift in Sources */,
-				0051 /* NOTAMChangeDetectorTests.swift in Sources */,
-				0052 /* NOTAMTranslatorTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5003 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0060 /* NOTAMAppUITests.swift in Sources */,
+				C09EC06E3D5225039D909528 /* AddFIRView.swift in Sources */,
+				457CFD06CA1D656CD9CCFEBA /* AppSettings.swift in Sources */,
+				5B11647C840BC423A5FAA5CD /* AppState.swift in Sources */,
+				8E66AE95029D15730D10FD84 /* BackgroundRefreshManager.swift in Sources */,
+				FCD068C161A14269EB480276 /* ChangeDetailView.swift in Sources */,
+				9C3929116E42DE160324689D /* ChangeStore.swift in Sources */,
+				793FF9662CDF489648115FEB /* ChangesListView.swift in Sources */,
+				255A2A8823DC02EFCA7EB075 /* ContentView.swift in Sources */,
+				67DC6AEBB2EE21865682E1B6 /* EmptyStateView.swift in Sources */,
+				38AB691DBB99B57067EDC604 /* ErrorView.swift in Sources */,
+				680936F28C73CB31E1719C27 /* FIR.swift in Sources */,
+				FA04A69076DFBE35F9B15F83 /* LoadingView.swift in Sources */,
+				049F5C8E77375A2535672970 /* NOTAM.swift in Sources */,
+				7E371F3EBDE0B16DA7E3F248 /* NOTAMApp.swift in Sources */,
+				B1D1AAD0B9FB21945EEDC011 /* NOTAMCache.swift in Sources */,
+				8AAC73B61F36FF096E2E5E0B /* NOTAMChange.swift in Sources */,
+				3BF64646694D8A06B5166A32 /* NOTAMChangeDetector.swift in Sources */,
+				D5050FF21DCA10F5EE52A7FB /* NOTAMDetailView.swift in Sources */,
+				296DB9BAE8363E48DA437CA4 /* NOTAMListView.swift in Sources */,
+				6B2EDBA9EA5A207CEC249E54 /* NOTAMRowView.swift in Sources */,
+				8BA0040B5E9AD3E568663858 /* NOTAMService.swift in Sources */,
+				EB979F4CB55E5635397EC2B6 /* NOTAMTranslator.swift in Sources */,
+				72B02B73279DD9975BE175DF /* NotificationManager.swift in Sources */,
+				A9C60573E40453F47A4E739F /* SettingsStore.swift in Sources */,
+				34E6C4D9A043C55452106631 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		7010 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7001 /* NOTAMApp */;
-			targetProxy = 2001 /* PBXContainerItemProxy */;
-		};
-		7011 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7001 /* NOTAMApp */;
-			targetProxy = 2002 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		9000 /* Debug */ = {
+		2BEB61DAB4AAE2C2E594A19A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		9001 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -506,8 +312,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -515,26 +320,28 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		9010 /* Debug */ = {
+		B43CD83A560997D945A404EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NOTAMApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NOTAM;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -548,23 +355,85 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		9011 /* Release */ = {
+		E45309D2E1933F7076AD3AD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F700082E82B1DD085938C237 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NOTAMApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NOTAM;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -578,129 +447,33 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		9020 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NOTAMApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NOTAMApp";
-			};
-			name = Debug;
-		};
-		9021 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NOTAMApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NOTAMApp";
-			};
-			name = Release;
-		};
-		9030 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = NOTAMApp;
-			};
-			name = Debug;
-		};
-		9031 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = NOTAMApp;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8000 /* Build configuration list for PBXProject */ = {
+		923B2DAAEE5FB9B3065B1DFD /* Build configuration list for PBXProject "NOTAMApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9000 /* Debug */,
-				9001 /* Release */,
+				E45309D2E1933F7076AD3AD2 /* Debug */,
+				2BEB61DAB4AAE2C2E594A19A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		8001 /* Build configuration list for PBXNativeTarget "NOTAMApp" */ = {
+		CE9B4A587FC44313A7157579 /* Build configuration list for PBXNativeTarget "NOTAMApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9010 /* Debug */,
-				9011 /* Release */,
+				B43CD83A560997D945A404EA /* Debug */,
+				F700082E82B1DD085938C237 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8002 /* Build configuration list for PBXNativeTarget "NOTAMAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9020 /* Debug */,
-				9021 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8003 /* Build configuration list for PBXNativeTarget "NOTAMAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9030 /* Debug */,
-				9031 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 3000 /* Project object */;
+	rootObject = C898020189DFFC45A31EDE08 /* Project object */;
 }
