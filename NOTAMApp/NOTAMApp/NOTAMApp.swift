@@ -14,6 +14,9 @@ struct NOTAMApp: App {
                 .onAppear {
                     setupBackgroundTasks()
                 }
+                .task {
+                    await appState.refresh()
+                }
         }
     }
 

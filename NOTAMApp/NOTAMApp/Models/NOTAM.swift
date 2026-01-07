@@ -83,85 +83,101 @@ struct NOTAMSearchResponse: Codable {
 }
 
 struct NOTAMResponseItem: Codable {
-    let id: String?
-    let series: String?
-    let number: String?
-    let type: String?
-    let issued: String?
-    let affectedFIR: String?
-    let selectionCode: String?
-    let traffic: String?
-    let purpose: String?
-    let scope: String?
-    let minimumFL: String?
-    let maximumFL: String?
-    let location: String?
-    let effectiveStart: String?
-    let effectiveEnd: String?
+    // FAA API actual field names
+    let facilityDesignator: String?
+    let notamNumber: String?
+    let featureName: String?
+    let issueDate: String?
+    let startDate: String?
+    let endDate: String?
+    let source: String?
+    let sourceType: String?
     let icaoMessage: String?
     let traditionalMessage: String?
-    let coordinates: String?
+    let plainLanguageMessage: String?
+    let icaoId: String?
+    let airportName: String?
+    let status: String?
+    let keyword: String?
+    let mapPointer: String?
+    let transactionID: Int?
 
     func toNOTAM() -> NOTAM? {
-        guard let id = id,
-              let series = series,
-              let number = number,
-              let location = location,
-              let text = icaoMessage ?? traditionalMessage else {
+        // Use notamNumber as the unique ID
+        guard let notamNum = notamNumber else {
             return nil
         }
 
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        // Get text from traditionalMessage or icaoMessage (prefer traditional as icao is often just a space)
+        let text = (traditionalMessage?.trimmingCharacters(in: .whitespaces).isEmpty == false ? traditionalMessage : nil)
+            ?? (icaoMessage?.trimmingCharacters(in: .whitespaces).isEmpty == false ? icaoMessage : nil)
+            ?? plainLanguageMessage
+            ?? "No message available"
 
-        let altFormatter = ISO8601DateFormatter()
-        altFormatter.formatOptions = [.withInternetDateTime]
+        // Parse notam number for series (e.g., "LTA-N90-114" -> series="LTA", number="N90-114")
+        let parts = notamNum.split(separator: "-", maxSplits: 1)
+        let series = parts.count > 0 ? String(parts[0]) : "N"
+        let number = parts.count > 1 ? String(parts[1]) : notamNum
+
+        // Date formatter for FAA format: "MM/dd/yyyy HHmm"
+        let faaDateFormatter = DateFormatter()
+        faaDateFormatter.dateFormat = "MM/dd/yyyy HHmm"
+        faaDateFormatter.timeZone = TimeZone(abbreviation: "UTC")
 
         func parseDate(_ string: String?) -> Date? {
-            guard let string = string else { return nil }
-            return dateFormatter.date(from: string) ?? altFormatter.date(from: string)
+            guard let string = string, !string.isEmpty else { return nil }
+            return faaDateFormatter.date(from: string)
         }
 
-        let issuedDate = parseDate(issued) ?? Date()
-        let startDate = parseDate(effectiveStart) ?? Date()
+        let issuedDate = parseDate(issueDate) ?? Date()
+        let startDateValue = parseDate(startDate) ?? Date()
 
-        var endDate: Date? = nil
+        var endDateValue: Date? = nil
         var isEstimated = false
         var isPerm = false
 
-        if let endStr = effectiveEnd?.uppercased() {
+        if let endStr = endDate?.uppercased() {
             if endStr.contains("PERM") {
                 isPerm = true
             } else if endStr.contains("EST") {
                 isEstimated = true
                 let cleanedEnd = endStr.replacingOccurrences(of: "EST", with: "").trimmingCharacters(in: .whitespaces)
-                endDate = parseDate(cleanedEnd)
+                endDateValue = parseDate(cleanedEnd)
             } else {
-                endDate = parseDate(effectiveEnd)
+                endDateValue = parseDate(endDate)
             }
         }
 
+        // Parse coordinates from mapPointer (e.g., "POINT(-73.7789 40.6398)")
         var coords: Coordinates? = nil
-        if let coordStr = coordinates {
-            coords = parseCoordinates(coordStr)
+        if let pointer = mapPointer, pointer.hasPrefix("POINT(") {
+            let coordStr = pointer.dropFirst(6).dropLast()
+            let coordParts = coordStr.split(separator: " ")
+            if coordParts.count == 2,
+               let lon = Double(coordParts[0]),
+               let lat = Double(coordParts[1]) {
+                coords = Coordinates(latitude: lat, longitude: lon, radius: nil)
+            }
         }
 
+        let location = icaoId ?? facilityDesignator ?? ""
+
         return NOTAM(
-            id: id,
+            id: notamNum,
             series: series,
             number: number,
-            type: NOTAMType(rawValue: type ?? "N") ?? .new,
+            type: .new,
             issued: issuedDate,
-            affectedFIR: affectedFIR ?? location,
-            selectionCode: selectionCode,
-            traffic: traffic,
-            purpose: purpose,
-            scope: scope,
-            minimumFL: minimumFL,
-            maximumFL: maximumFL,
+            affectedFIR: location,
+            selectionCode: nil,
+            traffic: nil,
+            purpose: nil,
+            scope: nil,
+            minimumFL: nil,
+            maximumFL: nil,
             location: location,
-            effectiveStart: startDate,
-            effectiveEnd: endDate,
+            effectiveStart: startDateValue,
+            effectiveEnd: endDateValue,
             isEstimatedEnd: isEstimated,
             isPermanent: isPerm,
             text: text,

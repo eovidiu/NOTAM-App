@@ -1,4 +1,7 @@
 import Foundation
+import os.log
+
+private let logger = Logger(subsystem: "com.notamapp.NOTAMApp", category: "NOTAMService")
 
 /// Service for fetching NOTAMs from the FAA API
 actor NOTAMService {
@@ -18,6 +21,7 @@ actor NOTAMService {
 
     /// Fetches NOTAMs for a list of FIR/location codes
     func fetchNOTAMs(for locations: [String]) async throws -> [String: [NOTAM]] {
+        logger.info("[NOTAMService] fetchNOTAMs called for locations: \(locations.description)")
         var results: [String: [NOTAM]] = [:]
         var errors: [String: Error] = [:]
 
@@ -26,8 +30,10 @@ actor NOTAMService {
                 group.addTask {
                     do {
                         let notams = try await self.fetchNOTAMs(for: location)
+                        logger.info("[NOTAMService] Success for \(location): \(notams.count) NOTAMs")
                         return (location, .success(notams))
                     } catch {
+                        logger.error("[NOTAMService] Error for \(location): \(error.localizedDescription)")
                         return (location, .failure(error))
                     }
                 }
@@ -43,7 +49,9 @@ actor NOTAMService {
             }
         }
 
+        logger.info("[NOTAMService] Results: \(results.count), Errors: \(errors.count)")
         if results.isEmpty && !errors.isEmpty {
+            logger.error("[NOTAMService] All fetches failed: \(errors.description)")
             throw NOTAMError.allFetchesFailed(errors)
         }
 
@@ -78,12 +86,16 @@ actor NOTAMService {
 
     private func performFetch(for location: String) async throws -> [NOTAM] {
         let request = try buildRequest(for: location)
+        logger.info("[NOTAMService] Fetching from: \(request.url?.absoluteString ?? "nil")")
 
         let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {
+            logger.info("[NOTAMService] Invalid response type")
             throw NOTAMError.invalidResponse
         }
+
+        logger.info("[NOTAMService] HTTP Status: \(httpResponse.statusCode), Data size: \(data.count) bytes")
 
         switch httpResponse.statusCode {
         case 200:
@@ -91,16 +103,22 @@ actor NOTAMService {
         case 429:
             throw NOTAMError.rateLimited
         case 400..<500:
+            logger.info("[NOTAMService] Client error: \(httpResponse.statusCode)")
+            if let body = String(data: data.prefix(300), encoding: .utf8) {
+                logger.info("[NOTAMService] Error body: \(body)")
+            }
             throw NOTAMError.apiError(statusCode: httpResponse.statusCode, message: nil)
         case 500..<600:
+            logger.info("[NOTAMService] Server error: \(httpResponse.statusCode)")
             throw NOTAMError.serverError
         default:
+            logger.info("[NOTAMService] Unexpected status: \(httpResponse.statusCode)")
             throw NOTAMError.invalidResponse
         }
     }
 
     private func buildRequest(for location: String) throws -> URLRequest {
-        guard var components = URLComponents(string: baseURL) else {
+        guard let components = URLComponents(string: baseURL) else {
             throw NOTAMError.invalidURL
         }
 
@@ -138,11 +156,10 @@ actor NOTAMService {
     }
 
     private func parseResponse(_ data: Data) throws -> [NOTAM] {
-        // Try to parse the response
         do {
             let response = try JSONDecoder().decode(NOTAMSearchResponse.self, from: data)
 
-            if let error = response.error {
+            if let error = response.error, !error.isEmpty {
                 throw NOTAMError.apiError(statusCode: nil, message: error)
             }
 

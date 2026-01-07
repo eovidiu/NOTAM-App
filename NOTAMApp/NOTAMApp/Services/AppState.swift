@@ -1,5 +1,8 @@
 import Foundation
 import Combine
+import os.log
+
+private let logger = Logger(subsystem: "com.notamapp.NOTAMApp", category: "AppState")
 
 /// Main application state managing NOTAMs and UI state
 @MainActor
@@ -81,7 +84,9 @@ final class AppState: ObservableObject {
 
         do {
             let locations = settingsStore.settings.enabledFIRs.map { $0.icaoCode }
+            logger.info("[AppState] Refreshing with FIRs: \(locations.description)")
             guard !locations.isEmpty else {
+                logger.info("[AppState] No FIRs configured, aborting refresh")
                 isLoading = false
                 return
             }
@@ -90,7 +95,9 @@ final class AppState: ObservableObject {
             let previousNotams = notams
 
             // Fetch new data
+            logger.info("[AppState] Calling notamService.fetchNOTAMs...")
             let fetched = try await notamService.fetchNOTAMs(for: locations)
+            logger.info("[AppState] Received \(fetched.count) FIRs with NOTAMs")
 
             // Update state
             notams = fetched
@@ -118,6 +125,7 @@ final class AppState: ObservableObject {
             BackgroundRefreshManager.shared.scheduleRefresh()
 
         } catch {
+            logger.error("[AppState] Refresh error: \(error.localizedDescription)")
             self.error = error
         }
 
