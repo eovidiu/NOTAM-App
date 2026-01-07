@@ -1,0 +1,255 @@
+import SwiftUI
+
+struct NOTAMDetailView: View {
+    let notam: NOTAM
+
+    @State private var selectedTab: DetailTab = .translated
+    @State private var showShareSheet = false
+
+    private var translated: TranslatedNOTAM {
+        NOTAMTranslator.shared.translate(notam)
+    }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Tab picker
+            Picker("View", selection: $selectedTab) {
+                ForEach(DetailTab.allCases) { tab in
+                    Text(tab.rawValue).tag(tab)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding()
+
+            // Content
+            ScrollView {
+                switch selectedTab {
+                case .translated:
+                    translatedView
+                case .original:
+                    originalView
+                }
+            }
+        }
+        .navigationTitle(notam.displayId)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                ShareLink(item: shareText) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+        }
+    }
+
+    // MARK: - Translated View
+
+    private var translatedView: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Summary card
+            VStack(alignment: .leading, spacing: 8) {
+                Label("Summary", systemImage: "text.alignleft")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                Text(translated.summary)
+                    .font(.headline)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+
+            // Status indicator
+            statusCard
+
+            // Sections
+            ForEach(translated.sections) { section in
+                sectionCard(section)
+            }
+
+            // Plain English text
+            VStack(alignment: .leading, spacing: 8) {
+                Label("Plain English", systemImage: "text.bubble")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                Text(translated.plainText)
+                    .font(.body)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .padding()
+    }
+
+    private var statusCard: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Status")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                HStack {
+                    Circle()
+                        .fill(notam.isActive ? .green : .gray)
+                        .frame(width: 10, height: 10)
+                    Text(notam.isActive ? "Active" : "Inactive")
+                        .font(.subheadline.bold())
+                }
+            }
+
+            Spacer()
+
+            VStack(alignment: .trailing, spacing: 4) {
+                Text("Type")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Text(notam.type.displayName)
+                    .font(.subheadline.bold())
+                    .foregroundStyle(typeColor)
+            }
+        }
+        .padding()
+        .background(Color(.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private func sectionCard(_ section: NOTAMSection) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label(section.title, systemImage: section.icon)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            Text(section.content)
+                .font(.body)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(Color(.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    // MARK: - Original View
+
+    private var originalView: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Header info
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text("NOTAM ID:")
+                        .foregroundStyle(.secondary)
+                    Text(notam.displayId)
+                        .bold()
+                }
+
+                HStack {
+                    Text("Issued:")
+                        .foregroundStyle(.secondary)
+                    Text(notam.issued, style: .date)
+                    Text(notam.issued, style: .time)
+                }
+
+                HStack {
+                    Text("Location:")
+                        .foregroundStyle(.secondary)
+                    Text(notam.location)
+                }
+            }
+            .font(.caption.monospaced())
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+
+            // Raw NOTAM text
+            VStack(alignment: .leading, spacing: 8) {
+                Label("Original NOTAM Text", systemImage: "doc.text")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                Text(notam.text)
+                    .font(.system(.body, design: .monospaced))
+                    .textSelection(.enabled)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+
+            // Q-code breakdown if available
+            if let selectionCode = notam.selectionCode {
+                VStack(alignment: .leading, spacing: 8) {
+                    Label("Q-Code", systemImage: "qrcode")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+
+                    Text(selectionCode)
+                        .font(.system(.body, design: .monospaced))
+                        .textSelection(.enabled)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+        }
+        .padding()
+    }
+
+    // MARK: - Helpers
+
+    private var typeColor: Color {
+        switch notam.type {
+        case .new: return .blue
+        case .replacement: return .orange
+        case .cancellation: return .red
+        }
+    }
+
+    private var shareText: String {
+        """
+        NOTAM \(notam.displayId)
+        Location: \(notam.location)
+        Effective: \(notam.effectivePeriodDescription)
+
+        \(notam.text)
+        """
+    }
+}
+
+// MARK: - Tab
+
+private enum DetailTab: String, CaseIterable, Identifiable {
+    case translated = "Plain English"
+    case original = "Original"
+
+    var id: String { rawValue }
+}
+
+#Preview {
+    NavigationStack {
+        NOTAMDetailView(notam: NOTAM(
+            id: "NOTAM_1",
+            series: "A",
+            number: "0123/24",
+            type: .new,
+            issued: Date(),
+            affectedFIR: "LROP",
+            selectionCode: "QMRLC",
+            traffic: "IV",
+            purpose: "NBO",
+            scope: "A",
+            minimumFL: "000",
+            maximumFL: "050",
+            location: "LROP",
+            effectiveStart: Date(),
+            effectiveEnd: Date().addingTimeInterval(86400 * 7),
+            isEstimatedEnd: false,
+            isPermanent: false,
+            text: "RWY 08R/26L CLSD DUE TO MAINT WIP. TWY A BTN TWY B AND TWY C CLSD.",
+            coordinates: Coordinates(latitude: 44.57, longitude: 26.08, radius: 5)
+        ))
+    }
+}

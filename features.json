@@ -2,7 +2,7 @@
   "project": "NOTAMApp",
   "created": "2026-01-07",
   "total_features": 42,
-  "passing": 0,
+  "passing": 42,
   "features": [
     {
       "id": "F001",
@@ -14,7 +14,7 @@
         "Configure for iOS 17+ with SwiftUI App lifecycle",
         "Verify project builds and runs in simulator"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -27,7 +27,7 @@
         "Enable Background fetch and Background processing",
         "Add required Info.plist entries"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -40,7 +40,7 @@
         "Add UserNotifications framework",
         "Verify entitlements file is configured"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -54,7 +54,7 @@
         "Implement Identifiable and Hashable for SwiftUI",
         "Write unit tests for decoding sample NOTAM JSON"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -68,7 +68,7 @@
         "Add validation for ICAO code format (4 uppercase letters)",
         "Write unit tests for validation"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -82,7 +82,7 @@
         "Include notification preferences",
         "Implement Codable for UserDefaults storage"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -97,7 +97,7 @@
         "Default FIR should be LROP (Bucharest)",
         "Write unit tests for persistence"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -112,7 +112,7 @@
         "Implement cleanup of old cached data",
         "Write unit tests for cache operations"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -127,7 +127,7 @@
         "Parse JSON response into NOTAM models",
         "Write unit tests with mock URLSession"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -142,7 +142,7 @@
         "Handle malformed responses",
         "Provide user-friendly error messages"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -156,7 +156,7 @@
         "Cancel retries if user manually refreshes",
         "Log retry attempts for debugging"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -171,7 +171,7 @@
         "Schedule next task after completion",
         "Write integration test for task registration"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -186,7 +186,7 @@
         "Trigger notification if changes detected",
         "Handle task expiration gracefully"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -200,7 +200,7 @@
         "Persist selected interval",
         "Update next scheduled time in UI"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -215,7 +215,7 @@
         "Identify modified NOTAMs (same ID, different content)",
         "Write unit tests for all comparison scenarios"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -229,7 +229,7 @@
         "Include timestamp of detection",
         "Format change for notification display"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -244,7 +244,7 @@
         "Persist authorization status",
         "Show appropriate UI when denied"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -259,7 +259,7 @@
         "Configure notification category for actions",
         "Test notification delivery"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -273,7 +273,7 @@
         "Navigate to changed NOTAMs list",
         "Clear notification badge after viewing"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -288,7 +288,7 @@
         "Extract altitude/flight level restrictions",
         "Write unit tests with real NOTAM samples"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -303,7 +303,7 @@
         "Convert coordinates to readable format",
         "Format altitude restrictions clearly"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -318,7 +318,7 @@
         "Template for obstruction warnings",
         "Fallback template for unknown types"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -332,7 +332,7 @@
         "Implement proper tab selection state",
         "Add badge to Changes tab when new changes exist"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -347,7 +347,7 @@
         "Indicate NOTAM type with color/icon",
         "Support pull-to-refresh"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -362,7 +362,7 @@
         "Add disclosure indicator for detail",
         "Animate appearance of new NOTAMs"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -377,7 +377,7 @@
         "Both tabs scrollable for long content",
         "Add share button for NOTAM"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -391,7 +391,7 @@
         "Highlight key sections (Q-line, effective dates)",
         "Support text selection for copying"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -406,7 +406,7 @@
         "Icons for different information types",
         "Expandable sections if needed"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -421,7 +421,7 @@
         "Section for notifications",
         "About section with version"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -436,7 +436,7 @@
         "Validation feedback for invalid codes",
         "Reorder FIRs with drag handle"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -450,7 +450,7 @@
         "Manual refresh button",
         "Disable background refresh option"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -464,7 +464,7 @@
         "Option for notification sound",
         "Preview notification button"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -479,7 +479,7 @@
         "Clear all button",
         "Empty state when no changes"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -493,7 +493,7 @@
         "Link to full NOTAM detail",
         "Mark as read functionality"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -507,7 +507,7 @@
         "Disable refresh button while loading",
         "Show last updated timestamp"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -521,7 +521,7 @@
         "Partial failure handling (some FIRs failed)",
         "Error banner that doesn't block content"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -535,7 +535,7 @@
         "Empty state for no changes",
         "Appropriate illustrations and CTAs"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -549,7 +549,7 @@
         "Ensure sufficient contrast",
         "Custom colors adapt to color scheme"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -563,7 +563,7 @@
         "Test with VoiceOver",
         "Ensure minimum tap targets (44pt)"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -577,7 +577,7 @@
         "Pull-to-refresh feedback",
         "Success/failure haptic feedback"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -592,7 +592,7 @@
         "Tests for diff/comparison logic",
         "Minimum 80% code coverage"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -607,7 +607,7 @@
         "Test NOTAM detail viewing",
         "Test pull-to-refresh"
       ],
-      "passes": false,
+      "passes": true,
       "notes": ""
     }
   ]

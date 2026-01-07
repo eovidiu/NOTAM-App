@@ -1,9 +1,9 @@
 # Context Summary
 
 ## Active Context
-- Currently working on: Project initialized, ready for F001 (Xcode project creation)
+- Currently working on: Project complete, ready for testing
 - Blocking issues: None
-- Next up: F001-F003 setup features, then F004-F006 data models
+- Next up: Open in Xcode, build, test API connectivity
 
 ## Cross-Cutting Concerns
 - **iOS Version**: iOS 17+ minimum (enables NavigationStack, modern SwiftUI)
@@ -18,16 +18,19 @@
 - Use FAA NOTAM API at notams.aim.faa.gov (2026-01-07)
 - Default FIR is LROP (Bucharest, Romania) per user requirement (2026-01-07)
 - Store raw NOTAM text alongside parsed data for fidelity (2026-01-07)
+- API uses POST with form data, not GET with query params (2026-01-07)
 
 ### Patterns
 - NOTAM ID format: series + number (e.g., "M0483/23")
 - ICAO location codes: 4 uppercase letters (e.g., LROP, KJFK)
 - Q-code: Encodes category/scope/traffic in standardized format
+- Actor pattern for thread-safe service classes
 
 ### Gotchas
-- NOTAM text uses aviation abbreviations heavily - need translation dictionary
-- Effective dates can be "PERM" (permanent) - handle as special case
-- Some NOTAMs have estimated end times (EST) - display appropriately
+- NOTAM text uses aviation abbreviations heavily - translator has 100+ mappings
+- Effective dates can be "PERM" (permanent) - handled as special case
+- Some NOTAMs have estimated end times (EST) - displayed appropriately
+- FAA API response structure may vary - multiple parsing strategies implemented
 
 ## Domain: Background Refresh
 
@@ -51,10 +54,12 @@
 ### Decisions
 - Use UNUserNotificationCenter for local notifications (2026-01-07)
 - Group notifications by FIR (2026-01-07)
+- Deep link to specific change from notification (2026-01-07)
 
 ### Patterns
 - Request permission on first app launch
-- Deep link to specific NOTAM from notification
+- Thread identifier groups notifications by FIR
+- Clear badge when Changes tab viewed
 
 ### Gotchas
 - Permission can be revoked in Settings - check each time
@@ -71,10 +76,15 @@
 - Use SF Symbols for consistency
 - Semantic colors for dark mode support
 - Form style for settings
+- NavigationStack with value-based navigation
 
 ### Gotchas
-- NOTAM text can be very long - ensure scrollable
-- Original NOTAM should use monospace for alignment
+- NOTAM text can be very long - scrollable views required
+- Original NOTAM uses monospace for proper alignment
+- Badge on Changes tab shows unread count
 
 ## Closed Work Streams
-<!-- None yet -->
+- Full implementation complete (2026-01-07)
+  - 42 features implemented
+  - 4 models, 9 services, 11 views
+  - Unit tests and UI tests included
