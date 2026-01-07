@@ -10,11 +10,11 @@ struct AddFIRView: View {
     @State private var showError = false
     @State private var errorMessage = ""
 
-    private let atsService = ATSUnitService.shared
+    private let firService = ATSUnitService.shared
 
     private var searchResults: [ATSUnit] {
         guard !searchText.isEmpty else { return [] }
-        return atsService.search(searchText)
+        return firService.search(searchText)
             .filter { unit in
                 !settingsStore.settings.configuredFIRs.contains { $0.icaoCode == unit.icao }
             }
@@ -58,7 +58,7 @@ struct AddFIRView: View {
                             Button {
                                 addUnit(unit)
                             } label: {
-                                ATSUnitRow(unit: unit)
+                                FIRRow(unit: unit)
                             }
                             .buttonStyle(.plain)
                         }
@@ -160,32 +160,22 @@ struct AddFIRView: View {
     }
 }
 
-// MARK: - ATS Unit Row
+// MARK: - FIR Row
 
-private struct ATSUnitRow: View {
+private struct FIRRow: View {
     let unit: ATSUnit
 
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 8) {
-                    Text(unit.icao)
-                        .font(.headline.monospaced())
-
-                    Text(unit.type.rawValue)
-                        .font(.caption2)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(typeColor.opacity(0.2))
-                        .foregroundStyle(typeColor)
-                        .clipShape(Capsule())
-                }
+            VStack(alignment: .leading, spacing: 4) {
+                Text(unit.icao)
+                    .font(.headline.monospaced())
 
                 Text(unit.name)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
-                Text(unit.controllingState.name)
+                Text(unit.country)
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
@@ -197,15 +187,6 @@ private struct ATSUnitRow: View {
                 .font(.title2)
         }
         .contentShape(Rectangle())
-    }
-
-    private var typeColor: Color {
-        switch unit.type {
-        case .FIR: return .blue
-        case .ACC: return .green
-        case .UIR: return .purple
-        case .ARTCC: return .orange
-        }
     }
 }
 

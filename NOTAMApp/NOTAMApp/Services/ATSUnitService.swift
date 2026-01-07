@@ -1,6 +1,6 @@
 import Foundation
 
-/// Service for loading and searching ATS units
+/// Service for loading and searching FIRs
 final class ATSUnitService {
     static let shared = ATSUnitService()
 
@@ -25,17 +25,17 @@ final class ATSUnitService {
             let atsData = try decoder.decode(ATSUnitsData.self, from: data)
             units = atsData.units
             isLoaded = true
-            print("ATSUnitService: Loaded \(units.count) ATS units")
+            print("ATSUnitService: Loaded \(units.count) FIRs")
         } catch {
-            print("ATSUnitService: Failed to load ATS units: \(error.localizedDescription)")
+            print("ATSUnitService: Failed to load FIRs: \(error.localizedDescription)")
         }
     }
 
     // MARK: - Search
 
-    /// Searches ATS units by ICAO code, name, or country
+    /// Searches FIRs by ICAO code, name, or country
     /// - Parameter query: Search query string
-    /// - Returns: Matching ATS units, sorted by relevance
+    /// - Returns: Matching FIRs, sorted by relevance
     func search(_ query: String) -> [ATSUnit] {
         guard !query.isEmpty else { return [] }
 
@@ -75,24 +75,19 @@ final class ATSUnitService {
         }
 
         // Country name contains query
-        let countryUpper = unit.controllingState.name.uppercased()
+        let countryUpper = unit.country.uppercased()
         if countryUpper.contains(query) {
             score += 15
-        }
-
-        // ISO codes
-        if unit.controllingState.iso2 == query || unit.controllingState.iso3 == query {
-            score += 25
         }
 
         return score
     }
 
     /// Returns all units for a given country
-    func unitsByCountry(_ countryCode: String) -> [ATSUnit] {
-        let code = countryCode.uppercased()
+    func unitsByCountry(_ country: String) -> [ATSUnit] {
+        let query = country.uppercased()
         return units.filter {
-            $0.controllingState.iso2 == code || $0.controllingState.iso3 == code
+            $0.country.uppercased().contains(query)
         }
     }
 
@@ -107,7 +102,7 @@ final class ATSUnitService {
     }
 
     /// Returns unique countries from loaded units
-    var countries: [ATSUnit.ControllingState] {
-        Array(Set(units.map { $0.controllingState })).sorted { $0.name < $1.name }
+    var countries: [String] {
+        Array(Set(units.map { $0.country })).sorted()
     }
 }

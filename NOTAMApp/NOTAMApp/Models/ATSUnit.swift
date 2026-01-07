@@ -1,27 +1,12 @@
 import Foundation
 
-/// Represents an Air Traffic Services unit (FIR, ACC, UIR, etc.)
+/// Represents a Flight Information Region (FIR)
 struct ATSUnit: Codable, Identifiable, Hashable {
-    let id: String
     let icao: String
-    let type: UnitType
     let name: String
-    let controllingState: ControllingState
-    let tags: [String]
-    let notes: String?
+    let country: String
 
-    enum UnitType: String, Codable {
-        case FIR
-        case ACC
-        case UIR
-        case ARTCC
-    }
-
-    struct ControllingState: Codable, Hashable {
-        let name: String
-        let iso2: String
-        let iso3: String
-    }
+    var id: String { icao }
 
     /// Converts to app's FIR model for use in settings
     func toFIR() -> FIR {
@@ -33,11 +18,5 @@ struct ATSUnit: Codable, Identifiable, Hashable {
 struct ATSUnitsData: Codable {
     let schemaVersion: String
     let generatedAt: String
-    let sources: [Source]
     let units: [ATSUnit]
-
-    struct Source: Codable {
-        let name: String
-        let url: String
-    }
 }
