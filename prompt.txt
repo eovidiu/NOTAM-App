@@ -1,0 +1,22 @@
+This was the initial prompt for creating the app:
+
+#start prompt
+I want to build an iOS app that will query and display NOTAM using https://notams.aim.faa.gov/notamSearch/nsapp.html#/ , for a configured list of FIR.
+- Feature 1 : The application should allow configuring FIR points . Default FIR LROP.
+- Feature 2 : Schedule query fo the end point each hour, each 6 hours, each 12 hours .
+- Feature 3 : If there are updates compared to the last query, display a notification on user's phone.
+- Feature 4 : Display the orignal NOTAM, and in a separate tab or section display the message in common english
+- Feature 5 : Nice and modern swift native UI, use Nano-banana to get suggestions on the interface
+
+Tech stack:
+- Swift/SwiftUI
+- Everything Apple native
+
+
+Please run /project:harness-init to set up this project for multi-session work.
+
+#end prompt
+
+Project started at 21:45 . fully functional by 23:45 .
+Cost : $37,09
+Compaction : twice, and at 94% at 23:45
