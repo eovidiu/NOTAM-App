@@ -4,77 +4,124 @@ struct AddFIRView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var settingsStore = SettingsStore.shared
 
-    @State private var icaoCode = ""
+    @State private var searchText = ""
     @State private var displayName = ""
+    @State private var showManualEntry = false
     @State private var showError = false
     @State private var errorMessage = ""
 
+    private let atsService = ATSUnitService.shared
+
+    private var searchResults: [ATSUnit] {
+        guard !searchText.isEmpty else { return [] }
+        return atsService.search(searchText)
+            .filter { unit in
+                !settingsStore.settings.configuredFIRs.contains { $0.icaoCode == unit.icao }
+            }
+    }
+
     private var isValidCode: Bool {
-        FIR.isValidICAOCode(icaoCode)
+        FIR.isValidICAOCode(searchText)
     }
 
     private var isDuplicate: Bool {
-        settingsStore.settings.configuredFIRs.contains { $0.icaoCode == icaoCode.uppercased() }
+        settingsStore.settings.configuredFIRs.contains { $0.icaoCode == searchText.uppercased() }
+    }
+
+    private var canAddManually: Bool {
+        isValidCode && !isDuplicate && searchResults.isEmpty
     }
 
     var body: some View {
         NavigationStack {
-            Form {
-                // Manual entry
+            List {
+                // Search section
                 Section {
-                    TextField("ICAO Code", text: $icaoCode)
-                        .textInputAutocapitalization(.characters)
-                        .autocorrectionDisabled()
-                        .font(.headline.monospaced())
-                        .onChange(of: icaoCode) { _, newValue in
-                            // Limit to 4 characters and uppercase
-                            icaoCode = String(newValue.prefix(4)).uppercased()
-                        }
-
-                    TextField("Display Name (Optional)", text: $displayName)
-                } header: {
-                    Text("Enter FIR Code")
-                } footer: {
-                    VStack(alignment: .leading, spacing: 4) {
-                        if !icaoCode.isEmpty {
-                            if !isValidCode {
-                                Label("ICAO code must be 4 letters", systemImage: "exclamationmark.circle")
-                                    .foregroundStyle(.red)
-                            } else if isDuplicate {
-                                Label("This FIR is already configured", systemImage: "exclamationmark.circle")
-                                    .foregroundStyle(.orange)
-                            } else {
-                                Label("Valid ICAO code", systemImage: "checkmark.circle")
-                                    .foregroundStyle(.green)
-                            }
-                        }
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(.secondary)
+                        TextField("Search ICAO, name, or country...", text: $searchText)
+                            .textInputAutocapitalization(.characters)
+                            .autocorrectionDisabled()
                     }
-                    .font(.caption)
+                } footer: {
+                    if !searchText.isEmpty && searchResults.isEmpty && !isValidCode {
+                        Text("Enter at least 2 characters to search")
+                            .foregroundStyle(.secondary)
+                    }
                 }
 
-                // Quick add from common FIRs
-                Section {
-                    ForEach(availableCommonFIRs) { fir in
-                        Button {
-                            addFIR(fir)
-                        } label: {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(fir.icaoCode)
-                                        .font(.headline.monospaced())
-                                    Text(fir.displayName)
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                                Spacer()
-                                Image(systemName: "plus.circle")
-                                    .foregroundStyle(.blue)
+                // Search results
+                if !searchResults.isEmpty {
+                    Section {
+                        ForEach(searchResults.prefix(15)) { unit in
+                            Button {
+                                addUnit(unit)
+                            } label: {
+                                ATSUnitRow(unit: unit)
                             }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
+                    } header: {
+                        Text("Search Results (\(searchResults.count))")
                     }
-                } header: {
-                    Text("Quick Add")
+                }
+
+                // Manual entry option
+                if canAddManually {
+                    Section {
+                        VStack(alignment: .leading, spacing: 12) {
+                            HStack {
+                                Label("Code not in database", systemImage: "questionmark.circle")
+                                    .foregroundStyle(.orange)
+                                Spacer()
+                            }
+
+                            TextField("Display Name (Optional)", text: $displayName)
+
+                            Button {
+                                addCustomFIR()
+                            } label: {
+                                HStack {
+                                    Text("Add \(searchText.uppercased())")
+                                    Spacer()
+                                    Image(systemName: "plus.circle.fill")
+                                }
+                            }
+                            .buttonStyle(.borderedProminent)
+                        }
+                    } header: {
+                        Text("Manual Entry")
+                    } footer: {
+                        Text("This ICAO code isn't in our database. You can still add it manually.")
+                    }
+                }
+
+                // Show duplicate warning
+                if isDuplicate && isValidCode {
+                    Section {
+                        Label("This FIR is already configured", systemImage: "exclamationmark.circle")
+                            .foregroundStyle(.orange)
+                    }
+                }
+
+                // Toggle for manual entry mode
+                if searchText.isEmpty {
+                    Section {
+                        DisclosureGroup("Enter code manually", isExpanded: $showManualEntry) {
+                            TextField("ICAO Code (4 letters)", text: $searchText)
+                                .textInputAutocapitalization(.characters)
+                                .autocorrectionDisabled()
+                                .font(.headline.monospaced())
+                                .onChange(of: searchText) { _, newValue in
+                                    searchText = String(newValue.prefix(4)).uppercased()
+                                }
+
+                            TextField("Display Name (Optional)", text: $displayName)
+                        }
+                    } footer: {
+                        Text("Use this if you know the exact ICAO code")
+                    }
                 }
             }
             .navigationTitle("Add FIR")
@@ -85,13 +132,6 @@ struct AddFIRView: View {
                         dismiss()
                     }
                 }
-
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Add") {
-                        addCustomFIR()
-                    }
-                    .disabled(!isValidCode || isDuplicate)
-                }
             }
             .alert("Error", isPresented: $showError) {
                 Button("OK") {}
@@ -101,26 +141,71 @@ struct AddFIRView: View {
         }
     }
 
-    private var availableCommonFIRs: [FIR] {
-        let configuredCodes = Set(settingsStore.settings.configuredFIRs.map { $0.icaoCode })
-        return FIR.commonFIRs.filter { !configuredCodes.contains($0.icaoCode) }
+    private func addUnit(_ unit: ATSUnit) {
+        let fir = unit.toFIR()
+        settingsStore.addFIR(fir)
+        dismiss()
     }
 
     private func addCustomFIR() {
         guard isValidCode && !isDuplicate else { return }
 
         let fir = FIR(
-            icaoCode: icaoCode.uppercased(),
+            icaoCode: searchText.uppercased(),
             displayName: displayName.isEmpty ? nil : displayName
         )
 
         settingsStore.addFIR(fir)
         dismiss()
     }
+}
 
-    private func addFIR(_ fir: FIR) {
-        settingsStore.addFIR(fir)
-        dismiss()
+// MARK: - ATS Unit Row
+
+private struct ATSUnitRow: View {
+    let unit: ATSUnit
+
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 8) {
+                    Text(unit.icao)
+                        .font(.headline.monospaced())
+
+                    Text(unit.type.rawValue)
+                        .font(.caption2)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(typeColor.opacity(0.2))
+                        .foregroundStyle(typeColor)
+                        .clipShape(Capsule())
+                }
+
+                Text(unit.name)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+
+                Text(unit.controllingState.name)
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+
+            Spacer()
+
+            Image(systemName: "plus.circle")
+                .foregroundStyle(.blue)
+                .font(.title2)
+        }
+        .contentShape(Rectangle())
+    }
+
+    private var typeColor: Color {
+        switch unit.type {
+        case .FIR: return .blue
+        case .ACC: return .green
+        case .UIR: return .purple
+        case .ARTCC: return .orange
+        }
     }
 }
 

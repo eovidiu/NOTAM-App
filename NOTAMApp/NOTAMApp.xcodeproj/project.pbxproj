@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		049F5C8E77375A2535672970 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4346817BF89EF2F0E0B30 /* NOTAM.swift */; };
+		1A2B3C4D5E6F7A8B9C0D1E2F /* ATSUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2 /* ATSUnit.swift */; };
+		2B3C4D5E6F7A8B9C0D1E2F3A /* ATSUnitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* ATSUnitService.swift */; };
+		3C4D5E6F7A8B9C0D1E2F3A4B /* ats_units.json in Resources */ = {isa = PBXBuildFile; fileRef = C3D4E5F6A7B8C9D0E1F2A3B4 /* ats_units.json */; };
 		255A2A8823DC02EFCA7EB075 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E247CC83F7FEF4ADA5829F1 /* ContentView.swift */; };
 		296DB9BAE8363E48DA437CA4 /* NOTAMListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428527AFFFED9581F4C7562 /* NOTAMListView.swift */; };
 		34E6C4D9A043C55452106631 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D091D1CA230B52FC8F906 /* SettingsView.swift */; };
@@ -39,6 +42,9 @@
 		0E1D091D1CA230B52FC8F906 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMApp.swift; sourceTree = "<group>"; };
 		18F27F61073120598BAF9139 /* NOTAMChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChange.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* ATSUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATSUnit.swift; sourceTree = "<group>"; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* ATSUnitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATSUnitService.swift; sourceTree = "<group>"; };
+		C3D4E5F6A7B8C9D0E1F2A3B4 /* ats_units.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ats_units.json; sourceTree = "<group>"; };
 		1E247CC83F7FEF4ADA5829F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		20F7AB760A39F0EE7E83C3CC /* NOTAMApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NOTAMApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		282F7F07CFF381982EA387F2 /* ChangeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeStore.swift; sourceTree = "<group>"; };
@@ -79,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				C4405DD65162EEF1D3ED570D /* AppSettings.swift */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* ATSUnit.swift */,
 				2AE22B1EE7A48D64BCBD4911 /* FIR.swift */,
 				C8E4346817BF89EF2F0E0B30 /* NOTAM.swift */,
 				18F27F61073120598BAF9139 /* NOTAMChange.swift */,
@@ -131,10 +138,19 @@
 				DA38FC41A96F52CC43C2BE6C /* Info.plist */,
 				0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */,
 				15D8440CC19A75EF35B61605 /* Models */,
+				D4E5F6A7B8C9D0E1F2A3B4C5 /* Resources */,
 				9A934877F04BC7AE96B5463E /* Services */,
 				430CDA8A1EB79AFC0BBAC633 /* Views */,
 			);
 			path = NOTAMApp;
+			sourceTree = "<group>";
+		};
+		D4E5F6A7B8C9D0E1F2A3B4C5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C3D4E5F6A7B8C9D0E1F2A3B4 /* ats_units.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		70AD913D0D021E021426C7FE /* NOTAM */ = {
@@ -161,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				868EA3DCB3BE6FD00F415269 /* AppState.swift */,
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* ATSUnitService.swift */,
 				B1EDEEE6E04060B866CD379E /* BackgroundRefreshManager.swift */,
 				282F7F07CFF381982EA387F2 /* ChangeStore.swift */,
 				7F950BFB1FBBB0784740E12C /* NOTAMCache.swift */,
@@ -234,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AC5B85E806FD0D6A09AD2CB /* Assets.xcassets in Resources */,
+				3C4D5E6F7A8B9C0D1E2F3A4B /* ats_units.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +265,8 @@
 				C09EC06E3D5225039D909528 /* AddFIRView.swift in Sources */,
 				457CFD06CA1D656CD9CCFEBA /* AppSettings.swift in Sources */,
 				5B11647C840BC423A5FAA5CD /* AppState.swift in Sources */,
+				1A2B3C4D5E6F7A8B9C0D1E2F /* ATSUnit.swift in Sources */,
+				2B3C4D5E6F7A8B9C0D1E2F3A /* ATSUnitService.swift in Sources */,
 				8E66AE95029D15730D10FD84 /* BackgroundRefreshManager.swift in Sources */,
 				FCD068C161A14269EB480276 /* ChangeDetailView.swift in Sources */,
 				9C3929116E42DE160324689D /* ChangeStore.swift in Sources */,

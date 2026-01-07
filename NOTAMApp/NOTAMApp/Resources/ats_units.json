@@ -1,0 +1,1182 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-01-07",
+  "sources": [
+    {
+      "name": "Wikipedia FIR/ACC list (unofficial mirror of ICAO designators)",
+      "url": "https://en.wikipedia.org/wiki/List_of_flight_information_regions_and_area_control_centers"
+    }
+  ],
+  "units": [
+    {
+      "id": "LRBB-FIR",
+      "icao": "LRBB",
+      "type": "FIR",
+      "name": "Bucharest FIR",
+      "controllingState": {
+        "name": "Romania",
+        "iso2": "RO",
+        "iso3": "ROU"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LROP-ACC",
+      "icao": "LROP",
+      "type": "ACC",
+      "name": "Bucharest Henri Coandă International",
+      "controllingState": {
+        "name": "Romania",
+        "iso2": "RO",
+        "iso3": "ROU"
+      },
+      "tags": ["europe"],
+      "notes": "Main international airport of Romania"
+    },
+    {
+      "id": "LRBS-ACC",
+      "icao": "LRBS",
+      "type": "ACC",
+      "name": "Bucharest Băneasa",
+      "controllingState": {
+        "name": "Romania",
+        "iso2": "RO",
+        "iso3": "ROU"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LRCL-ACC",
+      "icao": "LRCL",
+      "type": "ACC",
+      "name": "Cluj-Napoca International",
+      "controllingState": {
+        "name": "Romania",
+        "iso2": "RO",
+        "iso3": "ROU"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LRTM-ACC",
+      "icao": "LRTM",
+      "type": "ACC",
+      "name": "Timișoara Traian Vuia International",
+      "controllingState": {
+        "name": "Romania",
+        "iso2": "RO",
+        "iso3": "ROU"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LRIA-ACC",
+      "icao": "LRIA",
+      "type": "ACC",
+      "name": "Iași International",
+      "controllingState": {
+        "name": "Romania",
+        "iso2": "RO",
+        "iso3": "ROU"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LTBB-FIR",
+      "icao": "LTBB",
+      "type": "FIR",
+      "name": "Istanbul FIR",
+      "controllingState": {
+        "name": "Turkey",
+        "iso2": "TR",
+        "iso3": "TUR"
+      },
+      "tags": ["europe", "black_sea_region"],
+      "notes": null
+    },
+    {
+      "id": "LTAA-FIR",
+      "icao": "LTAA",
+      "type": "FIR",
+      "name": "Ankara FIR",
+      "controllingState": {
+        "name": "Turkey",
+        "iso2": "TR",
+        "iso3": "TUR"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "UKBV-FIR",
+      "icao": "UKBV",
+      "type": "FIR",
+      "name": "Kyiv FIR",
+      "controllingState": {
+        "name": "Ukraine",
+        "iso2": "UA",
+        "iso3": "UKR"
+      },
+      "tags": ["europe", "black_sea_region"],
+      "notes": null
+    },
+    {
+      "id": "UKLV-FIR",
+      "icao": "UKLV",
+      "type": "FIR",
+      "name": "Lviv FIR",
+      "controllingState": {
+        "name": "Ukraine",
+        "iso2": "UA",
+        "iso3": "UKR"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "UKDV-FIR",
+      "icao": "UKDV",
+      "type": "FIR",
+      "name": "Dnipro FIR",
+      "controllingState": {
+        "name": "Ukraine",
+        "iso2": "UA",
+        "iso3": "UKR"
+      },
+      "tags": ["europe", "black_sea_region"],
+      "notes": null
+    },
+    {
+      "id": "LUUU-FIR",
+      "icao": "LUUU",
+      "type": "FIR",
+      "name": "Chișinău FIR",
+      "controllingState": {
+        "name": "Moldova",
+        "iso2": "MD",
+        "iso3": "MDA"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LBSR-FIR",
+      "icao": "LBSR",
+      "type": "FIR",
+      "name": "Sofia FIR",
+      "controllingState": {
+        "name": "Bulgaria",
+        "iso2": "BG",
+        "iso3": "BGR"
+      },
+      "tags": ["europe", "black_sea_region"],
+      "notes": null
+    },
+    {
+      "id": "LGGG-FIR",
+      "icao": "LGGG",
+      "type": "FIR",
+      "name": "Athens FIR",
+      "controllingState": {
+        "name": "Greece",
+        "iso2": "GR",
+        "iso3": "GRC"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LYBA-FIR",
+      "icao": "LYBA",
+      "type": "FIR",
+      "name": "Belgrade FIR",
+      "controllingState": {
+        "name": "Serbia",
+        "iso2": "RS",
+        "iso3": "SRB"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LHCC-FIR",
+      "icao": "LHCC",
+      "type": "FIR",
+      "name": "Budapest FIR",
+      "controllingState": {
+        "name": "Hungary",
+        "iso2": "HU",
+        "iso3": "HUN"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LKAA-FIR",
+      "icao": "LKAA",
+      "type": "FIR",
+      "name": "Praha FIR",
+      "controllingState": {
+        "name": "Czech Republic",
+        "iso2": "CZ",
+        "iso3": "CZE"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LZBB-FIR",
+      "icao": "LZBB",
+      "type": "FIR",
+      "name": "Bratislava FIR",
+      "controllingState": {
+        "name": "Slovakia",
+        "iso2": "SK",
+        "iso3": "SVK"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "EPWW-FIR",
+      "icao": "EPWW",
+      "type": "FIR",
+      "name": "Warszawa FIR",
+      "controllingState": {
+        "name": "Poland",
+        "iso2": "PL",
+        "iso3": "POL"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "EDGG-FIR",
+      "icao": "EDGG",
+      "type": "FIR",
+      "name": "Langen FIR",
+      "controllingState": {
+        "name": "Germany",
+        "iso2": "DE",
+        "iso3": "DEU"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "EDMM-FIR",
+      "icao": "EDMM",
+      "type": "FIR",
+      "name": "München FIR",
+      "controllingState": {
+        "name": "Germany",
+        "iso2": "DE",
+        "iso3": "DEU"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "EDWW-FIR",
+      "icao": "EDWW",
+      "type": "FIR",
+      "name": "Bremen FIR",
+      "controllingState": {
+        "name": "Germany",
+        "iso2": "DE",
+        "iso3": "DEU"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "EDDF-ACC",
+      "icao": "EDDF",
+      "type": "ACC",
+      "name": "Frankfurt International",
+      "controllingState": {
+        "name": "Germany",
+        "iso2": "DE",
+        "iso3": "DEU"
+      },
+      "tags": ["europe"],
+      "notes": "Major European hub"
+    },
+    {
+      "id": "EGTT-FIR",
+      "icao": "EGTT",
+      "type": "FIR",
+      "name": "London FIR",
+      "controllingState": {
+        "name": "United Kingdom",
+        "iso2": "GB",
+        "iso3": "GBR"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "EGPX-FIR",
+      "icao": "EGPX",
+      "type": "FIR",
+      "name": "Scottish FIR",
+      "controllingState": {
+        "name": "United Kingdom",
+        "iso2": "GB",
+        "iso3": "GBR"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "EGLL-ACC",
+      "icao": "EGLL",
+      "type": "ACC",
+      "name": "London Heathrow",
+      "controllingState": {
+        "name": "United Kingdom",
+        "iso2": "GB",
+        "iso3": "GBR"
+      },
+      "tags": ["europe"],
+      "notes": "Busiest airport in UK"
+    },
+    {
+      "id": "LFFF-FIR",
+      "icao": "LFFF",
+      "type": "FIR",
+      "name": "Paris FIR",
+      "controllingState": {
+        "name": "France",
+        "iso2": "FR",
+        "iso3": "FRA"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LFBB-FIR",
+      "icao": "LFBB",
+      "type": "FIR",
+      "name": "Bordeaux FIR",
+      "controllingState": {
+        "name": "France",
+        "iso2": "FR",
+        "iso3": "FRA"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LFEE-FIR",
+      "icao": "LFEE",
+      "type": "FIR",
+      "name": "Reims FIR",
+      "controllingState": {
+        "name": "France",
+        "iso2": "FR",
+        "iso3": "FRA"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LFMM-FIR",
+      "icao": "LFMM",
+      "type": "FIR",
+      "name": "Marseille FIR",
+      "controllingState": {
+        "name": "France",
+        "iso2": "FR",
+        "iso3": "FRA"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LFPG-ACC",
+      "icao": "LFPG",
+      "type": "ACC",
+      "name": "Paris Charles de Gaulle",
+      "controllingState": {
+        "name": "France",
+        "iso2": "FR",
+        "iso3": "FRA"
+      },
+      "tags": ["europe"],
+      "notes": "Main Paris airport"
+    },
+    {
+      "id": "LIMM-FIR",
+      "icao": "LIMM",
+      "type": "FIR",
+      "name": "Milano FIR",
+      "controllingState": {
+        "name": "Italy",
+        "iso2": "IT",
+        "iso3": "ITA"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LIRR-FIR",
+      "icao": "LIRR",
+      "type": "FIR",
+      "name": "Roma FIR",
+      "controllingState": {
+        "name": "Italy",
+        "iso2": "IT",
+        "iso3": "ITA"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LIRF-ACC",
+      "icao": "LIRF",
+      "type": "ACC",
+      "name": "Roma Fiumicino",
+      "controllingState": {
+        "name": "Italy",
+        "iso2": "IT",
+        "iso3": "ITA"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LECM-FIR",
+      "icao": "LECM",
+      "type": "FIR",
+      "name": "Madrid FIR",
+      "controllingState": {
+        "name": "Spain",
+        "iso2": "ES",
+        "iso3": "ESP"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LECB-FIR",
+      "icao": "LECB",
+      "type": "FIR",
+      "name": "Barcelona FIR",
+      "controllingState": {
+        "name": "Spain",
+        "iso2": "ES",
+        "iso3": "ESP"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LECS-FIR",
+      "icao": "LECS",
+      "type": "FIR",
+      "name": "Sevilla FIR",
+      "controllingState": {
+        "name": "Spain",
+        "iso2": "ES",
+        "iso3": "ESP"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "GCCC-FIR",
+      "icao": "GCCC",
+      "type": "FIR",
+      "name": "Canarias FIR",
+      "controllingState": {
+        "name": "Spain",
+        "iso2": "ES",
+        "iso3": "ESP"
+      },
+      "tags": ["europe", "atlantic"],
+      "notes": null
+    },
+    {
+      "id": "LPPC-FIR",
+      "icao": "LPPC",
+      "type": "FIR",
+      "name": "Lisboa FIR",
+      "controllingState": {
+        "name": "Portugal",
+        "iso2": "PT",
+        "iso3": "PRT"
+      },
+      "tags": ["europe", "atlantic"],
+      "notes": null
+    },
+    {
+      "id": "LPPO-FIR",
+      "icao": "LPPO",
+      "type": "FIR",
+      "name": "Santa Maria FIR",
+      "controllingState": {
+        "name": "Portugal",
+        "iso2": "PT",
+        "iso3": "PRT"
+      },
+      "tags": ["europe", "atlantic"],
+      "notes": "Azores oceanic"
+    },
+    {
+      "id": "EHAM-ACC",
+      "icao": "EHAM",
+      "type": "ACC",
+      "name": "Amsterdam Schiphol",
+      "controllingState": {
+        "name": "Netherlands",
+        "iso2": "NL",
+        "iso3": "NLD"
+      },
+      "tags": ["europe"],
+      "notes": "Major European hub"
+    },
+    {
+      "id": "EHAA-FIR",
+      "icao": "EHAA",
+      "type": "FIR",
+      "name": "Amsterdam FIR",
+      "controllingState": {
+        "name": "Netherlands",
+        "iso2": "NL",
+        "iso3": "NLD"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "EBBU-FIR",
+      "icao": "EBBU",
+      "type": "FIR",
+      "name": "Brussels FIR",
+      "controllingState": {
+        "name": "Belgium",
+        "iso2": "BE",
+        "iso3": "BEL"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LSAS-FIR",
+      "icao": "LSAS",
+      "type": "FIR",
+      "name": "Switzerland FIR",
+      "controllingState": {
+        "name": "Switzerland",
+        "iso2": "CH",
+        "iso3": "CHE"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "LOVV-FIR",
+      "icao": "LOVV",
+      "type": "FIR",
+      "name": "Wien FIR",
+      "controllingState": {
+        "name": "Austria",
+        "iso2": "AT",
+        "iso3": "AUT"
+      },
+      "tags": ["europe"],
+      "notes": null
+    },
+    {
+      "id": "KZNY-FIR",
+      "icao": "KZNY",
+      "type": "FIR",
+      "name": "New York ARTCC",
+      "controllingState": {
+        "name": "United States",
+        "iso2": "US",
+        "iso3": "USA"
+      },
+      "tags": ["north_america"],
+      "notes": null
+    },
+    {
+      "id": "KJFK-ACC",
+      "icao": "KJFK",
+      "type": "ACC",
+      "name": "New York JFK International",
+      "controllingState": {
+        "name": "United States",
+        "iso2": "US",
+        "iso3": "USA"
+      },
+      "tags": ["north_america"],
+      "notes": "Major US international gateway"
+    },
+    {
+      "id": "KZLA-FIR",
+      "icao": "KZLA",
+      "type": "FIR",
+      "name": "Los Angeles ARTCC",
+      "controllingState": {
+        "name": "United States",
+        "iso2": "US",
+        "iso3": "USA"
+      },
+      "tags": ["north_america"],
+      "notes": null
+    },
+    {
+      "id": "KLAX-ACC",
+      "icao": "KLAX",
+      "type": "ACC",
+      "name": "Los Angeles International",
+      "controllingState": {
+        "name": "United States",
+        "iso2": "US",
+        "iso3": "USA"
+      },
+      "tags": ["north_america"],
+      "notes": null
+    },
+    {
+      "id": "KZDC-FIR",
+      "icao": "KZDC",
+      "type": "FIR",
+      "name": "Washington ARTCC",
+      "controllingState": {
+        "name": "United States",
+        "iso2": "US",
+        "iso3": "USA"
+      },
+      "tags": ["north_america"],
+      "notes": null
+    },
+    {
+      "id": "KZAU-FIR",
+      "icao": "KZAU",
+      "type": "FIR",
+      "name": "Chicago ARTCC",
+      "controllingState": {
+        "name": "United States",
+        "iso2": "US",
+        "iso3": "USA"
+      },
+      "tags": ["north_america"],
+      "notes": null
+    },
+    {
+      "id": "KORD-ACC",
+      "icao": "KORD",
+      "type": "ACC",
+      "name": "Chicago O'Hare International",
+      "controllingState": {
+        "name": "United States",
+        "iso2": "US",
+        "iso3": "USA"
+      },
+      "tags": ["north_america"],
+      "notes": null
+    },
+    {
+      "id": "CZUL-FIR",
+      "icao": "CZUL",
+      "type": "FIR",
+      "name": "Montréal FIR",
+      "controllingState": {
+        "name": "Canada",
+        "iso2": "CA",
+        "iso3": "CAN"
+      },
+      "tags": ["north_america"],
+      "notes": null
+    },
+    {
+      "id": "CZVR-FIR",
+      "icao": "CZVR",
+      "type": "FIR",
+      "name": "Vancouver FIR",
+      "controllingState": {
+        "name": "Canada",
+        "iso2": "CA",
+        "iso3": "CAN"
+      },
+      "tags": ["north_america"],
+      "notes": null
+    },
+    {
+      "id": "CZYZ-FIR",
+      "icao": "CZYZ",
+      "type": "FIR",
+      "name": "Toronto FIR",
+      "controllingState": {
+        "name": "Canada",
+        "iso2": "CA",
+        "iso3": "CAN"
+      },
+      "tags": ["north_america"],
+      "notes": null
+    },
+    {
+      "id": "VYYY-FIR",
+      "icao": "VYYY",
+      "type": "FIR",
+      "name": "Yangon FIR",
+      "controllingState": {
+        "name": "Myanmar",
+        "iso2": "MM",
+        "iso3": "MMR"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "VTBB-FIR",
+      "icao": "VTBB",
+      "type": "FIR",
+      "name": "Bangkok FIR",
+      "controllingState": {
+        "name": "Thailand",
+        "iso2": "TH",
+        "iso3": "THA"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "VVTS-FIR",
+      "icao": "VVTS",
+      "type": "FIR",
+      "name": "Ho Chi Minh FIR",
+      "controllingState": {
+        "name": "Vietnam",
+        "iso2": "VN",
+        "iso3": "VNM"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "VVHN-FIR",
+      "icao": "VVHN",
+      "type": "FIR",
+      "name": "Hanoi FIR",
+      "controllingState": {
+        "name": "Vietnam",
+        "iso2": "VN",
+        "iso3": "VNM"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "WMFC-FIR",
+      "icao": "WMFC",
+      "type": "FIR",
+      "name": "Kuala Lumpur FIR",
+      "controllingState": {
+        "name": "Malaysia",
+        "iso2": "MY",
+        "iso3": "MYS"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "WSJC-FIR",
+      "icao": "WSJC",
+      "type": "FIR",
+      "name": "Singapore FIR",
+      "controllingState": {
+        "name": "Singapore",
+        "iso2": "SG",
+        "iso3": "SGP"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "WIIF-FIR",
+      "icao": "WIIF",
+      "type": "FIR",
+      "name": "Jakarta FIR",
+      "controllingState": {
+        "name": "Indonesia",
+        "iso2": "ID",
+        "iso3": "IDN"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "RPHI-FIR",
+      "icao": "RPHI",
+      "type": "FIR",
+      "name": "Manila FIR",
+      "controllingState": {
+        "name": "Philippines",
+        "iso2": "PH",
+        "iso3": "PHL"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "VHKG-FIR",
+      "icao": "VHKG",
+      "type": "FIR",
+      "name": "Hong Kong FIR",
+      "controllingState": {
+        "name": "Hong Kong",
+        "iso2": "HK",
+        "iso3": "HKG"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "RCAA-FIR",
+      "icao": "RCAA",
+      "type": "FIR",
+      "name": "Taipei FIR",
+      "controllingState": {
+        "name": "Taiwan",
+        "iso2": "TW",
+        "iso3": "TWN"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "RJJJ-FIR",
+      "icao": "RJJJ",
+      "type": "FIR",
+      "name": "Tokyo FIR",
+      "controllingState": {
+        "name": "Japan",
+        "iso2": "JP",
+        "iso3": "JPN"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "RJTT-ACC",
+      "icao": "RJTT",
+      "type": "ACC",
+      "name": "Tokyo Haneda",
+      "controllingState": {
+        "name": "Japan",
+        "iso2": "JP",
+        "iso3": "JPN"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "RKRR-FIR",
+      "icao": "RKRR",
+      "type": "FIR",
+      "name": "Incheon FIR",
+      "controllingState": {
+        "name": "South Korea",
+        "iso2": "KR",
+        "iso3": "KOR"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "ZBPE-FIR",
+      "icao": "ZBPE",
+      "type": "FIR",
+      "name": "Beijing FIR",
+      "controllingState": {
+        "name": "China",
+        "iso2": "CN",
+        "iso3": "CHN"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "ZSHA-FIR",
+      "icao": "ZSHA",
+      "type": "FIR",
+      "name": "Shanghai FIR",
+      "controllingState": {
+        "name": "China",
+        "iso2": "CN",
+        "iso3": "CHN"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "ZGZU-FIR",
+      "icao": "ZGZU",
+      "type": "FIR",
+      "name": "Guangzhou FIR",
+      "controllingState": {
+        "name": "China",
+        "iso2": "CN",
+        "iso3": "CHN"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "VIDF-FIR",
+      "icao": "VIDF",
+      "type": "FIR",
+      "name": "Delhi FIR",
+      "controllingState": {
+        "name": "India",
+        "iso2": "IN",
+        "iso3": "IND"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "VABF-FIR",
+      "icao": "VABF",
+      "type": "FIR",
+      "name": "Mumbai FIR",
+      "controllingState": {
+        "name": "India",
+        "iso2": "IN",
+        "iso3": "IND"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "VECF-FIR",
+      "icao": "VECF",
+      "type": "FIR",
+      "name": "Kolkata FIR",
+      "controllingState": {
+        "name": "India",
+        "iso2": "IN",
+        "iso3": "IND"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "VOCF-FIR",
+      "icao": "VOCF",
+      "type": "FIR",
+      "name": "Chennai FIR",
+      "controllingState": {
+        "name": "India",
+        "iso2": "IN",
+        "iso3": "IND"
+      },
+      "tags": ["asia"],
+      "notes": null
+    },
+    {
+      "id": "OMAE-FIR",
+      "icao": "OMAE",
+      "type": "FIR",
+      "name": "Emirates FIR",
+      "controllingState": {
+        "name": "United Arab Emirates",
+        "iso2": "AE",
+        "iso3": "ARE"
+      },
+      "tags": ["middle_east"],
+      "notes": null
+    },
+    {
+      "id": "OMDB-ACC",
+      "icao": "OMDB",
+      "type": "ACC",
+      "name": "Dubai International",
+      "controllingState": {
+        "name": "United Arab Emirates",
+        "iso2": "AE",
+        "iso3": "ARE"
+      },
+      "tags": ["middle_east"],
+      "notes": "Major international hub"
+    },
+    {
+      "id": "OEJD-FIR",
+      "icao": "OEJD",
+      "type": "FIR",
+      "name": "Jeddah FIR",
+      "controllingState": {
+        "name": "Saudi Arabia",
+        "iso2": "SA",
+        "iso3": "SAU"
+      },
+      "tags": ["middle_east"],
+      "notes": null
+    },
+    {
+      "id": "OKAC-FIR",
+      "icao": "OKAC",
+      "type": "FIR",
+      "name": "Kuwait FIR",
+      "controllingState": {
+        "name": "Kuwait",
+        "iso2": "KW",
+        "iso3": "KWT"
+      },
+      "tags": ["middle_east"],
+      "notes": null
+    },
+    {
+      "id": "OBBB-FIR",
+      "icao": "OBBB",
+      "type": "FIR",
+      "name": "Bahrain FIR",
+      "controllingState": {
+        "name": "Bahrain",
+        "iso2": "BH",
+        "iso3": "BHR"
+      },
+      "tags": ["middle_east"],
+      "notes": null
+    },
+    {
+      "id": "LLLL-FIR",
+      "icao": "LLLL",
+      "type": "FIR",
+      "name": "Tel Aviv FIR",
+      "controllingState": {
+        "name": "Israel",
+        "iso2": "IL",
+        "iso3": "ISR"
+      },
+      "tags": ["middle_east"],
+      "notes": null
+    },
+    {
+      "id": "OJAC-FIR",
+      "icao": "OJAC",
+      "type": "FIR",
+      "name": "Amman FIR",
+      "controllingState": {
+        "name": "Jordan",
+        "iso2": "JO",
+        "iso3": "JOR"
+      },
+      "tags": ["middle_east"],
+      "notes": null
+    },
+    {
+      "id": "OLBB-FIR",
+      "icao": "OLBB",
+      "type": "FIR",
+      "name": "Beirut FIR",
+      "controllingState": {
+        "name": "Lebanon",
+        "iso2": "LB",
+        "iso3": "LBN"
+      },
+      "tags": ["middle_east"],
+      "notes": null
+    },
+    {
+      "id": "LCCC-FIR",
+      "icao": "LCCC",
+      "type": "FIR",
+      "name": "Nicosia FIR",
+      "controllingState": {
+        "name": "Cyprus",
+        "iso2": "CY",
+        "iso3": "CYP"
+      },
+      "tags": ["europe", "middle_east"],
+      "notes": null
+    },
+    {
+      "id": "HECC-FIR",
+      "icao": "HECC",
+      "type": "FIR",
+      "name": "Cairo FIR",
+      "controllingState": {
+        "name": "Egypt",
+        "iso2": "EG",
+        "iso3": "EGY"
+      },
+      "tags": ["africa", "middle_east"],
+      "notes": null
+    },
+    {
+      "id": "FAJS-ACC",
+      "icao": "FAJS",
+      "type": "ACC",
+      "name": "Johannesburg",
+      "controllingState": {
+        "name": "South Africa",
+        "iso2": "ZA",
+        "iso3": "ZAF"
+      },
+      "tags": ["africa"],
+      "notes": null
+    },
+    {
+      "id": "YSSY-ACC",
+      "icao": "YSSY",
+      "type": "ACC",
+      "name": "Sydney",
+      "controllingState": {
+        "name": "Australia",
+        "iso2": "AU",
+        "iso3": "AUS"
+      },
+      "tags": ["oceania"],
+      "notes": null
+    },
+    {
+      "id": "YMMM-FIR",
+      "icao": "YMMM",
+      "type": "FIR",
+      "name": "Melbourne FIR",
+      "controllingState": {
+        "name": "Australia",
+        "iso2": "AU",
+        "iso3": "AUS"
+      },
+      "tags": ["oceania"],
+      "notes": null
+    },
+    {
+      "id": "YBBB-FIR",
+      "icao": "YBBB",
+      "type": "FIR",
+      "name": "Brisbane FIR",
+      "controllingState": {
+        "name": "Australia",
+        "iso2": "AU",
+        "iso3": "AUS"
+      },
+      "tags": ["oceania"],
+      "notes": null
+    },
+    {
+      "id": "NZZC-FIR",
+      "icao": "NZZC",
+      "type": "FIR",
+      "name": "Auckland FIR",
+      "controllingState": {
+        "name": "New Zealand",
+        "iso2": "NZ",
+        "iso3": "NZL"
+      },
+      "tags": ["oceania"],
+      "notes": null
+    }
+  ]
+}
