@@ -1,0 +1,75 @@
+# Progress Log
+
+Read this at the START of every session.
+
+---
+
+## Session 1: Initialization
+Date: 2026-01-07
+Agent: Initializer
+Status: Complete
+
+### Completed:
+- [x] init.sh - iOS project initialization script
+- [x] features.json - 42 features across 15 categories
+- [x] context_summary.md - Project context and decisions
+- [x] Initial git commit
+
+### Feature Categories:
+- setup (F001-F003): Xcode project, capabilities
+- model (F004-F006): Data models for NOTAM, FIR, Settings
+- persistence (F007-F008): UserDefaults, cache storage
+- network (F009-F011): API client, error handling, retry
+- background (F012-F014): BGTaskScheduler, refresh coordinator
+- diff (F015-F016): NOTAM comparison logic
+- notifications (F017-F019): Permissions, delivery, deep linking
+- translation (F020-F022): Parser, translator, templates
+- ui-navigation (F023): Tab structure
+- ui-list (F024-F025): NOTAM list, row component
+- ui-detail (F026-F028): Detail view with tabs
+- ui-settings (F029-F032): Settings, FIR management
+- ui-changes (F033-F034): Changes list and detail
+- ui-states (F035-F037): Loading, error, empty states
+- ui-polish (F038-F040): Dark mode, accessibility, animations
+- testing (F041-F042): Unit and UI tests
+
+### Tech Stack Decisions:
+- iOS 17+ minimum (enables modern SwiftUI features)
+- Pure SwiftUI with App lifecycle
+- BGTaskScheduler for background refresh
+- UserNotifications for local notifications
+- FileManager or SwiftData for NOTAM cache
+
+### API Notes:
+- FAA NOTAM API endpoint: https://notams.aim.faa.gov/notamSearch
+- Query format: ICAO location identifiers (e.g., LROP for Bucharest)
+- Response includes: id, series, number, type, issued, affectedFIR, location, effectiveStart, effectiveEnd, text
+
+---
+
+## Session 2: [Next Session]
+Date: [TBD]
+Agent: Coding Agent
+Status: Pending
+
+### To Implement:
+- [ ] F001: Create Xcode project
+- [ ] F002: Configure background tasks capability
+- [ ] F003: Configure notifications capability
+
+### Notes:
+Start with F001 (project setup). This unblocks all other features.
+
+---
+
+## How to Continue
+
+1. Run `./init.sh` to verify environment
+2. Read `context_summary.md` for current state
+3. Check `features.json` for next feature (lowest priority number with passes=false)
+4. Create `task_plan.md` for the feature
+5. Implement and test
+6. Update `features.json` (set passes=true, add notes)
+7. Update this file with session summary
+
+---

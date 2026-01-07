@@ -1,0 +1,614 @@
+{
+  "project": "NOTAMApp",
+  "created": "2026-01-07",
+  "total_features": 42,
+  "passing": 0,
+  "features": [
+    {
+      "id": "F001",
+      "category": "setup",
+      "description": "Create Xcode project with SwiftUI lifecycle",
+      "priority": 1,
+      "steps": [
+        "Create new Xcode project NOTAMApp",
+        "Configure for iOS 17+ with SwiftUI App lifecycle",
+        "Verify project builds and runs in simulator"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F002",
+      "category": "setup",
+      "description": "Configure project for background tasks capability",
+      "priority": 1,
+      "steps": [
+        "Enable Background Modes capability",
+        "Enable Background fetch and Background processing",
+        "Add required Info.plist entries"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F003",
+      "category": "setup",
+      "description": "Configure project for push notifications capability",
+      "priority": 1,
+      "steps": [
+        "Enable Push Notifications capability",
+        "Add UserNotifications framework",
+        "Verify entitlements file is configured"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F004",
+      "category": "model",
+      "description": "Create NOTAM data model",
+      "priority": 2,
+      "steps": [
+        "Create NOTAM struct with all FAA fields (id, series, number, type, issued, affectedFIR, location, effectiveStart, effectiveEnd, text)",
+        "Implement Codable for JSON parsing",
+        "Implement Identifiable and Hashable for SwiftUI",
+        "Write unit tests for decoding sample NOTAM JSON"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F005",
+      "category": "model",
+      "description": "Create FIR configuration model",
+      "priority": 2,
+      "steps": [
+        "Create FIR struct with ICAO code and display name",
+        "Implement Codable for persistence",
+        "Add validation for ICAO code format (4 uppercase letters)",
+        "Write unit tests for validation"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F006",
+      "category": "model",
+      "description": "Create app settings model",
+      "priority": 2,
+      "steps": [
+        "Create Settings struct with refresh interval enum (1h, 6h, 12h)",
+        "Include list of configured FIRs",
+        "Include notification preferences",
+        "Implement Codable for UserDefaults storage"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F007",
+      "category": "persistence",
+      "description": "Implement UserDefaults storage for settings",
+      "priority": 3,
+      "steps": [
+        "Create SettingsStore class with @AppStorage or custom UserDefaults wrapper",
+        "Implement save and load for FIR list",
+        "Implement save and load for refresh interval",
+        "Default FIR should be LROP (Bucharest)",
+        "Write unit tests for persistence"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F008",
+      "category": "persistence",
+      "description": "Implement local storage for cached NOTAMs",
+      "priority": 3,
+      "steps": [
+        "Create NOTAMCache using FileManager or SwiftData",
+        "Store NOTAMs per FIR with timestamp",
+        "Implement retrieval of last fetched NOTAMs",
+        "Implement cleanup of old cached data",
+        "Write unit tests for cache operations"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F009",
+      "category": "network",
+      "description": "Create NOTAM API client",
+      "priority": 4,
+      "steps": [
+        "Create NOTAMService actor/class",
+        "Implement async function to fetch NOTAMs for FIR list",
+        "Handle FAA API endpoint structure",
+        "Parse JSON response into NOTAM models",
+        "Write unit tests with mock URLSession"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F010",
+      "category": "network",
+      "description": "Implement network error handling",
+      "priority": 4,
+      "steps": [
+        "Create custom error enum for API errors",
+        "Handle network unavailable gracefully",
+        "Handle API rate limiting",
+        "Handle malformed responses",
+        "Provide user-friendly error messages"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F011",
+      "category": "network",
+      "description": "Implement request retry logic",
+      "priority": 4,
+      "steps": [
+        "Implement exponential backoff for transient failures",
+        "Limit retries to 3 attempts",
+        "Cancel retries if user manually refreshes",
+        "Log retry attempts for debugging"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F012",
+      "category": "background",
+      "description": "Implement BGTaskScheduler for periodic refresh",
+      "priority": 5,
+      "steps": [
+        "Register background task identifier in Info.plist",
+        "Create BGAppRefreshTaskRequest with configured interval",
+        "Handle task execution in SceneDelegate/App",
+        "Schedule next task after completion",
+        "Write integration test for task registration"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F013",
+      "category": "background",
+      "description": "Implement background fetch coordinator",
+      "priority": 5,
+      "steps": [
+        "Create BackgroundRefreshManager class",
+        "Coordinate between BGTaskScheduler and NOTAMService",
+        "Update cache with new results",
+        "Trigger notification if changes detected",
+        "Handle task expiration gracefully"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F014",
+      "category": "background",
+      "description": "Implement refresh interval selection",
+      "priority": 5,
+      "steps": [
+        "Support 1 hour, 6 hours, 12 hours intervals",
+        "Reschedule background task when interval changes",
+        "Persist selected interval",
+        "Update next scheduled time in UI"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F015",
+      "category": "diff",
+      "description": "Implement NOTAM comparison logic",
+      "priority": 6,
+      "steps": [
+        "Compare current NOTAMs with cached NOTAMs",
+        "Identify new NOTAMs (not in cache)",
+        "Identify expired NOTAMs (in cache, not current)",
+        "Identify modified NOTAMs (same ID, different content)",
+        "Write unit tests for all comparison scenarios"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F016",
+      "category": "diff",
+      "description": "Create NOTAM change summary model",
+      "priority": 6,
+      "steps": [
+        "Create NOTAMChange struct with changeType enum (new, expired, modified)",
+        "Include affected NOTAM reference",
+        "Include timestamp of detection",
+        "Format change for notification display"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F017",
+      "category": "notifications",
+      "description": "Request notification permissions",
+      "priority": 7,
+      "steps": [
+        "Create NotificationManager class",
+        "Request authorization for alerts, badges, sounds",
+        "Handle authorization denied gracefully",
+        "Persist authorization status",
+        "Show appropriate UI when denied"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F018",
+      "category": "notifications",
+      "description": "Implement local notification delivery",
+      "priority": 7,
+      "steps": [
+        "Create notification content for NOTAM changes",
+        "Include summary of changes in notification body",
+        "Set appropriate notification sound",
+        "Configure notification category for actions",
+        "Test notification delivery"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F019",
+      "category": "notifications",
+      "description": "Implement notification deep linking",
+      "priority": 7,
+      "steps": [
+        "Add notification action to view changes",
+        "Handle notification tap in App delegate",
+        "Navigate to changed NOTAMs list",
+        "Clear notification badge after viewing"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F020",
+      "category": "translation",
+      "description": "Create NOTAM parser for structured data extraction",
+      "priority": 8,
+      "steps": [
+        "Parse NOTAM Q-code for category/scope",
+        "Extract location coordinates",
+        "Parse effective dates and times",
+        "Extract altitude/flight level restrictions",
+        "Write unit tests with real NOTAM samples"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F021",
+      "category": "translation",
+      "description": "Implement NOTAM to plain English translator",
+      "priority": 8,
+      "steps": [
+        "Create translation dictionary for common abbreviations",
+        "Translate Q-codes to readable descriptions",
+        "Format dates/times in user locale",
+        "Convert coordinates to readable format",
+        "Format altitude restrictions clearly"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F022",
+      "category": "translation",
+      "description": "Create translation templates for NOTAM types",
+      "priority": 8,
+      "steps": [
+        "Template for runway closures",
+        "Template for airspace restrictions",
+        "Template for navigation aid outages",
+        "Template for obstruction warnings",
+        "Fallback template for unknown types"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F023",
+      "category": "ui-navigation",
+      "description": "Create main tab navigation structure",
+      "priority": 9,
+      "steps": [
+        "Create TabView with NOTAMs, Changes, Settings tabs",
+        "Use SF Symbols for tab icons",
+        "Implement proper tab selection state",
+        "Add badge to Changes tab when new changes exist"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F024",
+      "category": "ui-list",
+      "description": "Create NOTAM list view",
+      "priority": 9,
+      "steps": [
+        "Create NOTAMListView with List component",
+        "Group NOTAMs by FIR",
+        "Show NOTAM summary in row (ID, location, dates)",
+        "Indicate NOTAM type with color/icon",
+        "Support pull-to-refresh"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F025",
+      "category": "ui-list",
+      "description": "Create NOTAM row component",
+      "priority": 9,
+      "steps": [
+        "Design compact row with key info visible",
+        "Show effective period prominently",
+        "Use color coding for urgency/type",
+        "Add disclosure indicator for detail",
+        "Animate appearance of new NOTAMs"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F026",
+      "category": "ui-detail",
+      "description": "Create NOTAM detail view with tabs",
+      "priority": 10,
+      "steps": [
+        "Create detail view with segmented control or tabs",
+        "Original tab shows raw NOTAM text",
+        "Translated tab shows plain English version",
+        "Both tabs scrollable for long content",
+        "Add share button for NOTAM"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F027",
+      "category": "ui-detail",
+      "description": "Style original NOTAM display",
+      "priority": 10,
+      "steps": [
+        "Use monospace font for raw NOTAM",
+        "Proper line wrapping",
+        "Highlight key sections (Q-line, effective dates)",
+        "Support text selection for copying"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F028",
+      "category": "ui-detail",
+      "description": "Style translated NOTAM display",
+      "priority": 10,
+      "steps": [
+        "Use readable proportional font",
+        "Clear section headings",
+        "Visual hierarchy for importance",
+        "Icons for different information types",
+        "Expandable sections if needed"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F029",
+      "category": "ui-settings",
+      "description": "Create settings view",
+      "priority": 11,
+      "steps": [
+        "Create SettingsView with Form layout",
+        "Section for FIR management",
+        "Section for refresh interval",
+        "Section for notifications",
+        "About section with version"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F030",
+      "category": "ui-settings",
+      "description": "Create FIR management interface",
+      "priority": 11,
+      "steps": [
+        "List current FIRs with delete option",
+        "Add FIR button with sheet/modal",
+        "Text field for ICAO code input",
+        "Validation feedback for invalid codes",
+        "Reorder FIRs with drag handle"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F031",
+      "category": "ui-settings",
+      "description": "Create refresh interval picker",
+      "priority": 11,
+      "steps": [
+        "Picker with 1h, 6h, 12h options",
+        "Show next scheduled refresh time",
+        "Manual refresh button",
+        "Disable background refresh option"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F032",
+      "category": "ui-settings",
+      "description": "Create notification settings section",
+      "priority": 11,
+      "steps": [
+        "Toggle for notifications enabled",
+        "Link to system settings if denied",
+        "Option for notification sound",
+        "Preview notification button"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F033",
+      "category": "ui-changes",
+      "description": "Create changes list view",
+      "priority": 12,
+      "steps": [
+        "List recent NOTAM changes",
+        "Group by date detected",
+        "Show change type (new, expired, modified)",
+        "Clear all button",
+        "Empty state when no changes"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F034",
+      "category": "ui-changes",
+      "description": "Create change detail view",
+      "priority": 12,
+      "steps": [
+        "Show before/after for modified NOTAMs",
+        "Highlight differences",
+        "Link to full NOTAM detail",
+        "Mark as read functionality"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F035",
+      "category": "ui-states",
+      "description": "Implement loading states",
+      "priority": 13,
+      "steps": [
+        "Show ProgressView during fetch",
+        "Skeleton loading for list items",
+        "Disable refresh button while loading",
+        "Show last updated timestamp"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F036",
+      "category": "ui-states",
+      "description": "Implement error states",
+      "priority": 13,
+      "steps": [
+        "Error view with message and retry button",
+        "Network offline indicator",
+        "Partial failure handling (some FIRs failed)",
+        "Error banner that doesn't block content"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F037",
+      "category": "ui-states",
+      "description": "Implement empty states",
+      "priority": 13,
+      "steps": [
+        "Empty state for no NOTAMs",
+        "Empty state for no FIRs configured",
+        "Empty state for no changes",
+        "Appropriate illustrations and CTAs"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F038",
+      "category": "ui-polish",
+      "description": "Implement dark mode support",
+      "priority": 14,
+      "steps": [
+        "Test all views in dark mode",
+        "Use semantic colors throughout",
+        "Ensure sufficient contrast",
+        "Custom colors adapt to color scheme"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F039",
+      "category": "ui-polish",
+      "description": "Implement accessibility",
+      "priority": 14,
+      "steps": [
+        "Add accessibility labels to all controls",
+        "Support Dynamic Type",
+        "Test with VoiceOver",
+        "Ensure minimum tap targets (44pt)"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F040",
+      "category": "ui-polish",
+      "description": "Add animations and transitions",
+      "priority": 14,
+      "steps": [
+        "Smooth list updates with animation",
+        "Tab transition animations",
+        "Pull-to-refresh feedback",
+        "Success/failure haptic feedback"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F041",
+      "category": "testing",
+      "description": "Create comprehensive unit test suite",
+      "priority": 15,
+      "steps": [
+        "Tests for all models",
+        "Tests for NOTAM parsing",
+        "Tests for translation logic",
+        "Tests for diff/comparison logic",
+        "Minimum 80% code coverage"
+      ],
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "F042",
+      "category": "testing",
+      "description": "Create UI test suite",
+      "priority": 15,
+      "steps": [
+        "Test main navigation flow",
+        "Test adding/removing FIRs",
+        "Test settings changes",
+        "Test NOTAM detail viewing",
+        "Test pull-to-refresh"
+      ],
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}
