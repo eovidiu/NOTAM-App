@@ -84,6 +84,42 @@ Status: Complete
 
 ---
 
+## Session 3: FIR Search and NOTAM Filtering
+Date: 2026-01-08
+Agent: Coding Agent
+Status: Complete
+
+### Completed:
+- [x] Added searchable ICAO code database (ats_units.json with 107 official FIRs)
+- [x] Created ATSUnit model and ATSUnitService for search
+- [x] Updated AddFIRView with search-first UI for adding FIRs
+- [x] Added active/inactive NOTAM filter to list view
+
+### Feature Details:
+**FIR Search:**
+- Official FIR database with ICAO codes, names, and countries
+- Relevance-based search (exact match > prefix > contains)
+- Manual entry fallback for codes not in database
+
+**NOTAM Filter:**
+- Default: show only active NOTAMs (current date within effective period)
+- Filter menu in top toolbar with counts
+- "Active Only (N)" and "All NOTAMs (N)" options
+- Shows count of expired/future NOTAMs
+- Filter icon changes state to indicate active filtering
+
+### Files Modified:
+- NOTAMApp/Models/ATSUnit.swift (new)
+- NOTAMApp/Services/ATSUnitService.swift (new)
+- NOTAMApp/Resources/ats_units.json (new)
+- NOTAMApp/Views/Settings/AddFIRView.swift (updated)
+- NOTAMApp/Views/NOTAM/NOTAMListView.swift (updated)
+
+### Git Commits:
+- 6e66f25: Add active/inactive NOTAM filter to list view
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
