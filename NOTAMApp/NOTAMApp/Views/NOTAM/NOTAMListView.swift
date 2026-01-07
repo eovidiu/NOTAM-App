@@ -4,20 +4,42 @@ struct NOTAMListView: View {
     @EnvironmentObject var appState: AppState
     @State private var searchText = ""
     @State private var selectedNotam: NOTAM?
+    @State private var showInactiveNotams = false
 
     var filteredNotamsByFIR: [(fir: String, notams: [NOTAM])] {
-        if searchText.isEmpty {
-            return appState.notamsByFIR
-        }
-
         return appState.notamsByFIR.compactMap { fir, notams in
-            let filtered = notams.filter { notam in
-                notam.text.localizedCaseInsensitiveContains(searchText) ||
-                notam.displayId.localizedCaseInsensitiveContains(searchText) ||
-                notam.location.localizedCaseInsensitiveContains(searchText)
+            var filtered = notams
+
+            // Filter by active status (default: show only active)
+            if !showInactiveNotams {
+                filtered = filtered.filter { $0.isActive }
             }
+
+            // Filter by search text
+            if !searchText.isEmpty {
+                filtered = filtered.filter { notam in
+                    notam.text.localizedCaseInsensitiveContains(searchText) ||
+                    notam.displayId.localizedCaseInsensitiveContains(searchText) ||
+                    notam.location.localizedCaseInsensitiveContains(searchText)
+                }
+            }
+
             return filtered.isEmpty ? nil : (fir, filtered)
         }
+    }
+
+    private var totalNotamsCount: Int {
+        appState.notamsByFIR.reduce(0) { $0 + $1.notams.count }
+    }
+
+    private var activeNotamsCount: Int {
+        appState.notamsByFIR.reduce(0) { total, group in
+            total + group.notams.filter { $0.isActive }.count
+        }
+    }
+
+    private var inactiveNotamsCount: Int {
+        totalNotamsCount - activeNotamsCount
     }
 
     var body: some View {
@@ -64,6 +86,42 @@ struct NOTAMListView: View {
                     }
                 }
 
+                ToolbarItem(placement: .topBarLeading) {
+                    Menu {
+                        Button {
+                            showInactiveNotams = false
+                        } label: {
+                            Label(
+                                "Active Only (\(activeNotamsCount))",
+                                systemImage: showInactiveNotams ? "" : "checkmark"
+                            )
+                        }
+
+                        Button {
+                            showInactiveNotams = true
+                        } label: {
+                            Label(
+                                "All NOTAMs (\(totalNotamsCount))",
+                                systemImage: showInactiveNotams ? "checkmark" : ""
+                            )
+                        }
+
+                        if inactiveNotamsCount > 0 {
+                            Divider()
+                            Text("\(inactiveNotamsCount) expired/future")
+                                .font(.caption)
+                        }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: showInactiveNotams ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
+                            if !showInactiveNotams {
+                                Text("Active")
+                                    .font(.caption)
+                            }
+                        }
+                    }
+                }
+
                 ToolbarItem(placement: .status) {
                     if let date = appState.lastRefreshDate {
                         Text("Updated \(date, style: .relative) ago")
@@ -98,6 +156,7 @@ struct NOTAMListView: View {
         }
         .listStyle(.insetGrouped)
         .animation(.default, value: searchText)
+        .animation(.default, value: showInactiveNotams)
     }
 }
 
