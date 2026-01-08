@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - NOTAM App</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1a365d 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #f59e0b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .back-link::before {
+            content: '\2190';
+            margin-right: 0.5rem;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        section h2 {
+            color: #f59e0b;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: #f59e0b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item a {
+            color: #f59e0b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-item p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* FAQ Section */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: #f59e0b;
+            font-weight: 300;
+            transition: transform 0.2s;
+        }
+
+        .faq-item.open .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding: 0 1.25rem 1.25rem;
+        }
+
+        .faq-answer p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        .faq-answer ul {
+            margin: 0.5rem 0 0 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .faq-answer li {
+            margin-bottom: 0.25rem;
+        }
+
+        .severity-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .severity-red { background: #ef4444; }
+        .severity-orange { background: #f59e0b; }
+        .severity-yellow { background: #eab308; }
+        .severity-green { background: #22c55e; }
+
+        /* Bug Reports Section */
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: #f59e0b;
+            color: #1a365d;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .github-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .github-link svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #f59e0b;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header {
+                padding: 2rem 0 1.5rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">NOTAM <span>App</span></div>
+            <h1>Support Center</h1>
+        </header>
+
+        <a href="index.html" class="back-link">Back to Home</a>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">&#9993;</div>
+                    <div>
+                        <a href="mailto:support@notamapp.com">support@notamapp.com</a>
+                        <p>We typically respond within 24-48 hours</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">How do I add a FIR?</div>
+                    <div class="faq-answer">
+                        <p>To add a Flight Information Region (FIR) to your watchlist:</p>
+                        <ul>
+                            <li>Open the app and navigate to the FIR management section</li>
+                            <li>Tap the "+" or "Add FIR" button</li>
+                            <li>Search for the FIR by its ICAO code (e.g., LRBB for Bucharest FIR)</li>
+                            <li>Select the FIR from the search results to add it to your list</li>
+                        </ul>
+                        <p>You can add multiple FIRs to monitor NOTAMs across different regions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How do notifications work?</div>
+                    <div class="faq-answer">
+                        <p>NOTAM App sends push notifications to keep you informed about important airspace changes:</p>
+                        <ul>
+                            <li>Notifications are sent when new NOTAMs are published for your selected FIRs</li>
+                            <li>Critical NOTAMs (runway closures, airspace restrictions) trigger immediate alerts</li>
+                            <li>You can customize notification preferences in the app settings</li>
+                            <li>Enable or disable notifications per FIR for granular control</li>
+                        </ul>
+                        <p>Make sure notifications are enabled in your device settings for the app to receive alerts.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What do the severity colors mean?</div>
+                    <div class="faq-answer">
+                        <p>NOTAMs are color-coded by severity to help you quickly identify important information:</p>
+                        <ul>
+                            <li><span class="severity-indicator severity-red"></span><strong>Red:</strong> Critical - Immediate safety impact (runway closures, airspace closures)</li>
+                            <li><span class="severity-indicator severity-orange"></span><strong>Orange:</strong> High - Significant operational impact (major restrictions, hazards)</li>
+                            <li><span class="severity-indicator severity-yellow"></span><strong>Yellow:</strong> Moderate - Notable changes (temporary restrictions, obstacles)</li>
+                            <li><span class="severity-indicator severity-green"></span><strong>Green:</strong> Low - Informational (minor changes, routine notices)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How often is data refreshed?</div>
+                    <div class="faq-answer">
+                        <p>NOTAM data is refreshed automatically to ensure you have the latest information:</p>
+                        <ul>
+                            <li>Background refresh occurs every 15 minutes when the app is active</li>
+                            <li>Pull-to-refresh allows you to manually update data at any time</li>
+                            <li>Critical NOTAMs may trigger push notifications between refresh cycles</li>
+                            <li>Data is sourced from official aviation authorities</li>
+                        </ul>
+                        <p>The timestamp at the top of the NOTAM list shows when data was last updated.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bugs">
+            <h2>Report a Bug</h2>
+            <p style="margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.8);">
+                Found a bug or have a feature request? We track all issues on GitHub. Your feedback helps us improve the app for everyone.
+            </p>
+            <a href="https://github.com/eovidiu/NOTAM-App/issues" target="_blank" rel="noopener noreferrer" class="github-link">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                Open GitHub Issues
+            </a>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 NOTAM App. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="https://github.com/eovidiu/NOTAM-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+                &nbsp;&middot;&nbsp;
+                <a href="index.html">Home</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const wasOpen = item.classList.contains('open');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('open');
+                });
+
+                // Open clicked item if it was closed
+                if (!wasOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
