@@ -292,6 +292,7 @@ final class NOTAMTranslator {
         "ASOS": "Automated Surface Observing System",
         "ATC": "Air Traffic Control",
         "ATIS": "Automatic Terminal Information Service",
+        "ATS": "Air Traffic Services",
         "AUTH": "Authority/Authorized",
         "AVBL": "Available",
         "AWY": "Airway",
@@ -480,6 +481,7 @@ final class NOTAMTranslator {
 
         // U
         "U/S": "Unserviceable",
+        "UIR": "Upper Information Region",
         "UNL": "Unlimited",
         "UNLGTD": "Unlighted",
         "USBL": "Usable",

@@ -1,4 +1,157 @@
-# Notes: Eurocontrol NOTAM API Research
+# Notes: NOTAM Research
+
+---
+
+# Airspace Closure NOTAM Format Research
+
+## Q-Line Codes for Closures
+
+NOTAM Q codes follow the pattern: **Q** + **Subject (2 letters)** + **Condition (2 letters)**
+
+### Relevant Subject Codes (2nd & 3rd letters):
+- **FA**: Aerodrome (general)
+- **MR**: Runway (movement area)
+- **RA**: Airspace reservation
+- **RD**: Danger area
+- **RP**: Prohibited area
+- **RR**: Restricted area
+- **RT**: Temporary restricted area
+
+### Relevant Condition Codes (4th & 5th letters):
+- **LC**: Closed
+- **LI**: Closed to IFR operations
+- **LV**: Closed to VFR operations
+- **LN**: Closed to all night operations
+- **CA**: Activated
+- **CD**: Deactivated
+
+### Common Closure Q-Codes:
+| Q-Code | Meaning |
+|--------|---------|
+| QFALC | Aerodrome closed |
+| QMRLC | Runway closed |
+| QRTCA | Temporary restricted area activated |
+| QRPCA | Prohibited area activated |
+| QRRCA | Restricted area activated |
+| QAFXX | Airspace general (various) |
+
+## Real-World Closure NOTAM Examples
+
+### 1. Ukrainian Airspace Closure (FIR-Wide)
+```
+UKBV A0640/22
+Q) UKBV/QAFXX/IV/NBO/E/000/999/
+E) DUE TO THE MILITARY INVASION OF UKRAINE BY THE RUSSIAN
+FEDERATION, THE USE OF AIRSPACE OF UKRAINE WITHIN
+UIR KYIV, FIR LVIV, FIR KYIV, FIR DNIPRO, FIR ODESA,
+FIR SIMFEROPOL' IS PROHIBITED FOR ALL AIRCRAFT
+EXCEPT STATE AIRCRAFT OF UKRAINE OR WITH
+THE PERMISSION OF THE GENERAL STAFF OF THE ARMED
+FORCES OF UKRAINE.
+ATS IS NOT PROVIDED.
+```
+**Key patterns:** "PROHIBITED FOR ALL AIRCRAFT", "ATS IS NOT PROVIDED"
+
+### 2. Moldova FIR Closure (Ukrainian Crisis)
+```
+A0046/22 NOTAMR A0045/22
+Q) LUUU/QAFXX/IV/BO/E/000/999/4704N02800E098
+A) LUUU
+E) FIR CHISINAU LUUU CLSD FOR ALL FLIGHTS DUE TO UKRAINIAN CRISIS
+WITH FOLLOWING EXCEPTIONS:
+A)THE REPOSITIONING FLIGHTS OF CIVIL AIRCRAFT...
+```
+**Key patterns:** "FIR ... CLSD FOR ALL FLIGHTS", "EXCEPTIONS"
+
+### 3. US FAA Prohibitory NOTAM
+```
+KICZ A0004/22 SECURITY
+THOSE PERSONS DESCRIBED IN PARAGRAPH A (APPLICABILITY) BELOW ARE
+PROHIBITED FROM OPERATING AT ALL ALTITUDES IN THE LVIV FLIGHT
+INFORMATION REGION (FIR) (UKLV)...
+DUE TO SAFETY-OF-FLIGHT RISKS ASSOCIATED WITH ONGOING HOSTILITIES.
+SFC—FL999: 24 FEB 19:30 2022 UNTIL PERM
+```
+**Key patterns:** "PROHIBITED FROM OPERATING", "SAFETY-OF-FLIGHT RISKS", "SFC—FL999"
+
+### 4. Airport Closure
+```
+Q) KZAU/QMRLC/IV/NBO/A/000/999/4152N08745W005
+E) RWY 04L/22R CLSD
+```
+**Key patterns:** "RWY ... CLSD", "QMRLC" code
+
+## Keywords Indicating Closure/Prohibition
+
+### Critical Keywords (requires immediate pilot attention):
+- `CLSD` / `CLOSED`
+- `PROHIBITED`
+- `NOT PERMITTED`
+- `NOT ALLOWED`
+- `NO ENTRY`
+- `FORBIDDEN`
+- `EXCEPT` (indicates exceptions to closure)
+
+### Airspace Type Indicators:
+- `FIR` - Flight Information Region
+- `UIR` - Upper Information Region
+- `CTR` - Control Zone
+- `TMA` - Terminal Maneuvering Area
+- `PROHIBITED AREA` / `P-XXX`
+- `RESTRICTED AREA` / `R-XXXX`
+- `DANGER AREA` / `D-XXX`
+
+### Reason Indicators:
+- `MILITARY ACTIVITY`
+- `MILITARY INVASION`
+- `HOSTILITIES`
+- `SAFETY-OF-FLIGHT RISKS`
+- `SECURITY`
+- `EMERGENCY`
+- `VOLCANIC ASH`
+- `HAZARDOUS`
+
+### ATS Status Indicators:
+- `ATS IS NOT PROVIDED`
+- `ATS NOT AVAILABLE`
+- `NO ATC SERVICES`
+
+## Current App Translator Analysis
+
+The translator already handles:
+- ✅ `CLSD` → "Closed"
+- ✅ `TFR` → "Temporary flight restriction"
+- ✅ `FIR` → "Flight Information Region"
+- ✅ `SFC` → "Surface"
+- ✅ Summary for "AD CLSD" or "AERODROME CLSD"
+- ✅ Summary for "RESTRICTED" or "PROHIBITED"
+
+### Missing/Could Improve:
+- ❌ No detection of FIR-wide closures vs airport closures
+- ❌ No special handling for "ATS NOT PROVIDED" (critical info)
+- ❌ No visual warning indicator for critical closures
+- ❌ `PROHIBITED` not in abbreviations (but detected in summary)
+
+## Recommendations
+
+1. **Add severity indicator** for critical NOTAMs:
+   - Red badge for "PROHIBITED", "CLSD" at FIR level, "NO ATS"
+   - Orange for airport closures
+   - Yellow for restricted areas
+
+2. **Enhance summary generation** to detect:
+   - FIR-wide closures: "Airspace closed: [FIR names]"
+   - No ATS: append "- No ATC services"
+   - Military/security: indicate reason
+
+3. **Add abbreviations**:
+   - `ATS` → "Air Traffic Services"
+   - `UIR` → "Upper Information Region"
+   - `PROHIBITED` → keep as-is (clear)
+
+---
+
+# Eurocontrol NOTAM API Research
 
 ## Sources
 

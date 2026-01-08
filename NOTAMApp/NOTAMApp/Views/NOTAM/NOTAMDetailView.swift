@@ -120,34 +120,83 @@ struct NOTAMDetailView: View {
     }
 
     private var statusCard: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Status")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+        VStack(spacing: 12) {
+            // Severity banner for critical/warning NOTAMs
+            if notam.severity == .critical || notam.severity == .warning {
                 HStack {
-                    Circle()
-                        .fill(notam.isActive ? .green : .gray)
-                        .frame(width: 10, height: 10)
-                    Text(notam.isActive ? "Active" : "Inactive")
-                        .font(.subheadline.bold())
+                    Image(systemName: notam.severity.icon)
+                    Text(notam.severity.label.uppercased())
+                        .font(.caption.bold())
+                    Spacer()
+                    Text(severityDescription)
+                        .font(.caption)
                 }
+                .foregroundStyle(.white)
+                .padding(8)
+                .background(notam.severity.color)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
 
-            Spacer()
+            HStack {
+                // Severity indicator
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Severity")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    HStack(spacing: 4) {
+                        Image(systemName: notam.severity.icon)
+                            .foregroundStyle(notam.severity.color)
+                        Text(notam.severity.label)
+                            .font(.subheadline.bold())
+                            .foregroundStyle(notam.severity.color)
+                    }
+                }
 
-            VStack(alignment: .trailing, spacing: 4) {
-                Text("Type")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Text(notam.type.displayName)
-                    .font(.subheadline.bold())
-                    .foregroundStyle(typeColor)
+                Spacer()
+
+                // Active status
+                VStack(alignment: .center, spacing: 4) {
+                    Text("Status")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    HStack {
+                        Circle()
+                            .fill(notam.isActive ? .green : .gray)
+                            .frame(width: 8, height: 8)
+                        Text(notam.isActive ? "Active" : "Inactive")
+                            .font(.subheadline.bold())
+                    }
+                }
+
+                Spacer()
+
+                // Type
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text("Type")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text(notam.type.displayName)
+                        .font(.subheadline.bold())
+                        .foregroundStyle(typeColor)
+                }
             }
         }
         .padding()
         .background(Color(.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private var severityDescription: String {
+        switch notam.severity {
+        case .critical:
+            return "Major operational impact"
+        case .warning:
+            return "Significant restriction"
+        case .caution:
+            return "Exercise caution"
+        case .info:
+            return "Informational"
+        }
     }
 
     private func sectionCard(_ section: NOTAMSection) -> some View {

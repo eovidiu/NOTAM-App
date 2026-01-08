@@ -22,17 +22,15 @@ struct NOTAMRowView: View {
 
                 Spacer()
 
-                // Status indicator
-                if notam.isActive {
-                    Label("Active", systemImage: "checkmark.circle.fill")
-                        .font(.caption)
-                        .foregroundStyle(.green)
-                        .labelStyle(.iconOnly)
-                } else {
-                    Label("Inactive", systemImage: "xmark.circle.fill")
-                        .font(.caption)
-                        .foregroundStyle(.gray)
-                        .labelStyle(.iconOnly)
+                // Severity indicator
+                HStack(spacing: 4) {
+                    Image(systemName: notam.severity.icon)
+                        .foregroundStyle(notam.severity.color)
+                    if notam.severity != .info {
+                        Text(notam.severity.label)
+                            .font(.caption2.bold())
+                            .foregroundStyle(notam.severity.color)
+                    }
                 }
             }
 

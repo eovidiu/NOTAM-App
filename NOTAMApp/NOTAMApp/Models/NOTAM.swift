@@ -1,4 +1,40 @@
 import Foundation
+import SwiftUI
+
+/// Severity level for NOTAMs based on operational impact
+enum NOTAMSeverity: String, Codable, CaseIterable {
+    case critical   // FIR/airspace prohibited, no ATS
+    case warning    // Airport/runway closed, restricted areas active
+    case caution    // TFR, partial closures
+    case info       // Normal NOTAMs
+
+    var color: Color {
+        switch self {
+        case .critical: return .red
+        case .warning: return .orange
+        case .caution: return .yellow
+        case .info: return .green
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .critical: return "exclamationmark.octagon.fill"
+        case .warning: return "exclamationmark.triangle.fill"
+        case .caution: return "exclamationmark.circle.fill"
+        case .info: return "checkmark.circle.fill"
+        }
+    }
+
+    var label: String {
+        switch self {
+        case .critical: return "Critical"
+        case .warning: return "Warning"
+        case .caution: return "Caution"
+        case .info: return "Active"
+        }
+    }
+}
 
 /// Represents a single NOTAM (Notice to Air Missions)
 struct NOTAM: Codable, Identifiable, Hashable {
@@ -32,6 +68,58 @@ struct NOTAM: Codable, Identifiable, Hashable {
         if isPermanent { return true }
         guard let end = effectiveEnd else { return true }
         return end > now
+    }
+
+    /// Determines severity based on NOTAM content
+    var severity: NOTAMSeverity {
+        let upperText = text.uppercased()
+
+        // CRITICAL: FIR/airspace prohibited, no ATS
+        if upperText.contains("ATS IS NOT PROVIDED") ||
+           upperText.contains("ATS NOT AVAILABLE") ||
+           upperText.contains("NO ATC SERVICE") {
+            return .critical
+        }
+
+        if upperText.contains("PROHIBITED") &&
+           (upperText.contains("FIR") || upperText.contains("UIR") || upperText.contains("AIRSPACE")) {
+            return .critical
+        }
+
+        if upperText.contains("CLSD") && upperText.contains("ALL FLIGHTS") {
+            return .critical
+        }
+
+        // WARNING: Airport/runway closed, restricted areas active
+        if upperText.contains("AD CLSD") || upperText.contains("AERODROME CLSD") ||
+           upperText.contains("AIRPORT CLSD") || upperText.contains("AIRPORT CLOSED") {
+            return .warning
+        }
+
+        if upperText.contains("RWY") && upperText.contains("CLSD") {
+            return .warning
+        }
+
+        if (upperText.contains("RESTRICTED AREA") || upperText.contains("PROHIBITED AREA")) &&
+           (upperText.contains("ACT") || upperText.contains("ACTIVE")) {
+            return .warning
+        }
+
+        // CAUTION: TFR, partial closures, general restrictions
+        if upperText.contains("TFR") || upperText.contains("TEMPORARY FLIGHT RESTRICTION") {
+            return .caution
+        }
+
+        if upperText.contains("CLSD") || upperText.contains("CLOSED") {
+            return .caution
+        }
+
+        if upperText.contains("RESTRICTED") || upperText.contains("PROHIBITED") {
+            return .caution
+        }
+
+        // INFO: Default for normal NOTAMs
+        return .info
     }
 
     var effectivePeriodDescription: String {
