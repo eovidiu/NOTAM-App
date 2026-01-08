@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - NOTAM App</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1a365d 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #f59e0b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .back-link::before {
+            content: '\2190';
+            margin-right: 0.5rem;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #f59e0b;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(245, 158, 11, 0.3);
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            margin: 1rem 0 1rem 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .last-updated {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #f59e0b;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header {
+                padding: 2rem 0 1.5rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">NOTAM <span>App</span></div>
+            <h1>Privacy Policy</h1>
+        </header>
+
+        <a href="index.html" class="back-link">Back to Home</a>
+
+        <div class="content">
+            <div class="highlight">
+                <p>NOTAM App does not collect, store, or share any personal data.</p>
+            </div>
+
+            <h2>Overview</h2>
+            <p>Your privacy is important to us. NOTAM App is designed with privacy in mind — we don't track you, we don't collect your data, and we don't share anything with third parties.</p>
+
+            <h2>Data Collection</h2>
+            <p><strong>We do not collect any data.</strong> Specifically:</p>
+            <ul>
+                <li>No personal information is collected</li>
+                <li>No usage analytics or tracking</li>
+                <li>No location data</li>
+                <li>No device identifiers</li>
+                <li>No cookies or tracking technologies</li>
+                <li>No third-party analytics services</li>
+            </ul>
+
+            <h2>Data Storage</h2>
+            <p>All app data is stored locally on your device only:</p>
+            <ul>
+                <li><strong>Your FIR selections</strong> — stored on your device</li>
+                <li><strong>App settings</strong> — stored on your device</li>
+                <li><strong>Cached NOTAM data</strong> — stored on your device for offline access</li>
+            </ul>
+            <p>This data never leaves your device and is not accessible to us or any third party.</p>
+
+            <h2>Network Requests</h2>
+            <p>The app makes network requests solely to fetch NOTAM data from the FAA's public NOTAM Search API. These requests:</p>
+            <ul>
+                <li>Contain only the FIR codes you've selected</li>
+                <li>Do not include any personal information</li>
+                <li>Do not include any device identifiers</li>
+                <li>Are made directly to the FAA — no intermediary servers</li>
+            </ul>
+
+            <h2>Push Notifications</h2>
+            <p>If you enable notifications, they are processed entirely on your device. We do not use push notification services that would require sending data to external servers.</p>
+
+            <h2>Third-Party Services</h2>
+            <p>NOTAM App does not integrate with any third-party services, analytics platforms, advertising networks, or social media trackers.</p>
+
+            <h2>Children's Privacy</h2>
+            <p>Our app does not collect any data from anyone, including children under 13.</p>
+
+            <h2>Changes to This Policy</h2>
+            <p>If we ever change this privacy policy, we will update this page. However, our commitment to not collecting your data will remain unchanged.</p>
+
+            <h2>Contact</h2>
+            <p>If you have questions about this privacy policy, please open an issue on our <a href="https://github.com/eovidiu/NOTAM-App/issues" style="color: #f59e0b;">GitHub repository</a>.</p>
+
+            <p class="last-updated">Last updated: January 8, 2026</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 NOTAM App. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="https://github.com/eovidiu/NOTAM-App" target="_blank" rel="noopener noreferrer">GitHub</a>
+                &nbsp;&middot;&nbsp;
+                <a href="index.html">Home</a>
+                &nbsp;&middot;&nbsp;
+                <a href="support.html">Support</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
