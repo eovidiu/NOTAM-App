@@ -236,6 +236,36 @@ Status: Complete
 
 ---
 
+## Session 7: App Store Marketing Images
+Date: 2026-01-08
+Agent: Coding Agent
+Status: Complete
+
+### Completed:
+- [x] Generated iPhone marketing image 1: "Stay Informed. Fly Safe."
+- [x] Generated iPhone marketing image 2: "Critical Alerts Instantly"
+- [x] Generated iPad marketing image: "Full Situational Awareness"
+- [x] Generated feature highlights image with 4-icon grid
+
+### Assets Created:
+**Marketing Images:**
+- `Marketing/iPhone_Marketing_1.png` - Hero image with iPhone mockup showing alert list
+- `Marketing/iPhone_Marketing_2.png` - Critical alert theme with map view
+- `Marketing/iPad_Marketing_1.png` - iPad showing multi-FIR NOTAM list
+- `Marketing/Feature_Highlights.png` - 4 feature icons (Alerts, FIRs, Safety, Updates)
+
+### Design Approach:
+- Deep navy blue gradient backgrounds (#1a365d)
+- White/light typography for readability
+- iPhone/iPad device mockups for context
+- Apple App Store marketing style compliance
+- Clean, professional aviation aesthetic
+
+### Git Commits:
+- 5f63264: Add App Store marketing images
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
