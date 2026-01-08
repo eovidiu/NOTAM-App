@@ -159,6 +159,48 @@ Status: Complete
 
 ---
 
+## Session 5: Critical Airspace Closure Notifications
+Date: 2026-01-08
+Agent: Orchestrator + Sub-agents
+Status: Complete
+
+### Completed:
+- [x] Created NotifiedNOTAMStore service to track notified NOTAMs
+- [x] Added sendCriticalAirspaceNotification method to NotificationManager
+- [x] Integrated critical notification check into background refresh flow
+- [x] Removed demo NOTAM from NOTAMListView
+
+### Feature Details:
+**Notification Trigger:**
+- Only Critical severity NOTAMs (airspace closures, no ATS)
+- NOTAM must be issued within last 3 days
+- Each NOTAM only triggers one notification (deduplication)
+
+**Notification Content:**
+- Title: "⚠️ Critical: Airspace Closed"
+- Body: "[location] - [translated summary]"
+- Sound: .defaultCritical
+- Interruption level: .timeSensitive (iOS 15+)
+
+**Architecture:**
+- NotifiedNOTAMStore persists notified NOTAM IDs to UserDefaults
+- Auto-cleanup removes entries older than 7 days
+- Check runs during background refresh when notifications enabled
+
+### Files Created:
+- NOTAMApp/Services/NotifiedNOTAMStore.swift
+
+### Files Modified:
+- NOTAMApp/Services/NotificationManager.swift
+- NOTAMApp/Services/BackgroundRefreshManager.swift
+- NOTAMApp/Views/NOTAM/NOTAMDetailView.swift (added critical preview)
+- NOTAMApp.xcodeproj/project.pbxproj
+
+### Git Commits:
+- 6b6ab7d: Add critical airspace closure notifications
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
