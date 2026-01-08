@@ -174,7 +174,7 @@
         }
 
         .faq-item.open .faq-answer {
-            max-height: 500px;
+            max-height: 800px;
             padding: 0 1.25rem 1.25rem;
         }
 
@@ -298,42 +298,72 @@
             <h2>Frequently Asked Questions</h2>
             <div class="faq-list">
                 <div class="faq-item">
-                    <div class="faq-question">How do I add a FIR?</div>
+                    <div class="faq-question">What is a NOTAM?</div>
                     <div class="faq-answer">
-                        <p>To add a Flight Information Region (FIR) to your watchlist:</p>
+                        <p>NOTAM stands for "Notice to Air Missions" (previously "Notice to Airmen"). These are official notices issued by aviation authorities to alert people about temporary changes or hazards in the airspace. Think of them as real-time bulletins about what's happening in the sky above you.</p>
+                        <p style="margin-top: 0.75rem;">NOTAMs can include information about:</p>
                         <ul>
-                            <li>Open the app and navigate to the FIR management section</li>
-                            <li>Tap the "+" or "Add FIR" button</li>
-                            <li>Search for the FIR by its ICAO code (e.g., LRBB for Bucharest FIR)</li>
-                            <li>Select the FIR from the search results to add it to your list</li>
+                            <li>Military exercises or drone operations in your area</li>
+                            <li>Airshow and special event flight restrictions</li>
+                            <li>Temporary flight restrictions (like VIP movements or emergencies)</li>
+                            <li>New obstacles like construction cranes or wind turbines</li>
+                            <li>Airport and runway closures</li>
                         </ul>
-                        <p>You can add multiple FIRs to monitor NOTAMs across different regions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Who is this app for?</div>
+                    <div class="faq-answer">
+                        <p>NOTAM App is designed for anyone curious about airspace activity in their area - you don't need to be a pilot or aviation professional to use it!</p>
+                        <ul>
+                            <li><strong>Drone operators:</strong> Know when and where flight restrictions apply before you fly</li>
+                            <li><strong>Aviation enthusiasts:</strong> Track interesting aerial activities like airshows, military exercises, or special flights</li>
+                            <li><strong>Researchers & journalists:</strong> Monitor airspace activity for stories or studies</li>
+                            <li><strong>Curious locals:</strong> Find out why there's unusual aircraft activity in your area</li>
+                            <li><strong>Event planners:</strong> Check for airspace restrictions that might affect outdoor events</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What is a FIR and how do I add one?</div>
+                    <div class="faq-answer">
+                        <p>A <strong>FIR (Flight Information Region)</strong> is simply a defined area of airspace, usually covering a country or large region. Each FIR has a four-letter code - for example, LRBB covers Romania, EGTT covers London/UK, and KZNY covers New York.</p>
+                        <p style="margin-top: 0.75rem;">To add a region to your watchlist:</p>
+                        <ul>
+                            <li>Open the app and go to the region management section</li>
+                            <li>Tap the "+" or "Add Region" button</li>
+                            <li>Search by country name, city, or the four-letter code if you know it</li>
+                            <li>Select the region from the results to start tracking it</li>
+                        </ul>
+                        <p style="margin-top: 0.75rem;">You can add multiple regions to monitor airspace activity across different areas - great if you travel or have interests in multiple locations.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">How do notifications work?</div>
                     <div class="faq-answer">
-                        <p>NOTAM App sends push notifications to keep you informed about important airspace changes:</p>
+                        <p>NOTAM App sends push notifications to keep you informed about important airspace changes in your selected regions:</p>
                         <ul>
-                            <li>Notifications are sent when new NOTAMs are published for your selected FIRs</li>
-                            <li>Critical NOTAMs (runway closures, airspace restrictions) trigger immediate alerts</li>
-                            <li>You can customize notification preferences in the app settings</li>
-                            <li>Enable or disable notifications per FIR for granular control</li>
+                            <li>Get notified when new notices are published for areas you're watching</li>
+                            <li>Important events (like airspace closures or major restrictions) trigger immediate alerts</li>
+                            <li>Customize what types of notices you want to hear about in settings</li>
+                            <li>Turn notifications on or off for each region individually</li>
                         </ul>
-                        <p>Make sure notifications are enabled in your device settings for the app to receive alerts.</p>
+                        <p style="margin-top: 0.75rem;">Make sure notifications are enabled in your device settings for the app to send you alerts.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">What do the severity colors mean?</div>
                     <div class="faq-answer">
-                        <p>NOTAMs are color-coded by severity to help you quickly identify important information:</p>
+                        <p>Notices are color-coded to help you quickly spot what matters most:</p>
                         <ul>
-                            <li><span class="severity-indicator severity-red"></span><strong>Red:</strong> Critical - Immediate safety impact (runway closures, airspace closures)</li>
-                            <li><span class="severity-indicator severity-orange"></span><strong>Orange:</strong> High - Significant operational impact (major restrictions, hazards)</li>
-                            <li><span class="severity-indicator severity-yellow"></span><strong>Yellow:</strong> Moderate - Notable changes (temporary restrictions, obstacles)</li>
-                            <li><span class="severity-indicator severity-green"></span><strong>Green:</strong> Low - Informational (minor changes, routine notices)</li>
+                            <li><span class="severity-indicator severity-red"></span><strong>Red - Critical:</strong> Major events like airspace closures, active military operations, or emergency restrictions. If you're a drone operator, definitely pay attention to these.</li>
+                            <li><span class="severity-indicator severity-orange"></span><strong>Orange - High:</strong> Significant activity like large-scale exercises, VIP movements, or notable hazards in the area.</li>
+                            <li><span class="severity-indicator severity-yellow"></span><strong>Yellow - Moderate:</strong> Notable changes like temporary restrictions, new obstacles (cranes, wind turbines), or scheduled activities.</li>
+                            <li><span class="severity-indicator severity-green"></span><strong>Green - Low:</strong> General information like minor changes, routine maintenance notices, or informational updates.</li>
                         </ul>
                     </div>
                 </div>
@@ -341,14 +371,29 @@
                 <div class="faq-item">
                     <div class="faq-question">How often is data refreshed?</div>
                     <div class="faq-answer">
-                        <p>NOTAM data is refreshed automatically to ensure you have the latest information:</p>
+                        <p>The app updates automatically so you always have current information:</p>
                         <ul>
-                            <li>Background refresh occurs every 15 minutes when the app is active</li>
-                            <li>Pull-to-refresh allows you to manually update data at any time</li>
-                            <li>Critical NOTAMs may trigger push notifications between refresh cycles</li>
-                            <li>Data is sourced from official aviation authorities</li>
+                            <li>Data refreshes every 15 minutes while you're using the app</li>
+                            <li>Pull down on the list to manually refresh anytime</li>
+                            <li>Critical notices may trigger push notifications between refresh cycles</li>
+                            <li>All information comes from official aviation authorities</li>
                         </ul>
-                        <p>The timestamp at the top of the NOTAM list shows when data was last updated.</p>
+                        <p style="margin-top: 0.75rem;">Look for the timestamp at the top of the notice list to see when the data was last updated.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">I'm a drone operator - how can this app help me?</div>
+                    <div class="faq-answer">
+                        <p>NOTAM App is an essential tool for responsible drone flying. Before you fly, check the app to see if there are any:</p>
+                        <ul>
+                            <li><strong>Temporary flight restrictions (TFRs):</strong> Areas temporarily off-limits due to events, emergencies, or VIP movements</li>
+                            <li><strong>Military exercises:</strong> Active training areas where manned aircraft may be operating at low altitudes</li>
+                            <li><strong>Special events:</strong> Airshows, sporting events, or concerts that create no-fly zones</li>
+                            <li><strong>New obstacles:</strong> Recently erected structures like cranes or wind turbines</li>
+                        </ul>
+                        <p style="margin-top: 0.75rem;">Set up notifications for your local region so you're always aware of new restrictions that could affect your flights.</p>
+                        <p style="margin-top: 0.5rem; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;"><em>Note: This app is for awareness only. Always check official sources and local regulations before flying.</em></p>
                     </div>
                 </div>
             </div>
