@@ -300,6 +300,7 @@ Status: Complete
 ### Files Created:
 - `docs/index.html` - Landing page
 - `docs/support.html` - Support page with FAQ
+- `docs/privacy.html` - Privacy Policy (no data collected)
 - `docs/styles.css` - Theme styling
 - `docs/images/` - Marketing images for website
 - `NOTAMApp/Local.xcconfig.example` - Template for dev team ID
@@ -322,6 +323,7 @@ Status: Complete
 - db8837a: Update footer: GitHub Issues for support
 - 57e9828: Add MIT License
 - 5a09eb8: Add README with project documentation
+- f8a614c: Add Privacy Policy page (no data collected)
 
 ---
 
@@ -341,8 +343,8 @@ Status: Complete
 - [x] Promotional text
 - [x] App description
 - [x] Keywords
-- [x] Support URL (GitHub Pages)
-- [ ] Privacy Policy URL (if needed)
+- [x] Support URL (https://eovidiu.github.io/NOTAM-App/support.html)
+- [x] Privacy Policy URL (https://eovidiu.github.io/NOTAM-App/privacy.html)
 - [ ] App Store Connect submission
 
 ### Known Considerations:
