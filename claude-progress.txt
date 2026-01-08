@@ -201,6 +201,41 @@ Status: Complete
 
 ---
 
+## Session 6: App Icon and App Store Screenshots
+Date: 2026-01-08
+Agent: Orchestrator + nano-banana skill
+Status: Complete
+
+### Completed:
+- [x] Generated app icon using nano-banana (Gemini) AI
+- [x] Integrated icon into Xcode asset catalog
+- [x] Captured iPhone screenshots (4 screens)
+- [x] Captured iPad Pro 13" screenshots (2 screens)
+
+### Assets Created:
+
+**App Icon (1024x1024):**
+- `NOTAMApp/Assets.xcassets/AppIcon.appiconset/AppIcon.png`
+- Design: Deep blue background, white aircraft prohibition symbol, orange alert dot
+- Xcode 14+ auto-generates all required sizes
+
+**Screenshots:**
+- `Screenshots/iPhone_NOTAMs_List.png` (1206x2622)
+- `Screenshots/iPhone_NOTAM_Detail.png`
+- `Screenshots/iPhone_Settings.png`
+- `Screenshots/iPhone_Changes.png`
+- `Screenshots/iPad_NOTAMs_List.png` (2064x2752)
+- `Screenshots/iPad_NOTAM_Detail.png`
+
+### App Store Requirements:
+- iPhone 6.7": Need 1290x2796 (can resize from 1206x2622)
+- iPad 12.9": Need 2048x2732 (current 2064x2752 is close)
+
+### Git Commits:
+- efd3574: Add app icon and App Store screenshots
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
