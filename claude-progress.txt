@@ -120,6 +120,45 @@ Status: Complete
 
 ---
 
+## Session 4: NOTAM Severity Indicator
+Date: 2026-01-08
+Agent: Coding Agent
+Status: Complete
+
+### Completed:
+- [x] Researched NOTAM format for airspace closures (Q-codes, real examples)
+- [x] Added NOTAMSeverity enum (critical/warning/caution/info)
+- [x] Implemented severity detection logic based on text patterns
+- [x] Updated NOTAMRowView with severity badge (icon + colored label)
+- [x] Updated NOTAMDetailView with severity banner and enhanced status card
+- [x] Added ATS and UIR abbreviations to translator
+
+### Feature Details:
+**Severity Levels:**
+- Critical (red): FIR/airspace prohibited, "ATS NOT PROVIDED", complete closures
+- Warning (orange): Airport/runway closed, restricted areas active
+- Caution (yellow): TFR, partial closures, general restrictions
+- Info (green): Normal NOTAMs
+
+**Detection Patterns:**
+- CRITICAL: "ATS IS NOT PROVIDED", "PROHIBITED" + FIR/UIR/AIRSPACE, "CLSD" + "ALL FLIGHTS"
+- WARNING: "AD CLSD", "RWY" + "CLSD", "RESTRICTED AREA" + "ACT"
+- CAUTION: "TFR", "CLSD", "RESTRICTED"
+- INFO: Default fallback
+
+### Files Modified:
+- NOTAMApp/Models/NOTAM.swift (added enum + severity property)
+- NOTAMApp/Services/NOTAMTranslator.swift (added ATS, UIR abbreviations)
+- NOTAMApp/Views/NOTAM/NOTAMRowView.swift (severity badge)
+- NOTAMApp/Views/NOTAM/NOTAMDetailView.swift (severity banner + status card)
+- notes.md (added research documentation)
+- task_plan.md (marked complete)
+
+### Git Commits:
+- efbdacd: Add NOTAM severity indicator for critical closures
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
