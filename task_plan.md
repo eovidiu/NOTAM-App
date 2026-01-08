@@ -1,51 +1,40 @@
-# Task Plan: Critical Airspace Closure Notifications
+# Task Plan: App Icon and App Store Screenshots
 
 ## Goal
-Send a push notification when a new Critical severity NOTAM (airspace closure) appears for a monitored FIR, ensuring each NOTAM only triggers one notification.
-
-## Requirements
-- Trigger: Critical severity NOTAMs only (FIR/airspace prohibited, no ATS)
-- One-time: Track notified NOTAMs to prevent duplicates
-- Freshness: Only notify if NOTAM issued within last 3 days
-- Timing: Check during background refresh
-- Settings: Use existing "Notifications Enabled" toggle
+Create an iOS app icon meeting Apple specifications and prepare App Store screenshots in required sizes.
 
 ## Phases
-- [x] Phase 1: Create NotifiedNOTAMStore to track sent notifications
-- [x] Phase 2: Add critical NOTAM detection to background refresh flow
-- [x] Phase 3: Implement notification sending logic with deduplication
-- [x] Phase 4: Update NotificationManager with critical alert content
-- [x] Phase 5: Remove demo NOTAM from NOTAMListView
-- [x] Phase 6: Build and test
+- [ ] Phase 1: Generate app icon using nano-banana skill
+- [ ] Phase 2: Create icon assets for all required Apple sizes
+- [ ] Phase 3: Capture app screenshots on required device sizes
+- [ ] Phase 4: Integrate icon into Xcode project
 
-## Implementation Details
+## Apple Icon Requirements
+Single 1024x1024px icon, Xcode auto-generates all sizes:
+- 1024x1024 (App Store)
+- 180x180 (iPhone @3x)
+- 120x120 (iPhone @2x)
+- 167x167 (iPad Pro @2x)
+- 152x152 (iPad @2x)
+- 76x76 (iPad @1x)
 
-### NotifiedNOTAMStore
-- Persist set of NOTAM IDs that have been notified
-- Use UserDefaults with JSON encoding
-- Auto-cleanup: remove IDs older than 7 days
+**Icon Guidelines:**
+- No transparency (solid background)
+- No rounded corners (iOS applies automatically)
+- Square format, simple recognizable design
 
-### Detection Logic
-```swift
-func shouldNotify(notam: NOTAM) -> Bool {
-    // Must be critical severity
-    guard notam.severity == .critical else { return false }
+## App Store Screenshot Sizes
+**Required for submission:**
+- iPhone 6.7" (1290 x 2796 px) - iPhone 15 Pro Max
+- iPhone 6.5" (1284 x 2778 px) - iPhone 14 Pro Max
+- iPhone 5.5" (1242 x 2208 px) - iPhone 8 Plus (optional)
+- iPad 12.9" (2048 x 2732 px) - iPad Pro
 
-    // Must be issued within last 3 days
-    let threeDaysAgo = Date().addingTimeInterval(-3 * 24 * 60 * 60)
-    guard notam.issued > threeDaysAgo else { return false }
-
-    // Must not have been notified before
-    guard !notifiedStore.hasBeenNotified(notam.id) else { return false }
-
-    return true
-}
-```
-
-### Notification Content
-- Title: "⚠️ Critical: Airspace Closed"
-- Body: "[FIR] - [Summary from translator]"
-- Category: criticalNotam (for deep linking)
+## Icon Design Direction
+- Style: Aviation-focused with alert indicator
+- Colors: Professional aviation blue with warning accent
+- Elements: Stylized aircraft or radar symbol with notification badge
+- Feel: Professional, trustworthy, safety-focused
 
 ## Status
-**COMPLETE** - All phases finished successfully
+**Starting Phase 1** - Generating app icon
