@@ -1584,6 +1584,21 @@ main {
   color: var(--color-light-text);
 }
 
+.coming-soon-badge {
+  display: inline-block;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+  border-radius: var(--radius-xl);
+  margin: var(--spacing-lg) 0;
+}
+
+.coming-soon-text {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-light-text);
+  letter-spacing: 0.5px;
+}
+
 .download-note {
   font-size: var(--font-size-sm);
   color: var(--color-secondary-text);
