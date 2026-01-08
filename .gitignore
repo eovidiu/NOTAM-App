@@ -2,3 +2,12 @@ NOTAMApp/.DS_Store
 NOTAMApp/build/
 *.xcuserstate
 *.xcworkspace/
+xcuserdata/
+
+# Local configuration (contains Developer Team ID)
+Local.xcconfig
+
+# Secrets
+*.env
+*.env.local
+Secrets.swift
