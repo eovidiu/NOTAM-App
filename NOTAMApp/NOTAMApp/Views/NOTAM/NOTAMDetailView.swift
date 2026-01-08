@@ -311,7 +311,7 @@ private enum DetailTab: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
-#Preview {
+#Preview("Warning - Runway Closure") {
     NavigationStack {
         NOTAMDetailView(notam: NOTAM(
             id: "NOTAM_1",
@@ -333,6 +333,32 @@ private enum DetailTab: String, CaseIterable, Identifiable {
             isPermanent: false,
             text: "RWY 08R/26L CLSD DUE TO MAINT WIP. TWY A BTN TWY B AND TWY C CLSD.",
             coordinates: Coordinates(latitude: 44.57, longitude: 26.08, radius: 5)
+        ))
+    }
+}
+
+#Preview("Critical - Airspace Closed") {
+    NavigationStack {
+        NOTAMDetailView(notam: NOTAM(
+            id: "UKBV_A0640",
+            series: "A",
+            number: "0640/22",
+            type: .new,
+            issued: Date(),
+            affectedFIR: "UKBV",
+            selectionCode: "QAFXX",
+            traffic: "IV",
+            purpose: "NBO",
+            scope: "E",
+            minimumFL: "000",
+            maximumFL: "999",
+            location: "UKBV",
+            effectiveStart: Date(),
+            effectiveEnd: nil,
+            isEstimatedEnd: false,
+            isPermanent: true,
+            text: "DUE TO MILITARY ACTIVITY THE USE OF AIRSPACE OF UKRAINE WITHIN FIR KYIV IS PROHIBITED FOR ALL AIRCRAFT. ATS IS NOT PROVIDED.",
+            coordinates: nil
         ))
     }
 }

@@ -120,6 +120,48 @@ final class NotificationManager: ObservableObject {
         clearBadge()
     }
 
+    // MARK: - Critical Airspace Notifications
+
+    func sendCriticalAirspaceNotification(for notam: NOTAM) async {
+        guard isAuthorized else { return }
+
+        let content = UNMutableNotificationContent()
+        content.title = "\u{26A0}\u{FE0F} Critical: Airspace Closed"
+
+        // Get translated summary from NOTAMTranslator
+        let translated = NOTAMTranslator.shared.translate(notam)
+        content.body = "\(notam.location) - \(translated.summary)"
+
+        // Use defaultCritical sound for high-priority alerts
+        content.sound = .defaultCritical
+
+        // Set time-sensitive interruption level for iOS 15+
+        if #available(iOS 15.0, *) {
+            content.interruptionLevel = .timeSensitive
+        }
+
+        // Add userInfo for deep linking
+        content.userInfo = [
+            "notamId": notam.id
+        ]
+
+        // Thread identifier for grouping critical notifications
+        content.threadIdentifier = "critical-airspace"
+
+        // Use notam.id as identifier to prevent duplicate notifications
+        let request = UNNotificationRequest(
+            identifier: "critical-airspace-\(notam.id)",
+            content: content,
+            trigger: nil // Deliver immediately
+        )
+
+        do {
+            try await center.add(request)
+        } catch {
+            print("Failed to send critical airspace notification: \(error)")
+        }
+    }
+
     // MARK: - Test Notification
 
     func sendTestNotification() async {

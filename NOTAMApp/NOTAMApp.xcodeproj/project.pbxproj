@@ -23,6 +23,7 @@
 		680936F28C73CB31E1719C27 /* FIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE22B1EE7A48D64BCBD4911 /* FIR.swift */; };
 		6B2EDBA9EA5A207CEC249E54 /* NOTAMRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56AECC454BC4598DE3045C5 /* NOTAMRowView.swift */; };
 		72B02B73279DD9975BE175DF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF4102D5405B506176529F /* NotificationManager.swift */; };
+		D1E2F3A4B5C6D7E8F9A0B1C2 /* NotifiedNOTAMStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3A4B5C6D7E8F9A0B1C2D3 /* NotifiedNOTAMStore.swift */; };
 		793FF9662CDF489648115FEB /* ChangesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA65169CDA9AB3D8DFC30CA /* ChangesListView.swift */; };
 		7E371F3EBDE0B16DA7E3F248 /* NOTAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */; };
 		8AAC73B61F36FF096E2E5E0B /* NOTAMChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F27F61073120598BAF9139 /* NOTAMChange.swift */; };
@@ -70,6 +71,7 @@
 		FA1D8DBE22D3310BD0600053 /* AddFIRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFIRView.swift; sourceTree = "<group>"; };
 		FDB2DEC8FA88FF9D23A3CF9B /* NOTAMChangeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChangeDetector.swift; sourceTree = "<group>"; };
 		FDEF4102D5405B506176529F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		E2F3A4B5C6D7E8F9A0B1C2D3 /* NotifiedNOTAMStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifiedNOTAMStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -185,6 +187,7 @@
 				2C7B4C3ACAC73CED23B20A2C /* NOTAMService.swift */,
 				42D77C2EDF21A0D1BEF1DCFA /* NOTAMTranslator.swift */,
 				FDEF4102D5405B506176529F /* NotificationManager.swift */,
+				E2F3A4B5C6D7E8F9A0B1C2D3 /* NotifiedNOTAMStore.swift */,
 				C12CC2ACC54E54CD5BC63480 /* SettingsStore.swift */,
 			);
 			path = Services;
@@ -287,6 +290,7 @@
 				8BA0040B5E9AD3E568663858 /* NOTAMService.swift in Sources */,
 				EB979F4CB55E5635397EC2B6 /* NOTAMTranslator.swift in Sources */,
 				72B02B73279DD9975BE175DF /* NotificationManager.swift in Sources */,
+				D1E2F3A4B5C6D7E8F9A0B1C2 /* NotifiedNOTAMStore.swift in Sources */,
 				A9C60573E40453F47A4E739F /* SettingsStore.swift in Sources */,
 				34E6C4D9A043C55452106631 /* SettingsView.swift in Sources */,
 			);

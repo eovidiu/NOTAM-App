@@ -56,6 +56,33 @@ final class BackgroundRefreshManager {
         }
     }
 
+    // MARK: - Critical NOTAM Notifications
+
+    /// Check for critical NOTAMs that need notification (airspace closures, no ATS, etc.)
+    private func checkAndNotifyCriticalNOTAMs(_ notams: [String: [NOTAM]]) async {
+        let store = NotifiedNOTAMStore.shared
+        let threeDaysAgo = Date().addingTimeInterval(-3 * 24 * 60 * 60)
+
+        for (_, firNotams) in notams {
+            for notam in firNotams {
+                // Must be critical severity
+                guard notam.severity == .critical else { continue }
+
+                // Must be issued within last 3 days
+                guard notam.issued > threeDaysAgo else { continue }
+
+                // Must not have been notified before
+                guard !store.hasBeenNotified(notam.id) else { continue }
+
+                // Send notification
+                await notificationManager.sendCriticalAirspaceNotification(for: notam)
+
+                // Mark as notified
+                store.markAsNotified(notam.id)
+            }
+        }
+    }
+
     // MARK: - Manual Refresh
 
     func performRefresh() async {
@@ -78,6 +105,11 @@ final class BackgroundRefreshManager {
             // Save to cache
             for (fir, notams) in newNOTAMs {
                 try await cache.save(notams: notams, for: fir)
+            }
+
+            // Check for critical NOTAMs requiring immediate notification
+            if settings.notificationsEnabled {
+                await checkAndNotifyCriticalNOTAMs(newNOTAMs)
             }
 
             // Detect changes
