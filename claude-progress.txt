@@ -327,6 +327,46 @@ Status: Complete
 
 ---
 
+## Session 9: Final Polish and App Store Preparation
+Date: 2026-01-09
+Agent: Coding Agent
+Status: Complete
+
+### Completed:
+- [x] Generated iPad Pro marketing images (3 images)
+- [x] Resized to Apple dimensions (2048x2732 portrait, 2732x2048 landscape)
+- [x] Published GitHub release v1.0.0
+- [x] Added GitHub repo description and homepage URL
+- [x] Replaced download button with "Coming Soon to App Store" badge
+- [x] Updated Plain Language Translation to highlight Apple on-device AI
+
+### Assets Created:
+**iPad Marketing Images:**
+- `Marketing/iPad_Pro_Portrait_1.png` (2048x2732) - "Track Airspace Activity Worldwide"
+- `Marketing/iPad_Pro_Portrait_2.png` (2048x2732) - "Stay Current. Stay Safe."
+- `Marketing/iPad_Pro_Landscape_1.png` (2732x2048) - "Critical Alerts, Clearly Explained"
+
+### Website Updates:
+- Download section now shows orange "Coming Soon to the App Store" badge
+- Plain Language Translation feature highlights:
+  - "using Apple's on-device AI"
+  - "Powered by Apple Core ML"
+  - "100% on-device processing"
+  - "Private and secure"
+
+### GitHub:
+- Release v1.0.0: https://github.com/eovidiu/NOTAM-App/releases/tag/v1.0.0
+- Repo description: "iOS app for tracking NOTAMs..."
+- Homepage: https://eovidiu.github.io/NOTAM-App/
+
+### Git Commits:
+- 1387967: Add iPad Pro marketing images for App Store
+- 90135e7: Update download link to point to latest GitHub release
+- cfcd019: Replace download button with 'Coming Soon to App Store'
+- 80c6b12: Update Plain Language Translation to highlight Apple on-device AI
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
