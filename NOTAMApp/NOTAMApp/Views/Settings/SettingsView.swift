@@ -4,6 +4,7 @@ struct SettingsView: View {
     @StateObject private var settingsStore = SettingsStore.shared
     @StateObject private var notificationManager = NotificationManager.shared
     @State private var showAddFIR = false
+    @State private var showLocateFIRs = false
 
     var body: some View {
         NavigationStack {
@@ -23,6 +24,9 @@ struct SettingsView: View {
             .navigationTitle("Settings")
             .sheet(isPresented: $showAddFIR) {
                 AddFIRView()
+            }
+            .sheet(isPresented: $showLocateFIRs) {
+                LocateFIRsView()
             }
         }
     }
@@ -47,6 +51,12 @@ struct SettingsView: View {
                 showAddFIR = true
             } label: {
                 Label("Add FIR", systemImage: "plus.circle")
+            }
+
+            Button {
+                showLocateFIRs = true
+            } label: {
+                Label("Locate FIRs Near Me", systemImage: "location.circle")
             }
         } header: {
             Text("Flight Information Regions")

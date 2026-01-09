@@ -37,6 +37,10 @@
 		EB979F4CB55E5635397EC2B6 /* NOTAMTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D77C2EDF21A0D1BEF1DCFA /* NOTAMTranslator.swift */; };
 		FA04A69076DFBE35F9B15F83 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18D2D6B342E5B1AAFF62603 /* LoadingView.swift */; };
 		FCD068C161A14269EB480276 /* ChangeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE39DDA7833A34986170042 /* ChangeDetailView.swift */; };
+		4A5B6C7D8E9F0A1B2C3D4E5F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C7D8E9F0A1B2C3D4E5F6A /* LocationManager.swift */; };
+		6C7D8E9F0A1B2C3D4E5F6A7B /* FIRLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E9F0A1B2C3D4E5F6A7B8C /* FIRLocationService.swift */; };
+		8E9F0A1B2C3D4E5F6A7B8C9D /* LocateFIRsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A1B2C3D4E5F6A7B8C9D0E /* LocateFIRsView.swift */; };
+		0A1B2C3D4E5F6A7B8C9D0E1F /* fir_coordinates.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,7 +76,11 @@
 		FA1D8DBE22D3310BD0600053 /* AddFIRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFIRView.swift; sourceTree = "<group>"; };
 		FDB2DEC8FA88FF9D23A3CF9B /* NOTAMChangeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChangeDetector.swift; sourceTree = "<group>"; };
 		FDEF4102D5405B506176529F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-/* End PBXFileReference section */
+		5B6C7D8E9F0A1B2C3D4E5F6A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		7D8E9F0A1B2C3D4E5F6A7B8C /* FIRLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRLocationService.swift; sourceTree = "<group>"; };
+		9F0A1B2C3D4E5F6A7B8C9D0E /* LocateFIRsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocateFIRsView.swift; sourceTree = "<group>"; };
+		1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fir_coordinates.json; sourceTree = "<group>"; };
+/* End PBXFileReference */
 
 /* Begin PBXGroup section */
 		109837CE14DF231DA92CA287 /* Products */ = {
@@ -118,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				FA1D8DBE22D3310BD0600053 /* AddFIRView.swift */,
+				9F0A1B2C3D4E5F6A7B8C9D0E /* LocateFIRsView.swift */,
 				0E1D091D1CA230B52FC8F906 /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -174,6 +183,8 @@
 				B2C3D4E5F6A7B8C9D0E1F2A3 /* ATSUnitService.swift */,
 				B1EDEEE6E04060B866CD379E /* BackgroundRefreshManager.swift */,
 				282F7F07CFF381982EA387F2 /* ChangeStore.swift */,
+				7D8E9F0A1B2C3D4E5F6A7B8C /* FIRLocationService.swift */,
+				5B6C7D8E9F0A1B2C3D4E5F6A /* LocationManager.swift */,
 				7F950BFB1FBBB0784740E12C /* NOTAMCache.swift */,
 				FDB2DEC8FA88FF9D23A3CF9B /* NOTAMChangeDetector.swift */,
 				2C7B4C3ACAC73CED23B20A2C /* NOTAMService.swift */,
@@ -189,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				C3D4E5F6A7B8C9D0E1F2A3B4 /* ats_units.json */,
+				1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -254,6 +266,7 @@
 			files = (
 				5AC5B85E806FD0D6A09AD2CB /* Assets.xcassets in Resources */,
 				3C4D5E6F7A8B9C0D1E2F3A4B /* ats_units.json in Resources */,
+				0A1B2C3D4E5F6A7B8C9D0E1F /* fir_coordinates.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +325,9 @@
 				D1E2F3A4B5C6D7E8F9A0B1C2 /* NotifiedNOTAMStore.swift in Sources */,
 				A9C60573E40453F47A4E739F /* SettingsStore.swift in Sources */,
 				34E6C4D9A043C55452106631 /* SettingsView.swift in Sources */,
+				4A5B6C7D8E9F0A1B2C3D4E5F /* LocationManager.swift in Sources */,
+				6C7D8E9F0A1B2C3D4E5F6A7B /* FIRLocationService.swift in Sources */,
+				8E9F0A1B2C3D4E5F6A7B8C9D /* LocateFIRsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

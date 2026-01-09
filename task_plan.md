@@ -1,48 +1,66 @@
-# Task Plan: Notification Severity Setting & Last Update Display
+# Task Plan: Locate FIRs Near Me
 
 ## Goal
-Add user-configurable notification severity threshold and display last refresh timestamp on main page.
+Add a "Locate FIRs near me" button in Settings that finds nearby airports and their associated FIRs based on user location.
 
-## Features
-1. **Notification Severity Setting**: Allow user to choose minimum severity for notifications (Caution or Critical)
-2. **Last Update Display**: Show date/time of last successful refresh below search field on NOTAMs list
+## Feature Requirements
+1. Button in Settings under "Add FIR" section
+2. Request location permission when tapped
+3. Search airports within 50km radius of user location
+4. Determine which FIRs those airports belong to
+5. Present found FIRs for user to add
+
+## Technical Analysis
+
+### Data Source
+- Need airport database with coordinates and FIR associations
+- Options:
+  a) Use existing ats_units.json (has FIR data but no coordinates)
+  b) Create airports.json with ICAO code, name, lat/lon, FIR code
+  c) Use OpenFlights or similar public airport database
+
+### Components Needed
+1. **LocationManager** - CoreLocation wrapper for requesting/getting location
+2. **Airport Model** - Airport with coordinates and FIR association
+3. **AirportService** - Load airports, find nearby ones
+4. **LocateFIRsView** - UI to show location request and results
 
 ## Parallelization Analysis
 
-**Can run in parallel:**
-- Track 1: Notification severity setting (Settings UI + persistence)
-- Track 2: Last update timestamp display (UI + persistence)
+**Sequential (must happen first):**
+- Track 0: Create airport database (JSON with coordinates + FIR codes)
 
-**Sequential dependency:**
-- Both tracks touch different parts of the codebase, can be developed independently
-- Final integration testing after both complete
+**Parallel Tracks (after Track 0):**
+- Track 1: LocationManager service (CoreLocation wrapper)
+- Track 2: Airport model and AirportService
+- Track 3: LocateFIRsView UI
+
+**Final:**
+- Track 4: Integration - wire button in SettingsView
 
 ## Phase Breakdown
 
-### Phase 1: Research & Plan
-- [ ] Review current AppSettings model
-- [ ] Review current SettingsStore
-- [ ] Review current SettingsView
-- [ ] Review NOTAMListView for last update placement
-- [ ] Review NotificationManager for severity filtering
+### Phase 1: Research & Data Preparation
+- [x] Check existing ats_units.json structure
+- [x] Find/create FIR data with coordinates
+- [x] Create fir_coordinates.json resource file (~150 FIRs worldwide)
 
-### Phase 2: Implement Notification Severity Setting
-- [ ] Add `notificationSeverityThreshold` to AppSettings
-- [ ] Update SettingsStore to persist new setting
-- [ ] Add UI picker in SettingsView (Caution/Critical options)
-- [ ] Update NotificationManager to respect threshold
-- [ ] Update BackgroundRefreshManager notification logic
+### Phase 2: Implement Location Services
+- [x] Create LocationManager (CoreLocation wrapper)
+- [x] Add location permission to Info.plist
 
-### Phase 3: Implement Last Update Display
-- [ ] Add `lastRefreshDate` to AppSettings or separate store
-- [ ] Update refresh logic to save timestamp
-- [ ] Add UI element below search in NOTAMListView
-- [ ] Format timestamp appropriately (relative or absolute)
+### Phase 3: Implement FIR Location Service
+- [x] Create FIRCoordinate model
+- [x] Create FIRLocationService (load, search nearby within radius)
 
-### Phase 4: Test & Verify
-- [ ] Test notification setting changes take effect
-- [ ] Test last update displays correctly after refresh
-- [ ] Verify persistence across app restarts
+### Phase 4: Implement UI
+- [x] Create LocateFIRsView (location request + results)
+- [x] Add button to SettingsView FIR section
+- [x] Wire up navigation with sheet presentation
+
+### Phase 5: Build & Verify
+- [x] Add new files to Xcode project
+- [x] Build succeeded with no errors
 
 ## Status
-**Starting Phase 1** - Research current implementation
+**COMPLETED** - Feature implemented and building successfully
