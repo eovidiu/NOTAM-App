@@ -1,40 +1,31 @@
-# Task Plan: App Icon and App Store Screenshots
+# Task Plan: GitHub Pages for NOTAM App
 
 ## Goal
-Create an iOS app icon meeting Apple specifications and prepare App Store screenshots in required sizes.
+Create a GitHub Pages site with app theme, including Support page link.
+
+## Parallelization Analysis
+
+**Sequential (must happen first):**
+- Track 0: Create gh-pages branch structure
+
+**Parallel Tracks (can run simultaneously after Track 0):**
+- Track 1: Main landing page (index.html) with app branding
+- Track 2: Support page (support.html or SUPPORT.md)
+- Track 3: CSS styling matching app theme (navy blue #1a365d, orange accent #f59e0b)
+
+**Final (after parallel tracks):**
+- Track 4: Enable GitHub Pages, verify deployment, get URL
+
+## App Theme Colors
+- Primary: Deep navy blue (#1a365d)
+- Accent: Orange/amber (#f59e0b)
+- Background: Dark gradient (#0f172a to #1a365d)
+- Text: White (#ffffff)
 
 ## Phases
-- [ ] Phase 1: Generate app icon using nano-banana skill
-- [ ] Phase 2: Create icon assets for all required Apple sizes
-- [ ] Phase 3: Capture app screenshots on required device sizes
-- [ ] Phase 4: Integrate icon into Xcode project
-
-## Apple Icon Requirements
-Single 1024x1024px icon, Xcode auto-generates all sizes:
-- 1024x1024 (App Store)
-- 180x180 (iPhone @3x)
-- 120x120 (iPhone @2x)
-- 167x167 (iPad Pro @2x)
-- 152x152 (iPad @2x)
-- 76x76 (iPad @1x)
-
-**Icon Guidelines:**
-- No transparency (solid background)
-- No rounded corners (iOS applies automatically)
-- Square format, simple recognizable design
-
-## App Store Screenshot Sizes
-**Required for submission:**
-- iPhone 6.7" (1290 x 2796 px) - iPhone 15 Pro Max
-- iPhone 6.5" (1284 x 2778 px) - iPhone 14 Pro Max
-- iPhone 5.5" (1242 x 2208 px) - iPhone 8 Plus (optional)
-- iPad 12.9" (2048 x 2732 px) - iPad Pro
-
-## Icon Design Direction
-- Style: Aviation-focused with alert indicator
-- Colors: Professional aviation blue with warning accent
-- Elements: Stylized aircraft or radar symbol with notification badge
-- Feel: Professional, trustworthy, safety-focused
+- [ ] Phase 1: Create docs/ folder structure (GitHub Pages source)
+- [ ] Phase 2: Parallel content creation (3 agents)
+- [ ] Phase 3: Enable GitHub Pages and get URL
 
 ## Status
-**Starting Phase 1** - Generating app icon
+**Starting Phase 1**

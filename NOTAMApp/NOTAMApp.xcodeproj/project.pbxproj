@@ -200,6 +200,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE9B4A587FC44313A7157579 /* Build configuration list for PBXNativeTarget "NOTAMApp" */;
 			buildPhases = (
+				A9AECCA12F104D1D00454B60 /* ShellScript */,
 				87CCB248E5BB5DA19F8C6966 /* Sources */,
 				D7AD3840774C97B16ECE19AC /* Resources */,
 			);
@@ -257,6 +258,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A9AECCA12F104D1D00454B60 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Auto-increment build number\n  if [ \"$CONFIGURATION\" == \"Release\" ]; then\n      buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n      buildNumber=$(($buildNumber + 1))\n      /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n      echo \"Build number incremented to $buildNumber\"\n  fi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		87CCB248E5BB5DA19F8C6966 /* Sources */ = {
@@ -362,7 +383,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HV325Z3W39;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = NOTAMApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NOTAM;
@@ -454,7 +475,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HV325Z3W39;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = NOTAMApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NOTAM;
