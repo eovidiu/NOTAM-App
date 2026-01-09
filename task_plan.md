@@ -1,30 +1,60 @@
-# Task Plan: Collapsible FIR Sections
+# Task Plan: Aviation Glass Design System Implementation
 
 ## Goal
-Add collapsible/expandable FIR sections in NOTAMs list with persistence across app restarts.
+Implement the "Aviation Glass" premium design system - a dark-first UI inspired by modern cockpit displays.
 
-## Requirements
-1. Each FIR section can be collapsed/expanded by tapping the header
-2. Collapsed state persists to UserDefaults
-3. Show chevron indicator (right/down) in section header
-4. Animation for collapse/expand transition
+## Design Decisions
+- **Approach:** Full Aviation Glass (implement mockups exactly)
+- **Platform:** iPhone only (standard tab bar navigation)
+- **Accessibility:** Reduce Motion and Increase Contrast fallbacks in Phase 4
 
-## Implementation Plan
+## Implementation Phases
 
-### Phase 1: Add Collapse State Management
-- [x] Add `@AppStorage` or UserDefaults-backed Set<String> for collapsed FIRs
-- [x] Default: all FIRs expanded
+### Phase 1: Foundation
+- [x] Create Theme/ folder structure
+- [x] Add 17 colors to Asset Catalog (dark + light variants)
+- [x] Create AviationTheme.swift with @Observable
+- [x] Create Typography.swift with 13 font functions
+- [x] Create Animation.swift with spring presets
+- [x] Create HapticManager.swift singleton
+- [x] Build verification: **PASSED**
+- [x] Commit: 3e32196
 
-### Phase 2: Update NOTAMListView
-- [x] Make section header tappable
-- [x] Add chevron indicator
-- [x] Conditionally show NOTAMs based on collapsed state
-- [x] Add animation
+### Phase 2: Components (Next)
+- [ ] Build GlassCard (with glass/solid toggle)
+- [ ] Build SeverityBadge (compact/standard/expanded)
+- [ ] Build NOTAMIDBadge (compact/hero variants)
+- [ ] Build FIRCodePill
+- [ ] Build SectionHeader (collapsible, uses theme)
+- [ ] Build PremiumSearchBar
+- [ ] Build TimelineProgressBar
+- [ ] Update EmptyStateView to use theme
 
-### Phase 3: Build & Test
-- [ ] Verify build succeeds
-- [ ] Test collapse/expand works
-- [ ] Test persistence across app restarts
+### Phase 3: View Migration
+- [ ] Migrate NOTAMRowView (uses new components)
+- [ ] Migrate NOTAMDetailView
+- [ ] Migrate NOTAMListView (sections, search)
+- [ ] Migrate ChangesListView
+- [ ] Migrate ChangeDetailView
+- [ ] Migrate SettingsView
+- [ ] Migrate ContentView (tab bar styling)
+
+### Phase 4: Polish
+- [ ] Add staggered reveal animations
+- [ ] Add haptic feedback to key interactions
+- [ ] Implement Reduce Motion support
+- [ ] Implement Increase Contrast fallbacks
+- [ ] Performance testing with glass effects
+- [ ] Test on older devices (iPhone 12 minimum)
+
+### Phase 5: Accessibility Audit
+- [ ] VoiceOver walkthrough
+- [ ] Dynamic Type scaling verification
+- [ ] Color contrast validation
+- [ ] Bold Text support check
 
 ## Status
-**In Progress** - Implementing feature
+**Phase 1 Complete** - Foundation built and committed. Ready for Phase 2: Components.
+
+## Plan File
+Full plan with architecture details: `/Users/oeftimie/.claude/plans/mighty-baking-wozniak.md`

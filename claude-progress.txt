@@ -480,6 +480,73 @@ Status: Complete
 
 ---
 
+## Session 13: Aviation Glass Design System - Phase 1 Foundation
+Date: 2026-01-10
+Agent: Orchestrator + iOS Specialist Sub-agents
+Status: Complete (Phase 1 of 5)
+
+### Overview:
+Implemented the foundation of the "Aviation Glass" premium design system - a dark-first UI inspired by modern cockpit displays. This was planned and evaluated using iOS architecture and UX specialist agents.
+
+### Design Decisions Made:
+- **Approach:** Full Aviation Glass (implement mockups exactly)
+- **Platform:** iPhone only (standard tab bar navigation)
+- **Accessibility:** Will add Reduce Motion and Increase Contrast fallbacks in Phase 4
+
+### Completed:
+- [x] Created Theme/ folder structure
+- [x] Added 17 color assets to Asset Catalog with dark/light variants
+- [x] Created AviationTheme.swift with @Observable and Environment key
+- [x] Created Typography.swift with 13 font functions and view modifiers
+- [x] Created Animation.swift with spring presets and AnyTransition extensions
+- [x] Created HapticManager.swift with @MainActor singleton
+
+### Theme Colors (17):
+**Backgrounds:** DeepSpace (#0A0A0F), Obsidian (#12121A), Graphite (#1C1C28), SlateGlass (#252535)
+**Accents:** ElectricCyan (#00D4FF), NeonBlue (#4D9FFF), AuroraGreen (#00FF94), AmberAlert (#FFB800), CrimsonPulse (#FF3366), VioletGlow (#9D4EDD), CautionYellow (#FFD600)
+**Text:** TextPrimary (#FFFFFF), TextSecondary (#E5E5EA), TextTertiary (#A1A1AA), TextDisabled (#6B6B7A)
+**Glass:** GlassBorder, GlassBackground
+
+### Files Created:
+- `NOTAMApp/Theme/AviationTheme.swift` - @Observable theme with colors, spacing, shadows
+- `NOTAMApp/Theme/Typography.swift` - 13 font functions (heroTitle, cardTitle, notamId, etc.)
+- `NOTAMApp/Theme/Animation.swift` - Spring presets, AnyTransition, view modifiers
+- `NOTAMApp/Theme/HapticManager.swift` - Haptic feedback singleton with UIImpactFeedbackGenerator
+- 17 colorsets in `NOTAMApp/Assets.xcassets/Colors/`
+
+### Architecture Patterns:
+```swift
+// Environment-based theme injection
+@Observable final class AviationTheme {
+    static let shared = AviationTheme()
+    var backgroundPrimary: Color { Color("DeepSpace") }
+    // ...
+}
+
+extension EnvironmentValues {
+    var theme: AviationTheme { ... }
+}
+
+// Usage in views:
+@Environment(\.theme) private var theme
+```
+
+### Git Commits:
+- 3e32196: Add Aviation Glass design system foundation (Phase 1)
+
+### For Next Session (Phase 2: Components):
+Build 8 reusable components using the theme foundation:
+1. GlassCard - glass morphism card container
+2. SeverityBadge - compact/standard/expanded variants
+3. NOTAMIDBadge - compact/hero variants
+4. FIRCodePill - styled FIR code display
+5. SectionHeader - collapsible, themed
+6. PremiumSearchBar - glass morphism search
+7. TimelineProgressBar - effective period visualization
+8. EmptyStateView - update existing to use theme
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
