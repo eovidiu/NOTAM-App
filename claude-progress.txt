@@ -407,6 +407,48 @@ Status: Complete
 
 ---
 
+## Session 11: Locate FIRs Near Me Feature
+Date: 2026-01-09
+Agent: Orchestrator + 3 Parallel Sub-agents
+Status: Complete
+
+### Completed:
+- [x] Created FIR coordinates database with 150+ FIRs worldwide
+- [x] Implemented LocationManager service for CoreLocation integration
+- [x] Implemented FIRLocationService for nearby FIR discovery
+- [x] Created LocateFIRsView with full permission flow and results UI
+- [x] Added "Locate FIRs Near Me" button to Settings
+
+### Feature Details:
+**Location-Based FIR Discovery:**
+- User taps "Locate FIRs Near Me" in Settings under "Add FIR"
+- App requests location permission (if not already granted)
+- Gets user's current location with 15-second timeout
+- Finds all FIRs within 500km radius, sorted by distance
+- If no FIRs within radius, shows the 3 closest FIRs
+- User can tap any FIR to add it to their configured list
+
+**Permission Handling:**
+- Not Determined: Shows "Find Nearby FIRs" button to trigger request
+- Denied: Shows message with button to open Settings
+- Authorized: Automatically searches for nearby FIRs
+
+### Files Created:
+- `NOTAMApp/Resources/fir_coordinates.json` - 150+ FIR coordinates (ICAO, lat, lon, name, country)
+- `NOTAMApp/Services/LocationManager.swift` - CoreLocation wrapper, @MainActor, single-shot location
+- `NOTAMApp/Services/FIRLocationService.swift` - FIRCoordinate model, findNearbyFIRs(), distance calculation
+- `NOTAMApp/Views/Settings/LocateFIRsView.swift` - Full UI with permission states, FIR list, add functionality
+
+### Files Modified:
+- `NOTAMApp/Views/Settings/SettingsView.swift` - Added button and sheet presentation
+- `NOTAMApp/Info.plist` - Added NSLocationWhenInUseUsageDescription
+- `NOTAMApp.xcodeproj/project.pbxproj` - Registered new files
+
+### Git Commits:
+- d26d108: Add Locate FIRs Near Me feature
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
