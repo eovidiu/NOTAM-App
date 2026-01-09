@@ -6,6 +6,27 @@ struct NOTAMListView: View {
     @State private var selectedNotam: NOTAM?
     @State private var showInactiveNotams = false
 
+    // Persisted collapsed state (comma-separated FIR codes)
+    @AppStorage("collapsedFIRs") private var collapsedFIRsString: String = ""
+
+    private var collapsedFIRs: Set<String> {
+        Set(collapsedFIRsString.split(separator: ",").map { String($0) })
+    }
+
+    private func isCollapsed(_ fir: String) -> Bool {
+        collapsedFIRs.contains(fir)
+    }
+
+    private func toggleCollapsed(_ fir: String) {
+        var current = collapsedFIRs
+        if current.contains(fir) {
+            current.remove(fir)
+        } else {
+            current.insert(fir)
+        }
+        collapsedFIRsString = current.sorted().joined(separator: ",")
+    }
+
     var filteredNotamsByFIR: [(fir: String, notams: [NOTAM])] {
         return appState.notamsByFIR.compactMap { fir, notams in
             var filtered = notams
@@ -145,26 +166,42 @@ struct NOTAMListView: View {
 
             ForEach(filteredNotamsByFIR, id: \.fir) { fir, notams in
                 Section {
-                    ForEach(notams) { notam in
-                        NavigationLink(value: notam) {
-                            NOTAMRowView(notam: notam)
+                    if !isCollapsed(fir) {
+                        ForEach(notams) { notam in
+                            NavigationLink(value: notam) {
+                                NOTAMRowView(notam: notam)
+                            }
                         }
                     }
                 } header: {
-                    HStack {
-                        Text(fir)
-                            .font(.headline)
-                        Spacer()
-                        Text("\(notams.count) NOTAM\(notams.count == 1 ? "" : "s")")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            toggleCollapsed(fir)
+                        }
+                    } label: {
+                        HStack {
+                            Image(systemName: isCollapsed(fir) ? "chevron.right" : "chevron.down")
+                                .font(.caption.bold())
+                                .foregroundStyle(.secondary)
+                                .frame(width: 16)
+                            Text(fir)
+                                .font(.headline)
+                                .foregroundStyle(.primary)
+                            Spacer()
+                            Text("\(notams.count) NOTAM\(notams.count == 1 ? "" : "s")")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .contentShape(Rectangle())
                     }
+                    .buttonStyle(.plain)
                 }
             }
         }
         .listStyle(.insetGrouped)
         .animation(.default, value: searchText)
         .animation(.default, value: showInactiveNotams)
+        .animation(.default, value: collapsedFIRsString)
     }
 }
 
