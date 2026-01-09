@@ -58,15 +58,17 @@ final class BackgroundRefreshManager {
 
     // MARK: - Critical NOTAM Notifications
 
-    /// Check for critical NOTAMs that need notification (airspace closures, no ATS, etc.)
+    /// Check for NOTAMs that meet severity threshold and need notification
     private func checkAndNotifyCriticalNOTAMs(_ notams: [String: [NOTAM]]) async {
         let store = NotifiedNOTAMStore.shared
+        let settings = SettingsStore.shared.settings
+        let threshold = settings.notificationSeverityThreshold
         let threeDaysAgo = Date().addingTimeInterval(-3 * 24 * 60 * 60)
 
         for (_, firNotams) in notams {
             for notam in firNotams {
-                // Must be critical severity
-                guard notam.severity == .critical else { continue }
+                // Must meet severity threshold
+                guard notam.severity.meetsThreshold(threshold) else { continue }
 
                 // Must be issued within last 3 days
                 guard notam.issued > threeDaysAgo else { continue }

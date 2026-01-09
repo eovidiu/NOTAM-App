@@ -107,6 +107,14 @@ struct SettingsView: View {
                     get: { settingsStore.settings.notificationSound },
                     set: { settingsStore.setNotificationSound($0) }
                 ))
+
+                Picker("Minimum Severity", selection: Binding(
+                    get: { settingsStore.settings.notificationSeverityThreshold },
+                    set: { settingsStore.setNotificationSeverityThreshold($0) }
+                )) {
+                    Text("Critical Only").tag(NOTAMSeverity.critical)
+                    Text("Caution and Above").tag(NOTAMSeverity.caution)
+                }
             }
 
             if notificationManager.authorizationStatus == .denied {

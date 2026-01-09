@@ -74,6 +74,10 @@ final class SettingsStore: ObservableObject {
         settings.notificationSound = enabled
     }
 
+    func setNotificationSeverityThreshold(_ threshold: NOTAMSeverity) {
+        settings.notificationSeverityThreshold = threshold
+    }
+
     // MARK: - Persistence
 
     private func save() {

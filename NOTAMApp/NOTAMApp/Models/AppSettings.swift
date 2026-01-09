@@ -6,6 +6,7 @@ struct AppSettings: Codable {
     var refreshInterval: RefreshInterval
     var notificationsEnabled: Bool
     var notificationSound: Bool
+    var notificationSeverityThreshold: NOTAMSeverity
     var lastRefreshDate: Date?
 
     init(
@@ -13,12 +14,14 @@ struct AppSettings: Codable {
         refreshInterval: RefreshInterval = .sixHours,
         notificationsEnabled: Bool = true,
         notificationSound: Bool = true,
+        notificationSeverityThreshold: NOTAMSeverity = .critical,
         lastRefreshDate: Date? = nil
     ) {
         self.configuredFIRs = configuredFIRs
         self.refreshInterval = refreshInterval
         self.notificationsEnabled = notificationsEnabled
         self.notificationSound = notificationSound
+        self.notificationSeverityThreshold = notificationSeverityThreshold
         self.lastRefreshDate = lastRefreshDate
     }
 

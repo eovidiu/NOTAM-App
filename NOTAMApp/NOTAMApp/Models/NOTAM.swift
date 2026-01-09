@@ -8,6 +8,21 @@ enum NOTAMSeverity: String, Codable, CaseIterable {
     case caution    // TFR, partial closures
     case info       // Normal NOTAMs
 
+    /// Numeric priority for comparison (lower = more severe)
+    var priority: Int {
+        switch self {
+        case .critical: return 0
+        case .warning: return 1
+        case .caution: return 2
+        case .info: return 3
+        }
+    }
+
+    /// Returns true if this severity meets or exceeds the given threshold
+    func meetsThreshold(_ threshold: NOTAMSeverity) -> Bool {
+        self.priority <= threshold.priority
+    }
+
     var color: Color {
         switch self {
         case .critical: return .red

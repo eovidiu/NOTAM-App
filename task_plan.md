@@ -1,31 +1,48 @@
-# Task Plan: GitHub Pages for NOTAM App
+# Task Plan: Notification Severity Setting & Last Update Display
 
 ## Goal
-Create a GitHub Pages site with app theme, including Support page link.
+Add user-configurable notification severity threshold and display last refresh timestamp on main page.
+
+## Features
+1. **Notification Severity Setting**: Allow user to choose minimum severity for notifications (Caution or Critical)
+2. **Last Update Display**: Show date/time of last successful refresh below search field on NOTAMs list
 
 ## Parallelization Analysis
 
-**Sequential (must happen first):**
-- Track 0: Create gh-pages branch structure
+**Can run in parallel:**
+- Track 1: Notification severity setting (Settings UI + persistence)
+- Track 2: Last update timestamp display (UI + persistence)
 
-**Parallel Tracks (can run simultaneously after Track 0):**
-- Track 1: Main landing page (index.html) with app branding
-- Track 2: Support page (support.html or SUPPORT.md)
-- Track 3: CSS styling matching app theme (navy blue #1a365d, orange accent #f59e0b)
+**Sequential dependency:**
+- Both tracks touch different parts of the codebase, can be developed independently
+- Final integration testing after both complete
 
-**Final (after parallel tracks):**
-- Track 4: Enable GitHub Pages, verify deployment, get URL
+## Phase Breakdown
 
-## App Theme Colors
-- Primary: Deep navy blue (#1a365d)
-- Accent: Orange/amber (#f59e0b)
-- Background: Dark gradient (#0f172a to #1a365d)
-- Text: White (#ffffff)
+### Phase 1: Research & Plan
+- [ ] Review current AppSettings model
+- [ ] Review current SettingsStore
+- [ ] Review current SettingsView
+- [ ] Review NOTAMListView for last update placement
+- [ ] Review NotificationManager for severity filtering
 
-## Phases
-- [ ] Phase 1: Create docs/ folder structure (GitHub Pages source)
-- [ ] Phase 2: Parallel content creation (3 agents)
-- [ ] Phase 3: Enable GitHub Pages and get URL
+### Phase 2: Implement Notification Severity Setting
+- [ ] Add `notificationSeverityThreshold` to AppSettings
+- [ ] Update SettingsStore to persist new setting
+- [ ] Add UI picker in SettingsView (Caution/Critical options)
+- [ ] Update NotificationManager to respect threshold
+- [ ] Update BackgroundRefreshManager notification logic
+
+### Phase 3: Implement Last Update Display
+- [ ] Add `lastRefreshDate` to AppSettings or separate store
+- [ ] Update refresh logic to save timestamp
+- [ ] Add UI element below search in NOTAMListView
+- [ ] Format timestamp appropriately (relative or absolute)
+
+### Phase 4: Test & Verify
+- [ ] Test notification setting changes take effect
+- [ ] Test last update displays correctly after refresh
+- [ ] Verify persistence across app restarts
 
 ## Status
-**Starting Phase 1**
+**Starting Phase 1** - Research current implementation

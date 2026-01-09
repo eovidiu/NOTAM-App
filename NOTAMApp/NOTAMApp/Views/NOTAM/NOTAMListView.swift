@@ -122,19 +122,27 @@ struct NOTAMListView: View {
                     }
                 }
 
-                ToolbarItem(placement: .status) {
-                    if let date = appState.lastRefreshDate {
-                        Text("Updated \(date, style: .relative) ago")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                }
             }
         }
     }
 
     private var notamList: some View {
         List {
+            if let lastRefresh = appState.lastRefreshDate {
+                Section {
+                    HStack {
+                        Image(systemName: "clock.arrow.circlepath")
+                        Text("Updated")
+                        Text(lastRefresh, style: .relative)
+                        Text("ago")
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .listRowBackground(Color.clear)
+                }
+            }
+
             ForEach(filteredNotamsByFIR, id: \.fir) { fir, notams in
                 Section {
                     ForEach(notams) { notam in
