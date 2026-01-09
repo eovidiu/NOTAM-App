@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		049F5C8E77375A2535672970 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4346817BF89EF2F0E0B30 /* NOTAM.swift */; };
+		0A1B2C3D4E5F6A7B8C9D0E1F /* fir_coordinates.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */; };
 		1A2B3C4D5E6F7A8B9C0D1E2F /* ATSUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2 /* ATSUnit.swift */; };
 		255A2A8823DC02EFCA7EB075 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E247CC83F7FEF4ADA5829F1 /* ContentView.swift */; };
 		296DB9BAE8363E48DA437CA4 /* NOTAMListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428527AFFFED9581F4C7562 /* NOTAMListView.swift */; };
@@ -17,17 +18,20 @@
 		3BF64646694D8A06B5166A32 /* NOTAMChangeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB2DEC8FA88FF9D23A3CF9B /* NOTAMChangeDetector.swift */; };
 		3C4D5E6F7A8B9C0D1E2F3A4B /* ats_units.json in Resources */ = {isa = PBXBuildFile; fileRef = C3D4E5F6A7B8C9D0E1F2A3B4 /* ats_units.json */; };
 		457CFD06CA1D656CD9CCFEBA /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4405DD65162EEF1D3ED570D /* AppSettings.swift */; };
+		4A5B6C7D8E9F0A1B2C3D4E5F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C7D8E9F0A1B2C3D4E5F6A /* LocationManager.swift */; };
 		5AC5B85E806FD0D6A09AD2CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C063F104388775531EB0C8B4 /* Assets.xcassets */; };
 		5B11647C840BC423A5FAA5CD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868EA3DCB3BE6FD00F415269 /* AppState.swift */; };
 		67DC6AEBB2EE21865682E1B6 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782039089BA899FC9F8B1313 /* EmptyStateView.swift */; };
 		680936F28C73CB31E1719C27 /* FIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE22B1EE7A48D64BCBD4911 /* FIR.swift */; };
 		6B2EDBA9EA5A207CEC249E54 /* NOTAMRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56AECC454BC4598DE3045C5 /* NOTAMRowView.swift */; };
+		6C7D8E9F0A1B2C3D4E5F6A7B /* FIRLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E9F0A1B2C3D4E5F6A7B8C /* FIRLocationService.swift */; };
 		72B02B73279DD9975BE175DF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF4102D5405B506176529F /* NotificationManager.swift */; };
 		793FF9662CDF489648115FEB /* ChangesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA65169CDA9AB3D8DFC30CA /* ChangesListView.swift */; };
 		7E371F3EBDE0B16DA7E3F248 /* NOTAMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */; };
 		8AAC73B61F36FF096E2E5E0B /* NOTAMChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F27F61073120598BAF9139 /* NOTAMChange.swift */; };
 		8BA0040B5E9AD3E568663858 /* NOTAMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B4C3ACAC73CED23B20A2C /* NOTAMService.swift */; };
 		8E66AE95029D15730D10FD84 /* BackgroundRefreshManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EDEEE6E04060B866CD379E /* BackgroundRefreshManager.swift */; };
+		8E9F0A1B2C3D4E5F6A7B8C9D /* LocateFIRsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A1B2C3D4E5F6A7B8C9D0E /* LocateFIRsView.swift */; };
 		9C3929116E42DE160324689D /* ChangeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282F7F07CFF381982EA387F2 /* ChangeStore.swift */; };
 		A9C60573E40453F47A4E739F /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12CC2ACC54E54CD5BC63480 /* SettingsStore.swift */; };
 		B1D1AAD0B9FB21945EEDC011 /* NOTAMCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950BFB1FBBB0784740E12C /* NOTAMCache.swift */; };
@@ -37,16 +41,13 @@
 		EB979F4CB55E5635397EC2B6 /* NOTAMTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D77C2EDF21A0D1BEF1DCFA /* NOTAMTranslator.swift */; };
 		FA04A69076DFBE35F9B15F83 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18D2D6B342E5B1AAFF62603 /* LoadingView.swift */; };
 		FCD068C161A14269EB480276 /* ChangeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE39DDA7833A34986170042 /* ChangeDetailView.swift */; };
-		4A5B6C7D8E9F0A1B2C3D4E5F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C7D8E9F0A1B2C3D4E5F6A /* LocationManager.swift */; };
-		6C7D8E9F0A1B2C3D4E5F6A7B /* FIRLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E9F0A1B2C3D4E5F6A7B8C /* FIRLocationService.swift */; };
-		8E9F0A1B2C3D4E5F6A7B8C9D /* LocateFIRsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A1B2C3D4E5F6A7B8C9D0E /* LocateFIRsView.swift */; };
-		0A1B2C3D4E5F6A7B8C9D0E1F /* fir_coordinates.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0E1D091D1CA230B52FC8F906 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMApp.swift; sourceTree = "<group>"; };
 		18F27F61073120598BAF9139 /* NOTAMChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChange.swift; sourceTree = "<group>"; };
+		1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fir_coordinates.json; sourceTree = "<group>"; };
 		1E247CC83F7FEF4ADA5829F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		20F7AB760A39F0EE7E83C3CC /* NOTAMApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NOTAMApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		282F7F07CFF381982EA387F2 /* ChangeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeStore.swift; sourceTree = "<group>"; };
@@ -54,12 +55,15 @@
 		2C7B4C3ACAC73CED23B20A2C /* NOTAMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMService.swift; sourceTree = "<group>"; };
 		3BE39DDA7833A34986170042 /* ChangeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDetailView.swift; sourceTree = "<group>"; };
 		42D77C2EDF21A0D1BEF1DCFA /* NOTAMTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMTranslator.swift; sourceTree = "<group>"; };
+		5B6C7D8E9F0A1B2C3D4E5F6A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		6F99420AD9E947887C4ABB7F /* NOTAMDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMDetailView.swift; sourceTree = "<group>"; };
 		782039089BA899FC9F8B1313 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		7D8E9F0A1B2C3D4E5F6A7B8C /* FIRLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRLocationService.swift; sourceTree = "<group>"; };
 		7F950BFB1FBBB0784740E12C /* NOTAMCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMCache.swift; sourceTree = "<group>"; };
 		81E4AAE7B2750B842C52D23D /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		868EA3DCB3BE6FD00F415269 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		8DA65169CDA9AB3D8DFC30CA /* ChangesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesListView.swift; sourceTree = "<group>"; };
+		9F0A1B2C3D4E5F6A7B8C9D0E /* LocateFIRsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocateFIRsView.swift; sourceTree = "<group>"; };
 		A18D2D6B342E5B1AAFF62603 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A7B8C9D0E1F2 /* ATSUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATSUnit.swift; sourceTree = "<group>"; };
 		B1EDEEE6E04060B866CD379E /* BackgroundRefreshManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRefreshManager.swift; sourceTree = "<group>"; };
@@ -76,11 +80,7 @@
 		FA1D8DBE22D3310BD0600053 /* AddFIRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFIRView.swift; sourceTree = "<group>"; };
 		FDB2DEC8FA88FF9D23A3CF9B /* NOTAMChangeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChangeDetector.swift; sourceTree = "<group>"; };
 		FDEF4102D5405B506176529F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		5B6C7D8E9F0A1B2C3D4E5F6A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		7D8E9F0A1B2C3D4E5F6A7B8C /* FIRLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRLocationService.swift; sourceTree = "<group>"; };
-		9F0A1B2C3D4E5F6A7B8C9D0E /* LocateFIRsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocateFIRsView.swift; sourceTree = "<group>"; };
-		1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fir_coordinates.json; sourceTree = "<group>"; };
-/* End PBXFileReference */
+/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		109837CE14DF231DA92CA287 /* Products */ = {
@@ -398,7 +398,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HV325Z3W39;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = NOTAMApp/Info.plist;
@@ -412,7 +412,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -490,7 +490,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HV325Z3W39;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = NOTAMApp/Info.plist;
@@ -504,7 +504,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

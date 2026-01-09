@@ -449,6 +449,37 @@ Status: Complete
 
 ---
 
+## Session 12: Collapsible FIR Sections
+Date: 2026-01-10
+Agent: Coding Agent
+Status: Complete
+
+### Completed:
+- [x] Added collapsible/expandable FIR sections in NOTAMs list
+- [x] Persistent collapsed state across app restarts
+- [x] Chevron indicator for collapsed/expanded state
+- [x] Smooth animation on toggle
+
+### Feature Details:
+**Collapsible FIR Sections:**
+- Tap FIR header to collapse/expand NOTAMs for that FIR
+- Chevron indicator: ▸ (right) = collapsed, ▾ (down) = expanded
+- State persists via `@AppStorage("collapsedFIRs")` in UserDefaults
+- Comma-separated string stores collapsed FIR codes
+- Default: all FIRs expanded
+
+### Files Modified:
+- `NOTAMApp/Views/NOTAM/NOTAMListView.swift` - Added collapse state management, tappable headers, chevron indicators
+
+### Version Bump:
+- Marketing version: 1.0 → 1.1
+- Build number: 1 → 2
+
+### Git Commits:
+- 345946f: Add collapsible FIR sections in NOTAMs list
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
