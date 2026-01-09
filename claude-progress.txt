@@ -367,6 +367,46 @@ Status: Complete
 
 ---
 
+## Session 10: Notification Severity Setting & Last Update Display
+Date: 2026-01-09
+Agent: Orchestrator + 2 Parallel Sub-agents
+Status: Complete
+
+### Completed:
+- [x] Added notification severity threshold setting (Critical Only / Caution and Above)
+- [x] Added prominent "Last Updated" display below search field on main page
+- [x] Both features implemented in parallel via sub-agents
+
+### Feature 1: Notification Severity Setting
+**User can choose minimum severity level for notifications:**
+- "Critical Only" (default) - airspace closures, no ATS
+- "Caution and Above" - includes TFRs, closures, restrictions
+
+**Implementation:**
+- Added `notificationSeverityThreshold: NOTAMSeverity` to AppSettings
+- Added `priority` and `meetsThreshold()` helpers to NOTAMSeverity enum
+- Added Picker in SettingsView notifications section
+- Updated BackgroundRefreshManager to respect threshold
+
+### Feature 2: Last Update Display
+**Shows "Updated X ago" prominently at top of NOTAM list:**
+- Displays below search field with clock icon
+- Uses SwiftUI relative time formatting
+- Styled with caption font, secondary color, centered
+
+### Files Modified:
+- `NOTAMApp/Models/AppSettings.swift` - added threshold property
+- `NOTAMApp/Models/NOTAM.swift` - added severity comparison helpers
+- `NOTAMApp/Services/SettingsStore.swift` - added setter method
+- `NOTAMApp/Services/BackgroundRefreshManager.swift` - threshold-based filtering
+- `NOTAMApp/Views/Settings/SettingsView.swift` - added severity picker
+- `NOTAMApp/Views/NOTAM/NOTAMListView.swift` - added last update display
+
+### Git Commits:
+- 92a6924: Add notification severity setting and last update display
+
+---
+
 ## Next Steps
 
 1. Open project in Xcode: `open NOTAMApp/NOTAMApp.xcodeproj`
