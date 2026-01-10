@@ -201,6 +201,52 @@ private struct ReduceMotionAnimationModifier<V: Equatable>: ViewModifier {
     }
 }
 
+// MARK: - Increase Contrast Support
+
+/// Modifier that increases text contrast when accessibility setting is enabled
+struct IncreaseContrastTextModifier: ViewModifier {
+    @Environment(\.colorSchemeContrast) private var contrast
+
+    func body(content: Content) -> some View {
+        content
+            .foregroundStyle(contrast == .increased ? Color("TextPrimary") : .primary)
+    }
+}
+
+/// Modifier that provides solid backgrounds when high contrast is enabled
+struct HighContrastBackgroundModifier: ViewModifier {
+    @Environment(\.colorSchemeContrast) private var contrast
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+
+    let normalColor: Color
+    let highContrastColor: Color
+
+    func body(content: Content) -> some View {
+        content
+            .background(
+                (contrast == .increased || reduceTransparency) ? highContrastColor : normalColor
+            )
+    }
+}
+
+extension View {
+    /// Apply increased contrast styling when accessibility setting is enabled
+    func adaptiveContrast() -> some View {
+        modifier(IncreaseContrastTextModifier())
+    }
+
+    /// Apply high contrast background when accessibility settings are enabled
+    func adaptiveBackground(
+        normal: Color = Color("Graphite"),
+        highContrast: Color = Color("Obsidian")
+    ) -> some View {
+        modifier(HighContrastBackgroundModifier(
+            normalColor: normal,
+            highContrastColor: highContrast
+        ))
+    }
+}
+
 // MARK: - Preview
 
 #Preview("Animation Timing") {

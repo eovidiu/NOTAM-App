@@ -4,11 +4,16 @@ import SwiftUI
 /// Premium glass morphism card with gradient border and subtle glow
 struct GlassCard<Content: View>: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var contrast
 
     let content: Content
     var cornerRadius: CGFloat = AviationTheme.CornerRadius.large
     var padding: CGFloat = AviationTheme.Spacing.md
     var showBorder: Bool = true
+
+    private var needsHighContrast: Bool {
+        reduceTransparency || contrast == .increased
+    }
 
     init(
         cornerRadius: CGFloat = AviationTheme.CornerRadius.large,
@@ -32,7 +37,7 @@ struct GlassCard<Content: View>: View {
 
     @ViewBuilder
     private var backgroundView: some View {
-        if reduceTransparency {
+        if needsHighContrast {
             // Solid fallback for accessibility
             Color("Graphite")
         } else {
@@ -56,18 +61,25 @@ struct GlassCard<Content: View>: View {
     @ViewBuilder
     private var borderOverlay: some View {
         if showBorder {
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .stroke(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(0.12),
-                            Color.white.opacity(0.04)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
-                    lineWidth: 1
-                )
+            if needsHighContrast {
+                // Higher contrast solid border for accessibility
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(Color.white.opacity(0.25), lineWidth: 1.5)
+            } else {
+                // Gradient border for glass effect
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(
+                        LinearGradient(
+                            colors: [
+                                Color.white.opacity(0.12),
+                                Color.white.opacity(0.04)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
+            }
         }
     }
 }
@@ -77,11 +89,16 @@ struct GlassCard<Content: View>: View {
 /// Higher elevation glass card with stronger glow effect
 struct ElevatedGlassCard<Content: View>: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var contrast
 
     let content: Content
     var cornerRadius: CGFloat = AviationTheme.CornerRadius.large
     var padding: CGFloat = AviationTheme.Spacing.md
     var glowColor: Color = Color("ElectricCyan")
+
+    private var needsHighContrast: Bool {
+        reduceTransparency || contrast == .increased
+    }
 
     init(
         cornerRadius: CGFloat = AviationTheme.CornerRadius.large,
@@ -99,7 +116,7 @@ struct ElevatedGlassCard<Content: View>: View {
         content
             .padding(padding)
             .background(
-                reduceTransparency
+                needsHighContrast
                     ? AnyView(Color("SlateGlass"))
                     : AnyView(
                         ZStack {
@@ -119,19 +136,14 @@ struct ElevatedGlassCard<Content: View>: View {
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(
-                        LinearGradient(
-                            colors: [
-                                Color.white.opacity(0.15),
-                                Color.white.opacity(0.05)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 1
+                        needsHighContrast
+                            ? Color.white.opacity(0.3)
+                            : Color.white.opacity(0.15),
+                        lineWidth: needsHighContrast ? 1.5 : 1
                     )
             )
             .shadow(
-                color: glowColor.opacity(reduceTransparency ? 0 : 0.15),
+                color: glowColor.opacity(needsHighContrast ? 0 : 0.15),
                 radius: 20,
                 x: 0,
                 y: 10
@@ -143,15 +155,20 @@ struct ElevatedGlassCard<Content: View>: View {
 
 struct GlassBackgroundModifier: ViewModifier {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var contrast
 
     var cornerRadius: CGFloat = AviationTheme.CornerRadius.medium
     var showBorder: Bool = true
+
+    private var needsHighContrast: Bool {
+        reduceTransparency || contrast == .increased
+    }
 
     func body(content: Content) -> some View {
         content
             .background(
                 Group {
-                    if reduceTransparency {
+                    if needsHighContrast {
                         Color("Graphite")
                     } else {
                         ZStack {
@@ -172,18 +189,23 @@ struct GlassBackgroundModifier: ViewModifier {
             .overlay(
                 Group {
                     if showBorder {
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(
-                                LinearGradient(
-                                    colors: [
-                                        Color.white.opacity(0.12),
-                                        Color.white.opacity(0.04)
-                                    ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 1
-                            )
+                        if needsHighContrast {
+                            RoundedRectangle(cornerRadius: cornerRadius)
+                                .stroke(Color.white.opacity(0.25), lineWidth: 1.5)
+                        } else {
+                            RoundedRectangle(cornerRadius: cornerRadius)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [
+                                            Color.white.opacity(0.12),
+                                            Color.white.opacity(0.04)
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 1
+                                )
+                        }
                     }
                 }
             )

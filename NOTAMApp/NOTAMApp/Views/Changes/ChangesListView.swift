@@ -4,7 +4,9 @@ import SwiftUI
 /// Displays NOTAM changes with premium card styling
 struct ChangesListView: View {
     @StateObject private var changeStore = ChangeStore.shared
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var selectedChange: NOTAMChange?
+    @State private var hasAppeared = false
 
     private var groupedChanges: [(date: String, changes: [NOTAMChange])] {
         let formatter = DateFormatter()
@@ -89,12 +91,18 @@ struct ChangesListView: View {
                         // Date header
                         SimpleSectionHeader(title: group.date.uppercased())
 
-                        // Change cards
-                        ForEach(group.changes) { change in
+                        // Change cards with staggered animation
+                        ForEach(Array(group.changes.enumerated()), id: \.element.id) { index, change in
                             NavigationLink(value: change) {
                                 ChangeRowView(change: change)
                             }
                             .buttonStyle(.plain)
+                            .opacity(hasAppeared ? 1 : 0)
+                            .offset(y: hasAppeared ? 0 : 20)
+                            .animation(
+                                reduceMotion ? nil : AviationAnimation.staggered(index: index),
+                                value: hasAppeared
+                            )
                         }
                     }
                 }
@@ -103,6 +111,14 @@ struct ChangesListView: View {
         }
         .scrollContentBackground(.hidden)
         .background(Color("DeepSpace"))
+        .onAppear {
+            // Trigger staggered reveal animation
+            if !hasAppeared {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    hasAppeared = true
+                }
+            }
+        }
     }
 }
 

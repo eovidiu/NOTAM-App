@@ -4,9 +4,11 @@ import SwiftUI
 /// Main list with collapsible FIR sections and premium search
 struct NOTAMListView: View {
     @EnvironmentObject var appState: AppState
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var searchText = ""
     @State private var selectedNotam: NOTAM?
     @State private var showInactiveNotams = false
+    @State private var hasAppeared = false
 
     // Persisted collapsed state (comma-separated FIR codes)
     @AppStorage("collapsedFIRs") private var collapsedFIRsString: String = ""
@@ -201,14 +203,20 @@ struct NOTAMListView: View {
                         )
                         .background(Color("Obsidian"))
 
-                        // NOTAM Cards
+                        // NOTAM Cards with staggered animation
                         if !isCollapsed(fir) {
                             LazyVStack(spacing: AviationTheme.Spacing.sm) {
-                                ForEach(notams) { notam in
+                                ForEach(Array(notams.enumerated()), id: \.element.id) { index, notam in
                                     NavigationLink(value: notam) {
                                         NOTAMRowView(notam: notam)
                                     }
                                     .buttonStyle(.plain)
+                                    .opacity(hasAppeared ? 1 : 0)
+                                    .offset(y: hasAppeared ? 0 : 20)
+                                    .animation(
+                                        reduceMotion ? nil : AviationAnimation.staggered(index: index),
+                                        value: hasAppeared
+                                    )
                                 }
                             }
                             .padding(.horizontal, AviationTheme.Spacing.md)
@@ -221,9 +229,17 @@ struct NOTAMListView: View {
         }
         .scrollContentBackground(.hidden)
         .background(Color("DeepSpace"))
-        .animation(AviationAnimation.standard, value: searchText)
-        .animation(AviationAnimation.standard, value: showInactiveNotams)
-        .animation(AviationAnimation.standard, value: collapsedFIRsString)
+        .animation(reduceMotion ? nil : AviationAnimation.standard, value: searchText)
+        .animation(reduceMotion ? nil : AviationAnimation.standard, value: showInactiveNotams)
+        .animation(reduceMotion ? nil : AviationAnimation.standard, value: collapsedFIRsString)
+        .onAppear {
+            // Trigger staggered reveal animation
+            if !hasAppeared {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    hasAppeared = true
+                }
+            }
+        }
     }
 }
 
