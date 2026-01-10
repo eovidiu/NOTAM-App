@@ -56,8 +56,16 @@ Implement the "Aviation Glass" premium design system - a dark-first UI inspired 
 - [ ] Color contrast validation
 - [ ] Bold Text support check
 
+### Phase 6: Pixel-Perfect Refinement
+- [x] Add type label (NEW, MODIFIED, etc.) to ChangeRowView
+- [x] Add color-coded left border to change cards based on type
+- [x] Update NOTAMIDBadge to use .standard style (with background) in NOTAMRowView
+- [x] Verify TimeRemainingBadge shows relative time ("38m remaining")
+- [x] Verify SeverityBadge shows text labels (WARNING, INFO)
+- [x] Build verification: **PASSED**
+
 ## Status
-**Phases 1-4 Complete** - Aviation Glass design system fully implemented with accessibility support.
+**Phases 1-4 and 6 Complete** - Aviation Glass design system fully implemented with pixel-perfect refinements.
 
 Phase 5 (Accessibility Audit) is manual testing that should be done in Xcode/Simulator.
 

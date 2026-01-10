@@ -9,8 +9,8 @@ struct NOTAMRowView: View {
         VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
             // Top Row: ID Badge + Type + Severity
             HStack(alignment: .center, spacing: AviationTheme.Spacing.sm) {
-                // NOTAM ID Badge
-                NOTAMIDBadge(id: notam.displayId, style: .compact)
+                // NOTAM ID Badge with colored background
+                NOTAMIDBadge(id: notam.displayId, style: .standard)
 
                 // Type indicator
                 Text(notam.type.displayName)

@@ -123,13 +123,13 @@ struct ChangesListView: View {
 }
 
 /// Aviation Glass Change Row View
-/// Premium card design for change items
+/// Premium card design for change items with type-specific styling
 struct ChangeRowView: View {
     let change: NOTAMChange
 
     var body: some View {
         HStack(spacing: AviationTheme.Spacing.md) {
-            // Change type icon with glow
+            // Change type icon with colored glow
             ZStack {
                 Circle()
                     .fill(changeColor.opacity(0.15))
@@ -141,6 +141,11 @@ struct ChangeRowView: View {
             }
 
             VStack(alignment: .leading, spacing: 4) {
+                // Type label
+                Text(change.changeType.displayName.uppercased())
+                    .font(AviationFont.timestamp())
+                    .foregroundStyle(changeColor)
+
                 HStack {
                     Text(change.notam.displayId)
                         .font(AviationFont.cardTitle())
@@ -188,16 +193,14 @@ struct ChangeRowView: View {
                 )
         )
         .overlay(
-            // Unread indicator bar
+            // Left indicator bar - colored by change type
             RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
                 .fill(Color.clear)
                 .overlay(alignment: .leading) {
-                    if !change.isRead {
-                        RoundedRectangle(cornerRadius: 2)
-                            .fill(Color("ElectricCyan"))
-                            .frame(width: 3)
-                            .padding(.vertical, 8)
-                    }
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(changeColor)
+                        .frame(width: 3)
+                        .padding(.vertical, 8)
                 }
         )
     }
