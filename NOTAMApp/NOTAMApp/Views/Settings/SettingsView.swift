@@ -1,5 +1,7 @@
 import SwiftUI
 
+/// Aviation Glass Settings View
+/// Premium settings interface with glass morphism styling
 struct SettingsView: View {
     @StateObject private var settingsStore = SettingsStore.shared
     @StateObject private var notificationManager = NotificationManager.shared
@@ -8,20 +10,33 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                // FIR Configuration
-                firSection
+            ZStack {
+                // Background
+                Color("DeepSpace")
+                    .ignoresSafeArea()
 
-                // Refresh Settings
-                refreshSection
+                ScrollView {
+                    VStack(spacing: AviationTheme.Spacing.lg) {
+                        // FIR Configuration
+                        firSection
 
-                // Notifications
-                notificationSection
+                        // Refresh Settings
+                        refreshSection
 
-                // About
-                aboutSection
+                        // Notifications
+                        notificationSection
+
+                        // About
+                        aboutSection
+                    }
+                    .padding(AviationTheme.Spacing.md)
+                }
+                .scrollContentBackground(.hidden)
             }
             .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbarBackground(Color("DeepSpace"), for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
             .sheet(isPresented: $showAddFIR) {
                 AddFIRView()
             }
@@ -34,162 +49,312 @@ struct SettingsView: View {
     // MARK: - FIR Section
 
     private var firSection: some View {
-        Section {
-            ForEach(settingsStore.settings.configuredFIRs) { fir in
-                FIRRowView(fir: fir) {
-                    settingsStore.toggleFIR(fir)
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+            SimpleSectionHeader(
+                title: "FLIGHT INFORMATION REGIONS",
+                subtitle: "Tap to enable/disable, swipe to delete"
+            )
+
+            GlassCard {
+                VStack(spacing: 0) {
+                    ForEach(Array(settingsStore.settings.configuredFIRs.enumerated()), id: \.element.id) { index, fir in
+                        if index > 0 {
+                            Divider()
+                                .background(Color.white.opacity(0.1))
+                        }
+
+                        FIRRowView(fir: fir) {
+                            HapticManager.shared.light()
+                            settingsStore.toggleFIR(fir)
+                        }
+                        .padding(.vertical, AviationTheme.Spacing.xs)
+                    }
+
+                    if settingsStore.settings.configuredFIRs.isEmpty {
+                        Text("No FIRs configured")
+                            .font(AviationFont.bodySecondary())
+                            .foregroundStyle(Color("TextDisabled"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, AviationTheme.Spacing.md)
+                    }
                 }
             }
-            .onDelete { offsets in
-                settingsStore.removeFIR(at: offsets)
-            }
-            .onMove { source, destination in
-                settingsStore.moveFIR(from: source, to: destination)
-            }
 
-            Button {
-                showAddFIR = true
-            } label: {
-                Label("Add FIR", systemImage: "plus.circle")
-            }
+            // Action buttons
+            HStack(spacing: AviationTheme.Spacing.sm) {
+                Button {
+                    HapticManager.shared.buttonTap()
+                    showAddFIR = true
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "plus.circle")
+                        Text("Add FIR")
+                    }
+                    .font(AviationFont.cardTitle())
+                    .foregroundStyle(Color("ElectricCyan"))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, AviationTheme.Spacing.sm)
+                    .background(Color("ElectricCyan").opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
+                            .stroke(Color("ElectricCyan").opacity(0.3), lineWidth: 1)
+                    )
+                }
+                .buttonStyle(.plain)
 
-            Button {
-                showLocateFIRs = true
-            } label: {
-                Label("Locate FIRs Near Me", systemImage: "location.circle")
+                Button {
+                    HapticManager.shared.buttonTap()
+                    showLocateFIRs = true
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "location.circle")
+                        Text("Near Me")
+                    }
+                    .font(AviationFont.cardTitle())
+                    .foregroundStyle(Color("AuroraGreen"))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, AviationTheme.Spacing.sm)
+                    .background(Color("AuroraGreen").opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
+                            .stroke(Color("AuroraGreen").opacity(0.3), lineWidth: 1)
+                    )
+                }
+                .buttonStyle(.plain)
             }
-        } header: {
-            Text("Flight Information Regions")
-        } footer: {
-            Text("Configure the FIRs you want to monitor for NOTAMs. Tap to enable/disable, swipe to delete.")
         }
     }
 
     // MARK: - Refresh Section
 
     private var refreshSection: some View {
-        Section {
-            Picker("Refresh Interval", selection: Binding(
-                get: { settingsStore.settings.refreshInterval },
-                set: { settingsStore.setRefreshInterval($0) }
-            )) {
-                ForEach(RefreshInterval.allCases) { interval in
-                    Text(interval.displayName).tag(interval)
-                }
-            }
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+            SimpleSectionHeader(
+                title: "BACKGROUND REFRESH",
+                subtitle: "iOS may adjust timing based on usage patterns"
+            )
 
-            if let nextRefresh = settingsStore.settings.nextRefreshDate {
-                HStack {
-                    Text("Next Refresh")
-                    Spacer()
-                    Text(nextRefresh, style: .relative)
-                        .foregroundStyle(.secondary)
-                }
-            }
+            GlassCard {
+                VStack(spacing: AviationTheme.Spacing.sm) {
+                    // Refresh interval picker
+                    HStack {
+                        Text("Refresh Interval")
+                            .font(AviationFont.bodyPrimary())
+                            .foregroundStyle(Color("TextPrimary"))
 
-            if let lastRefresh = settingsStore.settings.lastRefreshDate {
-                HStack {
-                    Text("Last Refresh")
-                    Spacer()
-                    Text(lastRefresh, style: .relative)
-                        .foregroundStyle(.secondary)
+                        Spacer()
+
+                        Picker("", selection: Binding(
+                            get: { settingsStore.settings.refreshInterval },
+                            set: { settingsStore.setRefreshInterval($0) }
+                        )) {
+                            ForEach(RefreshInterval.allCases) { interval in
+                                Text(interval.displayName).tag(interval)
+                            }
+                        }
+                        .tint(Color("ElectricCyan"))
+                    }
+
+                    Divider().background(Color.white.opacity(0.1))
+
+                    // Next refresh
+                    if let nextRefresh = settingsStore.settings.nextRefreshDate {
+                        HStack {
+                            Text("Next Refresh")
+                                .font(AviationFont.bodySecondary())
+                                .foregroundStyle(Color("TextSecondary"))
+                            Spacer()
+                            Text(nextRefresh, style: .relative)
+                                .font(AviationFont.bodySecondary())
+                                .foregroundStyle(Color("TextTertiary"))
+                        }
+                    }
+
+                    // Last refresh
+                    if let lastRefresh = settingsStore.settings.lastRefreshDate {
+                        HStack {
+                            Text("Last Refresh")
+                                .font(AviationFont.bodySecondary())
+                                .foregroundStyle(Color("TextSecondary"))
+                            Spacer()
+                            Text(lastRefresh, style: .relative)
+                                .font(AviationFont.bodySecondary())
+                                .foregroundStyle(Color("TextTertiary"))
+                        }
+                    }
                 }
             }
-        } header: {
-            Text("Background Refresh")
-        } footer: {
-            Text("NOTAMs are refreshed automatically in the background. iOS may adjust timing based on your usage patterns.")
         }
     }
 
     // MARK: - Notification Section
 
     private var notificationSection: some View {
-        Section {
-            Toggle("Enable Notifications", isOn: Binding(
-                get: { settingsStore.settings.notificationsEnabled },
-                set: { settingsStore.setNotificationsEnabled($0) }
-            ))
-            .disabled(notificationManager.authorizationStatus == .denied)
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+            SimpleSectionHeader(
+                title: "NOTIFICATIONS",
+                subtitle: "Receive alerts when NOTAMs change"
+            )
 
-            if settingsStore.settings.notificationsEnabled {
-                Toggle("Notification Sound", isOn: Binding(
-                    get: { settingsStore.settings.notificationSound },
-                    set: { settingsStore.setNotificationSound($0) }
-                ))
+            GlassCard {
+                VStack(spacing: AviationTheme.Spacing.sm) {
+                    // Enable toggle
+                    Toggle(isOn: Binding(
+                        get: { settingsStore.settings.notificationsEnabled },
+                        set: { settingsStore.setNotificationsEnabled($0) }
+                    )) {
+                        Text("Enable Notifications")
+                            .font(AviationFont.bodyPrimary())
+                            .foregroundStyle(Color("TextPrimary"))
+                    }
+                    .tint(Color("ElectricCyan"))
+                    .disabled(notificationManager.authorizationStatus == .denied)
 
-                Picker("Minimum Severity", selection: Binding(
-                    get: { settingsStore.settings.notificationSeverityThreshold },
-                    set: { settingsStore.setNotificationSeverityThreshold($0) }
-                )) {
-                    Text("Critical Only").tag(NOTAMSeverity.critical)
-                    Text("Caution and Above").tag(NOTAMSeverity.caution)
-                }
-            }
+                    if settingsStore.settings.notificationsEnabled {
+                        Divider().background(Color.white.opacity(0.1))
 
-            if notificationManager.authorizationStatus == .denied {
-                Button {
-                    openAppSettings()
-                } label: {
-                    HStack {
-                        Image(systemName: "exclamationmark.triangle")
-                            .foregroundStyle(.orange)
-                        Text("Notifications Disabled")
-                        Spacer()
-                        Text("Open Settings")
-                            .foregroundStyle(.blue)
+                        // Sound toggle
+                        Toggle(isOn: Binding(
+                            get: { settingsStore.settings.notificationSound },
+                            set: { settingsStore.setNotificationSound($0) }
+                        )) {
+                            Text("Notification Sound")
+                                .font(AviationFont.bodyPrimary())
+                                .foregroundStyle(Color("TextPrimary"))
+                        }
+                        .tint(Color("ElectricCyan"))
+
+                        Divider().background(Color.white.opacity(0.1))
+
+                        // Severity picker
+                        HStack {
+                            Text("Minimum Severity")
+                                .font(AviationFont.bodyPrimary())
+                                .foregroundStyle(Color("TextPrimary"))
+
+                            Spacer()
+
+                            Picker("", selection: Binding(
+                                get: { settingsStore.settings.notificationSeverityThreshold },
+                                set: { settingsStore.setNotificationSeverityThreshold($0) }
+                            )) {
+                                Text("Critical Only").tag(NOTAMSeverity.critical)
+                                Text("Caution+").tag(NOTAMSeverity.caution)
+                            }
+                            .tint(Color("ElectricCyan"))
+                        }
+                    }
+
+                    // Permission warning
+                    if notificationManager.authorizationStatus == .denied {
+                        Divider().background(Color.white.opacity(0.1))
+
+                        Button {
+                            openAppSettings()
+                        } label: {
+                            HStack {
+                                Image(systemName: "exclamationmark.triangle")
+                                    .foregroundStyle(Color("AmberAlert"))
+                                Text("Notifications Disabled")
+                                    .font(AviationFont.bodyPrimary())
+                                    .foregroundStyle(Color("TextPrimary"))
+                                Spacer()
+                                Text("Open Settings")
+                                    .font(AviationFont.bodySecondary())
+                                    .foregroundStyle(Color("ElectricCyan"))
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    } else if notificationManager.authorizationStatus == .notDetermined {
+                        Divider().background(Color.white.opacity(0.1))
+
+                        Button {
+                            Task {
+                                _ = await notificationManager.requestAuthorization()
+                            }
+                        } label: {
+                            Text("Request Permission")
+                                .font(AviationFont.bodyPrimary())
+                                .foregroundStyle(Color("ElectricCyan"))
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.plain)
+                    }
+
+                    // Test notification
+                    if notificationManager.isAuthorized {
+                        Divider().background(Color.white.opacity(0.1))
+
+                        Button {
+                            HapticManager.shared.buttonTap()
+                            Task {
+                                await notificationManager.sendTestNotification()
+                            }
+                        } label: {
+                            Text("Send Test Notification")
+                                .font(AviationFont.bodyPrimary())
+                                .foregroundStyle(Color("ElectricCyan"))
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
-            } else if notificationManager.authorizationStatus == .notDetermined {
-                Button("Request Permission") {
-                    Task {
-                        _ = await notificationManager.requestAuthorization()
-                    }
-                }
             }
-
-            if notificationManager.isAuthorized {
-                Button("Send Test Notification") {
-                    Task {
-                        await notificationManager.sendTestNotification()
-                    }
-                }
-            }
-        } header: {
-            Text("Notifications")
-        } footer: {
-            Text("Receive notifications when NOTAMs change for your configured FIRs.")
         }
     }
 
     // MARK: - About Section
 
     private var aboutSection: some View {
-        Section {
-            HStack {
-                Text("Version")
-                Spacer()
-                Text("1.0.0")
-                    .foregroundStyle(.secondary)
-            }
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+            SimpleSectionHeader(title: "ABOUT")
 
-            Link(destination: URL(string: "https://notams.aim.faa.gov")!) {
-                HStack {
-                    Text("FAA NOTAM Search")
-                    Spacer()
-                    Image(systemName: "arrow.up.right.square")
-                        .foregroundStyle(.secondary)
+            GlassCard {
+                VStack(spacing: AviationTheme.Spacing.sm) {
+                    // Version
+                    HStack {
+                        Text("Version")
+                            .font(AviationFont.bodyPrimary())
+                            .foregroundStyle(Color("TextPrimary"))
+                        Spacer()
+                        Text("1.0.0")
+                            .font(AviationFont.rawText())
+                            .foregroundStyle(Color("TextTertiary"))
+                    }
+
+                    Divider().background(Color.white.opacity(0.1))
+
+                    // FAA Link
+                    Link(destination: URL(string: "https://notams.aim.faa.gov")!) {
+                        HStack {
+                            Text("FAA NOTAM Search")
+                                .font(AviationFont.bodyPrimary())
+                                .foregroundStyle(Color("TextPrimary"))
+                            Spacer()
+                            Image(systemName: "arrow.up.right.square")
+                                .foregroundStyle(Color("TextTertiary"))
+                        }
+                    }
+
+                    Divider().background(Color.white.opacity(0.1))
+
+                    // Clear cache
+                    Button {
+                        HapticManager.shared.buttonTap()
+                        Task {
+                            try? await NOTAMCache.shared.clearAll()
+                        }
+                    } label: {
+                        Text("Clear Cache")
+                            .font(AviationFont.bodyPrimary())
+                            .foregroundStyle(Color("CrimsonPulse"))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
-
-            Button("Clear Cache") {
-                Task {
-                    try? await NOTAMCache.shared.clearAll()
-                }
-            }
-            .foregroundStyle(.red)
-        } header: {
-            Text("About")
         }
     }
 
@@ -200,30 +365,33 @@ struct SettingsView: View {
     }
 }
 
+/// Aviation Glass FIR Row View
 struct FIRRowView: View {
     let fir: FIR
     let toggleAction: () -> Void
 
     var body: some View {
         Button(action: toggleAction) {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(fir.icaoCode)
-                        .font(.headline.monospaced())
+            HStack(spacing: AviationTheme.Spacing.sm) {
+                // FIR Code badge
+                FIRCodePill(code: fir.icaoCode, style: .standard)
 
-                    if fir.displayName != fir.icaoCode {
-                        Text(fir.displayName)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
+                // Name (if different from code)
+                if fir.displayName != fir.icaoCode {
+                    Text(fir.displayName)
+                        .font(AviationFont.bodySecondary())
+                        .foregroundStyle(Color("TextSecondary"))
+                        .lineLimit(1)
                 }
 
                 Spacer()
 
+                // Enable/Disable indicator
                 Image(systemName: fir.isEnabled ? "checkmark.circle.fill" : "circle")
-                    .foregroundStyle(fir.isEnabled ? .green : .secondary)
-                    .font(.title3)
+                    .font(.system(size: 22))
+                    .foregroundStyle(fir.isEnabled ? Color("AuroraGreen") : Color("TextDisabled"))
             }
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }

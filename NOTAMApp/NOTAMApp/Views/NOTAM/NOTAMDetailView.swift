@@ -1,5 +1,7 @@
 import SwiftUI
 
+/// Aviation Glass NOTAM Detail View
+/// Premium detail view with glass cards and timeline visualization
 struct NOTAMDetailView: View {
     let notam: NOTAM
 
@@ -11,32 +13,41 @@ struct NOTAMDetailView: View {
     private let translator = NOTAMTranslator.shared
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Tab picker
-            Picker("View", selection: $selectedTab) {
-                ForEach(DetailTab.allCases) { tab in
-                    Text(tab.rawValue).tag(tab)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding()
+        ZStack {
+            // Background
+            Color("DeepSpace")
+                .ignoresSafeArea()
 
-            // Content
-            ScrollView {
-                switch selectedTab {
-                case .translated:
-                    translatedView
-                case .original:
-                    originalView
+            VStack(spacing: 0) {
+                // Tab picker with custom styling
+                Picker("View", selection: $selectedTab) {
+                    ForEach(DetailTab.allCases) { tab in
+                        Text(tab.rawValue).tag(tab)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(AviationTheme.Spacing.md)
+
+                // Content
+                ScrollView {
+                    switch selectedTab {
+                    case .translated:
+                        translatedView
+                    case .original:
+                        originalView
+                    }
                 }
             }
         }
         .navigationTitle(notam.displayId)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(Color("DeepSpace"), for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 ShareLink(item: shareText) {
                     Image(systemName: "square.and.arrow.up")
+                        .foregroundStyle(Color("ElectricCyan"))
                 }
             }
         }
@@ -56,24 +67,33 @@ struct NOTAMDetailView: View {
     // MARK: - Translated View
 
     private var translatedView: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.md) {
             if let translated {
-                // Summary card
-                VStack(alignment: .leading, spacing: 8) {
-                    Label("Summary", systemImage: "text.alignleft")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                // Hero Header with NOTAM ID
+                heroHeader
 
-                    Text(translated.summary)
-                        .font(.headline)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-
-                // Status indicator
+                // Status card with severity
                 statusCard
+
+                // Timeline card
+                TimelineCard(
+                    startDate: notam.effectiveStart,
+                    endDate: notam.effectiveEnd ?? Date.distantFuture,
+                    currentDate: Date()
+                )
+
+                // Summary card
+                GlassCard {
+                    VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                        Label("Summary", systemImage: "text.alignleft")
+                            .font(AviationFont.label())
+                            .foregroundStyle(Color("TextTertiary"))
+
+                        Text(translated.summary)
+                            .font(AviationFont.cardTitle())
+                            .foregroundStyle(Color("TextPrimary"))
+                    }
+                }
 
                 // Sections
                 ForEach(translated.sections) { section in
@@ -81,109 +101,147 @@ struct NOTAMDetailView: View {
                 }
 
                 // Plain English text
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Label("Plain English", systemImage: "text.bubble")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                GlassCard {
+                    VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                        HStack {
+                            Label("Plain English", systemImage: "text.bubble")
+                                .font(AviationFont.label())
+                                .foregroundStyle(Color("TextTertiary"))
 
-                        Spacer()
+                            Spacer()
 
-                        if isLoadingAI {
-                            HStack(spacing: 4) {
-                                ProgressView()
-                                    .scaleEffect(0.7)
-                                Text("AI translating...")
-                                    .font(.caption2)
+                            if isLoadingAI {
+                                HStack(spacing: 4) {
+                                    ProgressView()
+                                        .scaleEffect(0.7)
+                                        .tint(Color("ElectricCyan"))
+                                    Text("AI translating...")
+                                        .font(AviationFont.caption())
+                                }
+                                .foregroundStyle(Color("TextTertiary"))
+                            } else if translated.aiPlainText != nil {
+                                HStack(spacing: 4) {
+                                    Image(systemName: "apple.intelligence")
+                                    Text("AI")
+                                }
+                                .font(AviationFont.caption())
+                                .foregroundStyle(Color("AzureNebula"))
                             }
-                            .foregroundStyle(.secondary)
-                        } else if translated.aiPlainText != nil {
-                            Label("AI", systemImage: "apple.intelligence")
-                                .font(.caption2)
-                                .foregroundStyle(.purple)
                         }
-                    }
 
-                    Text(translated.bestTranslation)
-                        .font(.body)
+                        Text(translated.bestTranslation)
+                            .font(AviationFont.bodyPrimary())
+                            .foregroundStyle(Color("TextSecondary"))
+                    }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
             } else {
                 ProgressView("Loading...")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .tint(Color("ElectricCyan"))
             }
         }
-        .padding()
+        .padding(AviationTheme.Spacing.md)
+    }
+
+    private var heroHeader: some View {
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+            HStack {
+                NOTAMIDBadge(id: notam.displayId, style: .hero)
+                Spacer()
+                SeverityBadge(severity: notam.severity, style: .expanded)
+            }
+
+            HStack(spacing: 6) {
+                Image(systemName: "mappin")
+                    .font(.system(size: 14, weight: .medium))
+                Text(notam.location)
+                    .font(AviationFont.bodyPrimary())
+            }
+            .foregroundStyle(Color("TextSecondary"))
+        }
+        .padding(AviationTheme.Spacing.md)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            LinearGradient(
+                colors: [
+                    notam.severity.themeColor.opacity(0.2),
+                    Color("DeepSpace")
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.large))
+        .overlay(
+            RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.large)
+                .stroke(notam.severity.themeColor.opacity(0.3), lineWidth: 1)
+        )
     }
 
     private var statusCard: some View {
-        VStack(spacing: 12) {
-            // Severity banner for critical/warning NOTAMs
-            if notam.severity == .critical || notam.severity == .warning {
-                HStack {
-                    Image(systemName: notam.severity.icon)
-                    Text(notam.severity.label.uppercased())
-                        .font(.caption.bold())
-                    Spacer()
-                    Text(severityDescription)
-                        .font(.caption)
-                }
-                .foregroundStyle(.white)
-                .padding(8)
-                .background(notam.severity.color)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-            }
-
-            HStack {
-                // Severity indicator
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Severity")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    HStack(spacing: 4) {
-                        Image(systemName: notam.severity.icon)
-                            .foregroundStyle(notam.severity.color)
-                        Text(notam.severity.label)
-                            .font(.subheadline.bold())
-                            .foregroundStyle(notam.severity.color)
-                    }
-                }
-
-                Spacer()
-
-                // Active status
-                VStack(alignment: .center, spacing: 4) {
-                    Text("Status")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+        GlassCard {
+            VStack(spacing: AviationTheme.Spacing.sm) {
+                // Severity banner for critical/warning NOTAMs
+                if notam.severity == .critical || notam.severity == .warning {
                     HStack {
-                        Circle()
-                            .fill(notam.isActive ? .green : .gray)
-                            .frame(width: 8, height: 8)
-                        Text(notam.isActive ? "Active" : "Inactive")
-                            .font(.subheadline.bold())
+                        Image(systemName: notam.severity.icon)
+                        Text(notam.severity.label.uppercased())
+                            .font(AviationFont.label())
+                        Spacer()
+                        Text(severityDescription)
+                            .font(AviationFont.caption())
                     }
+                    .foregroundStyle(.white)
+                    .padding(AviationTheme.Spacing.sm)
+                    .background(notam.severity.themeColor)
+                    .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.small))
                 }
 
-                Spacer()
+                HStack {
+                    // Severity indicator
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("SEVERITY")
+                            .font(AviationFont.label())
+                            .foregroundStyle(Color("TextDisabled"))
+                        HStack(spacing: 4) {
+                            SeverityDot(severity: notam.severity)
+                            Text(notam.severity.label)
+                                .font(AviationFont.cardTitle())
+                                .foregroundStyle(notam.severity.themeColor)
+                        }
+                    }
 
-                // Type
-                VStack(alignment: .trailing, spacing: 4) {
-                    Text("Type")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text(notam.type.displayName)
-                        .font(.subheadline.bold())
-                        .foregroundStyle(typeColor)
+                    Spacer()
+
+                    // Active status
+                    VStack(alignment: .center, spacing: 4) {
+                        Text("STATUS")
+                            .font(AviationFont.label())
+                            .foregroundStyle(Color("TextDisabled"))
+                        HStack {
+                            Circle()
+                                .fill(notam.isActive ? Color("AuroraGreen") : Color("TextDisabled"))
+                                .frame(width: 8, height: 8)
+                            Text(notam.isActive ? "Active" : "Inactive")
+                                .font(AviationFont.cardTitle())
+                                .foregroundStyle(Color("TextPrimary"))
+                        }
+                    }
+
+                    Spacer()
+
+                    // Type
+                    VStack(alignment: .trailing, spacing: 4) {
+                        Text("TYPE")
+                            .font(AviationFont.label())
+                            .foregroundStyle(Color("TextDisabled"))
+                        Text(notam.type.displayName)
+                            .font(AviationFont.cardTitle())
+                            .foregroundStyle(typeColor)
+                    }
                 }
             }
         }
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     private var severityDescription: String {
@@ -200,94 +258,101 @@ struct NOTAMDetailView: View {
     }
 
     private func sectionCard(_ section: NOTAMSection) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Label(section.title, systemImage: section.icon)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        GlassCard {
+            VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                Label(section.title, systemImage: section.icon)
+                    .font(AviationFont.label())
+                    .foregroundStyle(Color("TextTertiary"))
 
-            Text(section.content)
-                .font(.body)
+                Text(section.content)
+                    .font(AviationFont.bodyPrimary())
+                    .foregroundStyle(Color("TextSecondary"))
+            }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     // MARK: - Original View
 
     private var originalView: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.md) {
             // Header info
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Text("NOTAM ID:")
-                        .foregroundStyle(.secondary)
-                    Text(notam.displayId)
-                        .bold()
-                }
-
-                HStack {
-                    Text("Issued:")
-                        .foregroundStyle(.secondary)
-                    Text(notam.issued, style: .date)
-                    Text(notam.issued, style: .time)
-                }
-
-                HStack {
-                    Text("Location:")
-                        .foregroundStyle(.secondary)
-                    Text(notam.location)
+            GlassCard {
+                VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                    infoRow(label: "NOTAM ID", value: notam.displayId)
+                    infoRow(label: "Issued", value: formatDateTime(notam.issued))
+                    infoRow(label: "Location", value: notam.location)
+                    infoRow(label: "FIR", value: notam.affectedFIR)
                 }
             }
-            .font(.caption.monospaced())
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
 
             // Raw NOTAM text
-            VStack(alignment: .leading, spacing: 8) {
-                Label("Original NOTAM Text", systemImage: "doc.text")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+            GlassCard {
+                VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                    Label("Original NOTAM Text", systemImage: "doc.text")
+                        .font(AviationFont.label())
+                        .foregroundStyle(Color("TextTertiary"))
 
-                Text(notam.text)
-                    .font(.system(.body, design: .monospaced))
-                    .textSelection(.enabled)
+                    Text(notam.text)
+                        .font(AviationFont.rawText())
+                        .foregroundStyle(Color("TextPrimary"))
+                        .textSelection(.enabled)
+                }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
 
             // Q-code breakdown if available
             if let selectionCode = notam.selectionCode {
-                VStack(alignment: .leading, spacing: 8) {
-                    Label("Q-Code", systemImage: "qrcode")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                GlassCard {
+                    VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                        Label("Q-Code", systemImage: "qrcode")
+                            .font(AviationFont.label())
+                            .foregroundStyle(Color("TextTertiary"))
 
-                    Text(selectionCode)
-                        .font(.system(.body, design: .monospaced))
-                        .textSelection(.enabled)
+                        Text(selectionCode)
+                            .font(AviationFont.rawText())
+                            .foregroundStyle(Color("ElectricCyan"))
+                            .textSelection(.enabled)
+                    }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+
+            // Effective period
+            GlassCard {
+                VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                    Label("Effective Period", systemImage: "calendar")
+                        .font(AviationFont.label())
+                        .foregroundStyle(Color("TextTertiary"))
+
+                    infoRow(label: "From", value: formatDateTime(notam.effectiveStart))
+                    if let end = notam.effectiveEnd {
+                        infoRow(label: "To", value: formatDateTime(end) + (notam.isEstimatedEnd ? " (EST)" : ""))
+                    } else if notam.isPermanent {
+                        infoRow(label: "To", value: "PERMANENT")
+                    }
+                }
             }
         }
-        .padding()
+        .padding(AviationTheme.Spacing.md)
+    }
+
+    private func infoRow(label: String, value: String) -> some View {
+        HStack {
+            Text(label)
+                .font(AviationFont.label())
+                .foregroundStyle(Color("TextTertiary"))
+            Spacer()
+            Text(value)
+                .font(AviationFont.rawText())
+                .foregroundStyle(Color("TextPrimary"))
+        }
     }
 
     // MARK: - Helpers
 
     private var typeColor: Color {
         switch notam.type {
-        case .new: return .blue
-        case .replacement: return .orange
-        case .cancellation: return .red
+        case .new: return Color("ElectricCyan")
+        case .replacement: return Color("AmberAlert")
+        case .cancellation: return Color("CrimsonPulse")
         }
     }
 
@@ -300,6 +365,13 @@ struct NOTAMDetailView: View {
         \(notam.text)
         """
     }
+
+    private func formatDateTime(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
+    }
 }
 
 // MARK: - Tab
@@ -309,6 +381,19 @@ private enum DetailTab: String, CaseIterable, Identifiable {
     case original = "Original"
 
     var id: String { rawValue }
+}
+
+// MARK: - Severity Color Extension
+
+extension NOTAMSeverity {
+    var themeColor: Color {
+        switch self {
+        case .critical: return Color("CrimsonPulse")
+        case .warning: return Color("AmberAlert")
+        case .caution: return Color("AmberAlert").opacity(0.8)
+        case .info: return Color("AuroraGreen")
+        }
+    }
 }
 
 #Preview("Warning - Runway Closure") {

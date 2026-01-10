@@ -1,5 +1,7 @@
 import SwiftUI
 
+/// Aviation Glass Changes List View
+/// Displays NOTAM changes with premium card styling
 struct ChangesListView: View {
     @StateObject private var changeStore = ChangeStore.shared
     @State private var selectedChange: NOTAMChange?
@@ -26,20 +28,29 @@ struct ChangesListView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if changeStore.changes.isEmpty {
-                    EmptyStateView(
-                        title: "No Changes",
-                        message: "Changes to NOTAMs will appear here when detected during background refresh.",
-                        systemImage: "bell.slash",
-                        action: nil,
-                        actionTitle: nil
-                    )
-                } else {
-                    changesList
+            ZStack {
+                // Background
+                Color("DeepSpace")
+                    .ignoresSafeArea()
+
+                Group {
+                    if changeStore.changes.isEmpty {
+                        EmptyStateView(
+                            title: "No Changes",
+                            message: "Changes to NOTAMs will appear here when detected during background refresh.",
+                            systemImage: "bell.slash",
+                            action: nil,
+                            actionTitle: nil
+                        )
+                    } else {
+                        changesList
+                    }
                 }
             }
             .navigationTitle("Changes")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbarBackground(Color("DeepSpace"), for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
             .navigationDestination(for: NOTAMChange.self) { change in
                 ChangeDetailView(change: change)
             }
@@ -48,18 +59,21 @@ struct ChangesListView: View {
                     ToolbarItem(placement: .primaryAction) {
                         Menu {
                             Button {
+                                HapticManager.shared.buttonTap()
                                 Task { await changeStore.markAllAsRead() }
                             } label: {
                                 Label("Mark All Read", systemImage: "checkmark.circle")
                             }
 
                             Button(role: .destructive) {
+                                HapticManager.shared.buttonTap()
                                 Task { await changeStore.clearAll() }
                             } label: {
                                 Label("Clear All", systemImage: "trash")
                             }
                         } label: {
                             Image(systemName: "ellipsis.circle")
+                                .foregroundStyle(Color("ElectricCyan"))
                         }
                     }
                 }
@@ -68,84 +82,116 @@ struct ChangesListView: View {
     }
 
     private var changesList: some View {
-        List {
-            ForEach(groupedChanges, id: \.date) { group in
-                Section {
-                    ForEach(group.changes) { change in
-                        NavigationLink(value: change) {
-                            ChangeRowView(change: change)
-                        }
-                        .swipeActions(edge: .trailing) {
-                            Button(role: .destructive) {
-                                Task { await changeStore.removeChange(change) }
-                            } label: {
-                                Label("Delete", systemImage: "trash")
+        ScrollView {
+            LazyVStack(spacing: AviationTheme.Spacing.md) {
+                ForEach(groupedChanges, id: \.date) { group in
+                    VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                        // Date header
+                        SimpleSectionHeader(title: group.date.uppercased())
+
+                        // Change cards
+                        ForEach(group.changes) { change in
+                            NavigationLink(value: change) {
+                                ChangeRowView(change: change)
                             }
-                        }
-                        .swipeActions(edge: .leading) {
-                            if !change.isRead {
-                                Button {
-                                    Task { await changeStore.markAsRead(change) }
-                                } label: {
-                                    Label("Mark Read", systemImage: "checkmark.circle")
-                                }
-                                .tint(.blue)
-                            }
+                            .buttonStyle(.plain)
                         }
                     }
-                } header: {
-                    Text(group.date)
                 }
             }
+            .padding(AviationTheme.Spacing.md)
         }
-        .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(Color("DeepSpace"))
     }
 }
 
+/// Aviation Glass Change Row View
+/// Premium card design for change items
 struct ChangeRowView: View {
     let change: NOTAMChange
 
     var body: some View {
-        HStack(spacing: 12) {
-            // Change type icon
-            Image(systemName: change.changeType.iconName)
-                .font(.title2)
-                .foregroundStyle(changeColor)
-                .frame(width: 32)
+        HStack(spacing: AviationTheme.Spacing.md) {
+            // Change type icon with glow
+            ZStack {
+                Circle()
+                    .fill(changeColor.opacity(0.15))
+                    .frame(width: 44, height: 44)
+
+                Image(systemName: change.changeType.iconName)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(changeColor)
+            }
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text(change.notam.displayId)
-                        .font(.subheadline.bold())
+                        .font(AviationFont.cardTitle())
+                        .foregroundStyle(Color("TextPrimary"))
 
                     if !change.isRead {
                         Circle()
-                            .fill(.blue)
+                            .fill(Color("ElectricCyan"))
                             .frame(width: 8, height: 8)
                     }
+
+                    Spacer()
+
+                    // Chevron indicator
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(Color("TextDisabled"))
                 }
 
                 Text(change.summary)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(AviationFont.bodySecondary())
+                    .foregroundStyle(Color("TextSecondary"))
                     .lineLimit(2)
 
                 Text(change.detectedAt, style: .time)
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
+                    .font(AviationFont.timestamp())
+                    .foregroundStyle(Color("TextDisabled"))
             }
-
-            Spacer()
         }
-        .padding(.vertical, 4)
+        .padding(AviationTheme.Spacing.md)
+        .background(Color("Graphite"))
+        .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium))
+        .overlay(
+            RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
+                .stroke(
+                    LinearGradient(
+                        colors: [
+                            Color.white.opacity(0.12),
+                            Color.white.opacity(0.04)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 1
+                )
+        )
+        .overlay(
+            // Unread indicator bar
+            RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
+                .fill(Color.clear)
+                .overlay(alignment: .leading) {
+                    if !change.isRead {
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color("ElectricCyan"))
+                            .frame(width: 3)
+                            .padding(.vertical, 8)
+                    }
+                }
+        )
     }
 
     private var changeColor: Color {
         switch change.changeType {
-        case .new: return .green
-        case .expired: return .gray
-        case .modified: return .orange
-        case .cancelled: return .red
+        case .new: return Color("AuroraGreen")
+        case .expired: return Color("TextDisabled")
+        case .modified: return Color("AmberAlert")
+        case .cancelled: return Color("CrimsonPulse")
         }
     }
 }

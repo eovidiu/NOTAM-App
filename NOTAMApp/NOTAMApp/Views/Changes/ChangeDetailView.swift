@@ -1,55 +1,61 @@
 import SwiftUI
 
+/// Aviation Glass Change Detail View
+/// Premium detail view for NOTAM changes with diff visualization
 struct ChangeDetailView: View {
     let change: NOTAMChange
 
     @StateObject private var changeStore = ChangeStore.shared
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                // Change type header
-                changeHeader
+        ZStack {
+            // Background
+            Color("DeepSpace")
+                .ignoresSafeArea()
 
-                // Current NOTAM
-                VStack(alignment: .leading, spacing: 8) {
-                    Label(
-                        change.changeType == .expired ? "Expired NOTAM" : "Current NOTAM",
-                        systemImage: "doc.text"
-                    )
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+            ScrollView {
+                VStack(alignment: .leading, spacing: AviationTheme.Spacing.md) {
+                    // Change type header
+                    changeHeader
 
-                    NavigationLink(value: change.notam) {
-                        notamCard(change.notam)
+                    // Current NOTAM
+                    VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                        SimpleSectionHeader(
+                            title: change.changeType == .expired ? "EXPIRED NOTAM" : "CURRENT NOTAM"
+                        )
+
+                        NavigationLink(value: change.notam) {
+                            notamCard(change.notam)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
+
+                    // Previous NOTAM (for modifications)
+                    if let previous = change.previousNotam {
+                        VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+                            SimpleSectionHeader(title: "PREVIOUS VERSION")
+
+                            notamCard(previous)
+                                .opacity(0.7)
+                        }
+
+                        // Diff view
+                        if change.changeType == .modified {
+                            diffSection(previous: previous, current: change.notam)
+                        }
+                    }
+
+                    // Details
+                    detailsSection
                 }
-
-                // Previous NOTAM (for modifications)
-                if let previous = change.previousNotam {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label("Previous Version", systemImage: "doc.text.below.ecg")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-
-                        notamCard(previous)
-                            .opacity(0.7)
-                    }
-
-                    // Diff view
-                    if change.changeType == .modified {
-                        diffSection(previous: previous, current: change.notam)
-                    }
-                }
-
-                // Details
-                detailsSection
+                .padding(AviationTheme.Spacing.md)
             }
-            .padding()
+            .scrollContentBackground(.hidden)
         }
         .navigationTitle("Change Details")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(Color("DeepSpace"), for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
         .navigationDestination(for: NOTAM.self) { notam in
             NOTAMDetailView(notam: notam)
         }
@@ -61,165 +67,213 @@ struct ChangeDetailView: View {
     }
 
     private var changeHeader: some View {
-        HStack {
-            Image(systemName: change.changeType.iconName)
-                .font(.largeTitle)
-                .foregroundStyle(changeColor)
+        HStack(spacing: AviationTheme.Spacing.md) {
+            // Icon with glow
+            ZStack {
+                Circle()
+                    .fill(changeColor.opacity(0.2))
+                    .frame(width: 56, height: 56)
+
+                Circle()
+                    .fill(changeColor.opacity(0.1))
+                    .frame(width: 72, height: 72)
+                    .blur(radius: 8)
+
+                Image(systemName: change.changeType.iconName)
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundStyle(changeColor)
+            }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(change.changeType.displayName)
-                    .font(.headline)
+                    .font(AviationFont.sectionHeader())
+                    .foregroundStyle(Color("TextPrimary"))
 
                 Text(change.detailedDescription)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(AviationFont.bodySecondary())
+                    .foregroundStyle(Color("TextSecondary"))
             }
+
+            Spacer()
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(changeColor.opacity(0.1))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(AviationTheme.Spacing.md)
+        .background(
+            LinearGradient(
+                colors: [
+                    changeColor.opacity(0.15),
+                    Color("Graphite")
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.large))
+        .overlay(
+            RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.large)
+                .stroke(changeColor.opacity(0.3), lineWidth: 1)
+        )
     }
 
     private func notamCard(_ notam: NOTAM) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
             HStack {
-                Text(notam.displayId)
-                    .font(.headline.monospaced())
+                NOTAMIDBadge(id: notam.displayId, style: .standard)
 
                 Spacer()
 
                 Text(notam.type.displayName)
-                    .font(.caption)
-                    .padding(.horizontal, 8)
+                    .font(AviationFont.label())
+                    .padding(.horizontal, 10)
                     .padding(.vertical, 4)
-                    .background(Color.secondary.opacity(0.2))
+                    .background(Color("SlateGlass"))
+                    .foregroundStyle(Color("TextSecondary"))
                     .clipShape(Capsule())
             }
 
-            Text(notam.location)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+            HStack(spacing: 6) {
+                Image(systemName: "mappin")
+                    .font(.system(size: 12))
+                Text(notam.location)
+                    .font(AviationFont.bodySecondary())
+            }
+            .foregroundStyle(Color("TextSecondary"))
 
             Text(notam.text)
-                .font(.caption.monospaced())
+                .font(AviationFont.rawText())
+                .foregroundStyle(Color("TextPrimary"))
                 .lineLimit(4)
 
             Text(notam.effectivePeriodDescription)
-                .font(.caption2)
-                .foregroundStyle(.tertiary)
+                .font(AviationFont.timestamp())
+                .foregroundStyle(Color("TextDisabled"))
         }
-        .padding()
+        .padding(AviationTheme.Spacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .background(Color("Graphite"))
+        .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium))
+        .overlay(
+            RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
+                .stroke(Color.white.opacity(0.08), lineWidth: 1)
+        )
     }
 
     private func diffSection(previous: NOTAM, current: NOTAM) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Label("Changes", systemImage: "arrow.triangle.2.circlepath")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+            SimpleSectionHeader(title: "CHANGES")
 
-            VStack(alignment: .leading, spacing: 12) {
-                if previous.text != current.text {
-                    diffRow(label: "Text", old: previous.text, new: current.text)
-                }
+            GlassCard {
+                VStack(alignment: .leading, spacing: AviationTheme.Spacing.md) {
+                    if previous.text != current.text {
+                        diffRow(label: "Text", old: previous.text, new: current.text)
+                    }
 
-                if previous.effectiveStart != current.effectiveStart {
-                    diffRow(
-                        label: "Start Date",
-                        old: formatDate(previous.effectiveStart),
-                        new: formatDate(current.effectiveStart)
-                    )
-                }
+                    if previous.effectiveStart != current.effectiveStart {
+                        diffRow(
+                            label: "Start Date",
+                            old: formatDate(previous.effectiveStart),
+                            new: formatDate(current.effectiveStart)
+                        )
+                    }
 
-                if previous.effectiveEnd != current.effectiveEnd {
-                    diffRow(
-                        label: "End Date",
-                        old: previous.effectiveEnd.map { formatDate($0) } ?? "None",
-                        new: current.effectiveEnd.map { formatDate($0) } ?? "None"
-                    )
-                }
+                    if previous.effectiveEnd != current.effectiveEnd {
+                        diffRow(
+                            label: "End Date",
+                            old: previous.effectiveEnd.map { formatDate($0) } ?? "None",
+                            new: current.effectiveEnd.map { formatDate($0) } ?? "None"
+                        )
+                    }
 
-                if previous.type != current.type {
-                    diffRow(
-                        label: "Type",
-                        old: previous.type.displayName,
-                        new: current.type.displayName
-                    )
+                    if previous.type != current.type {
+                        diffRow(
+                            label: "Type",
+                            old: previous.type.displayName,
+                            new: current.type.displayName
+                        )
+                    }
                 }
             }
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
     }
 
     private func diffRow(label: String, old: String, new: String) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(label)
-                .font(.caption.bold())
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.xs) {
+            Text(label.uppercased())
+                .font(AviationFont.label())
+                .foregroundStyle(Color("TextTertiary"))
 
-            HStack(alignment: .top, spacing: 8) {
-                VStack(alignment: .leading) {
-                    Text("Before")
-                        .font(.caption2)
-                        .foregroundStyle(.red)
+            HStack(alignment: .top, spacing: AviationTheme.Spacing.sm) {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "minus.circle.fill")
+                            .font(.system(size: 10))
+                        Text("Before")
+                            .font(AviationFont.label())
+                    }
+                    .foregroundStyle(Color("CrimsonPulse"))
+
                     Text(old)
-                        .font(.caption)
+                        .font(AviationFont.bodySecondary())
                         .strikethrough()
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color("TextDisabled"))
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
 
                 Image(systemName: "arrow.right")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color("TextDisabled"))
 
-                VStack(alignment: .leading) {
-                    Text("After")
-                        .font(.caption2)
-                        .foregroundStyle(.green)
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.system(size: 10))
+                        Text("After")
+                            .font(AviationFont.label())
+                    }
+                    .foregroundStyle(Color("AuroraGreen"))
+
                     Text(new)
-                        .font(.caption)
+                        .font(AviationFont.bodySecondary())
+                        .foregroundStyle(Color("TextPrimary"))
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
     }
 
     private var detailsSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Label("Details", systemImage: "info.circle")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
+            SimpleSectionHeader(title: "DETAILS")
 
-            VStack(alignment: .leading, spacing: 12) {
-                detailRow(label: "Detected", value: formatDateTime(change.detectedAt))
-                detailRow(label: "FIR", value: change.notam.affectedFIR)
-                detailRow(label: "Location", value: change.notam.location)
+            GlassCard {
+                VStack(spacing: AviationTheme.Spacing.sm) {
+                    detailRow(label: "Detected", value: formatDateTime(change.detectedAt))
+                    Divider().background(Color.white.opacity(0.1))
+                    detailRow(label: "FIR", value: change.notam.affectedFIR)
+                    Divider().background(Color.white.opacity(0.1))
+                    detailRow(label: "Location", value: change.notam.location)
+                }
             }
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
     }
 
     private func detailRow(label: String, value: String) -> some View {
         HStack {
             Text(label)
-                .foregroundStyle(.secondary)
+                .font(AviationFont.bodySecondary())
+                .foregroundStyle(Color("TextTertiary"))
             Spacer()
             Text(value)
+                .font(AviationFont.bodyPrimary())
+                .foregroundStyle(Color("TextPrimary"))
         }
-        .font(.caption)
     }
 
     private var changeColor: Color {
         switch change.changeType {
-        case .new: return .green
-        case .expired: return .gray
-        case .modified: return .orange
-        case .cancelled: return .red
+        case .new: return Color("AuroraGreen")
+        case .expired: return Color("TextDisabled")
+        case .modified: return Color("AmberAlert")
+        case .cancelled: return Color("CrimsonPulse")
         }
     }
 
