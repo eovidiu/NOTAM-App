@@ -55,29 +55,51 @@ struct SettingsView: View {
                 subtitle: "Tap to enable/disable, swipe to delete"
             )
 
-            GlassCard {
-                VStack(spacing: 0) {
-                    ForEach(Array(settingsStore.settings.configuredFIRs.enumerated()), id: \.element.id) { index, fir in
-                        if index > 0 {
-                            Divider()
-                                .background(Color.white.opacity(0.1))
-                        }
-
+            if settingsStore.settings.configuredFIRs.isEmpty {
+                GlassCard {
+                    Text("No FIRs configured")
+                        .font(AviationFont.bodySecondary())
+                        .foregroundStyle(Color("TextDisabled"))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, AviationTheme.Spacing.md)
+                }
+            } else {
+                // Use List for native swipe-to-delete support
+                List {
+                    ForEach(settingsStore.settings.configuredFIRs) { fir in
                         FIRRowView(fir: fir) {
                             HapticManager.shared.light()
                             settingsStore.toggleFIR(fir)
                         }
-                        .padding(.vertical, AviationTheme.Spacing.xs)
+                        .listRowBackground(Color("Graphite"))
+                        .listRowSeparatorTint(Color.white.opacity(0.1))
                     }
-
-                    if settingsStore.settings.configuredFIRs.isEmpty {
-                        Text("No FIRs configured")
-                            .font(AviationFont.bodySecondary())
-                            .foregroundStyle(Color("TextDisabled"))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, AviationTheme.Spacing.md)
+                    .onDelete { indexSet in
+                        HapticManager.shared.medium()
+                        for index in indexSet {
+                            let fir = settingsStore.settings.configuredFIRs[index]
+                            settingsStore.removeFIR(fir)
+                        }
                     }
                 }
+                .listStyle(.plain)
+                .scrollDisabled(true)
+                .frame(height: CGFloat(settingsStore.settings.configuredFIRs.count) * 52)
+                .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.large))
+                .overlay(
+                    RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.large)
+                        .stroke(
+                            LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.12),
+                                    Color.white.opacity(0.04)
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                )
             }
 
             // Action buttons
