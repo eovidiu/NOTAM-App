@@ -11,6 +11,7 @@ struct NOTAMApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(appState)
+                .preferredColorScheme(.dark) // Force dark mode always
                 .onAppear {
                     setupBackgroundTasks()
                 }
