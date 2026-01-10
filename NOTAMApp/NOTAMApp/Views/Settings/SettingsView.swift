@@ -73,6 +73,7 @@ struct SettingsView: View {
                         }
                         .listRowBackground(Color("Graphite"))
                         .listRowSeparatorTint(Color.white.opacity(0.1))
+                        .listRowInsets(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
                     }
                     .onDelete { indexSet in
                         HapticManager.shared.medium()
@@ -414,6 +415,7 @@ struct FIRRowView: View {
                     .font(.system(size: 22))
                     .foregroundStyle(fir.isEnabled ? Color("AuroraGreen") : Color("TextDisabled"))
             }
+            .frame(height: 36)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
