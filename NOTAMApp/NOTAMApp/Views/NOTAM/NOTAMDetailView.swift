@@ -95,8 +95,10 @@ struct NOTAMDetailView: View {
                     }
                 }
 
-                // Sections
-                ForEach(translated.sections) { section in
+                // Sections (filter out redundant Type and Location)
+                ForEach(translated.sections.filter { section in
+                    section.title != "Type" && section.title != "Location"
+                }) { section in
                     sectionCard(section)
                 }
 
