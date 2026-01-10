@@ -102,7 +102,7 @@ struct SettingsView: View {
                 )
             }
 
-            // Action buttons
+            // Action buttons (with top spacing to separate from list)
             HStack(spacing: AviationTheme.Spacing.sm) {
                 Button {
                     HapticManager.shared.buttonTap()
@@ -146,6 +146,7 @@ struct SettingsView: View {
                 }
                 .buttonStyle(.plain)
             }
+            .padding(.top, AviationTheme.Spacing.xs)
         }
     }
 

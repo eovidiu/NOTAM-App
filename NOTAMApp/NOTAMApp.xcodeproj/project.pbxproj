@@ -7,17 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		COMP002A1B2C3D4E5F6A7B8C /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP001A1B2C3D4E5F6A7B8C /* GlassCard.swift */; };
-		COMP004A1B2C3D4E5F6A7B8C /* SeverityBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP003A1B2C3D4E5F6A7B8C /* SeverityBadge.swift */; };
-		COMP006A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP005A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift */; };
-		COMP008A1B2C3D4E5F6A7B8C /* FIRCodePill.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP007A1B2C3D4E5F6A7B8C /* FIRCodePill.swift */; };
-		COMP010A1B2C3D4E5F6A7B8C /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP009A1B2C3D4E5F6A7B8C /* SectionHeader.swift */; };
-		COMP012A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP011A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift */; };
-		COMP014A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP013A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift */; };
-		THEME002A1B2C3D4E5F6A7B8C /* AviationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME001A1B2C3D4E5F6A7B8C /* AviationTheme.swift */; };
-		THEME004A1B2C3D4E5F6A7B8C /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME003A1B2C3D4E5F6A7B8C /* Typography.swift */; };
-		THEME006A1B2C3D4E5F6A7B8C /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME005A1B2C3D4E5F6A7B8C /* Animation.swift */; };
-		THEME008A1B2C3D4E5F6A7B8C /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME007A1B2C3D4E5F6A7B8C /* HapticManager.swift */; };
 		049F5C8E77375A2535672970 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4346817BF89EF2F0E0B30 /* NOTAM.swift */; };
 		0A1B2C3D4E5F6A7B8C9D0E1F /* fir_coordinates.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */; };
 		1A2B3C4D5E6F7A8B9C0D1E2F /* ATSUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2 /* ATSUnit.swift */; };
@@ -47,25 +36,25 @@
 		A9C60573E40453F47A4E739F /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12CC2ACC54E54CD5BC63480 /* SettingsStore.swift */; };
 		B1D1AAD0B9FB21945EEDC011 /* NOTAMCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950BFB1FBBB0784740E12C /* NOTAMCache.swift */; };
 		C09EC06E3D5225039D909528 /* AddFIRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1D8DBE22D3310BD0600053 /* AddFIRView.swift */; };
+		COMP002A1B2C3D4E5F6A7B8C /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP001A1B2C3D4E5F6A7B8C /* GlassCard.swift */; };
+		COMP004A1B2C3D4E5F6A7B8C /* SeverityBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP003A1B2C3D4E5F6A7B8C /* SeverityBadge.swift */; };
+		COMP006A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP005A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift */; };
+		COMP008A1B2C3D4E5F6A7B8C /* FIRCodePill.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP007A1B2C3D4E5F6A7B8C /* FIRCodePill.swift */; };
+		COMP010A1B2C3D4E5F6A7B8C /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP009A1B2C3D4E5F6A7B8C /* SectionHeader.swift */; };
+		COMP012A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP011A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift */; };
+		COMP014A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP013A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift */; };
 		D1E2F3A4B5C6D7E8F9A0B1C2 /* NotifiedNOTAMStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3A4B5C6D7E8F9A0B1C2D3 /* NotifiedNOTAMStore.swift */; };
 		D5050FF21DCA10F5EE52A7FB /* NOTAMDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F99420AD9E947887C4ABB7F /* NOTAMDetailView.swift */; };
 		EB979F4CB55E5635397EC2B6 /* NOTAMTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D77C2EDF21A0D1BEF1DCFA /* NOTAMTranslator.swift */; };
 		FA04A69076DFBE35F9B15F83 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18D2D6B342E5B1AAFF62603 /* LoadingView.swift */; };
 		FCD068C161A14269EB480276 /* ChangeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE39DDA7833A34986170042 /* ChangeDetailView.swift */; };
+		THEME002A1B2C3D4E5F6A7B8C /* AviationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME001A1B2C3D4E5F6A7B8C /* AviationTheme.swift */; };
+		THEME004A1B2C3D4E5F6A7B8C /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME003A1B2C3D4E5F6A7B8C /* Typography.swift */; };
+		THEME006A1B2C3D4E5F6A7B8C /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME005A1B2C3D4E5F6A7B8C /* Animation.swift */; };
+		THEME008A1B2C3D4E5F6A7B8C /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME007A1B2C3D4E5F6A7B8C /* HapticManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		COMP001A1B2C3D4E5F6A7B8C /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
-		COMP003A1B2C3D4E5F6A7B8C /* SeverityBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeverityBadge.swift; sourceTree = "<group>"; };
-		COMP005A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMIDBadge.swift; sourceTree = "<group>"; };
-		COMP007A1B2C3D4E5F6A7B8C /* FIRCodePill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRCodePill.swift; sourceTree = "<group>"; };
-		COMP009A1B2C3D4E5F6A7B8C /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
-		COMP011A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSearchBar.swift; sourceTree = "<group>"; };
-		COMP013A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineProgressBar.swift; sourceTree = "<group>"; };
-		THEME001A1B2C3D4E5F6A7B8C /* AviationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AviationTheme.swift; sourceTree = "<group>"; };
-		THEME003A1B2C3D4E5F6A7B8C /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
-		THEME005A1B2C3D4E5F6A7B8C /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
-		THEME007A1B2C3D4E5F6A7B8C /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		0E1D091D1CA230B52FC8F906 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMApp.swift; sourceTree = "<group>"; };
 		18F27F61073120598BAF9139 /* NOTAMChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChange.swift; sourceTree = "<group>"; };
@@ -95,6 +84,13 @@
 		C3D4E5F6A7B8C9D0E1F2A3B4 /* ats_units.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ats_units.json; sourceTree = "<group>"; };
 		C4405DD65162EEF1D3ED570D /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		C8E4346817BF89EF2F0E0B30 /* NOTAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAM.swift; sourceTree = "<group>"; };
+		COMP001A1B2C3D4E5F6A7B8C /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
+		COMP003A1B2C3D4E5F6A7B8C /* SeverityBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeverityBadge.swift; sourceTree = "<group>"; };
+		COMP005A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMIDBadge.swift; sourceTree = "<group>"; };
+		COMP007A1B2C3D4E5F6A7B8C /* FIRCodePill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRCodePill.swift; sourceTree = "<group>"; };
+		COMP009A1B2C3D4E5F6A7B8C /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		COMP011A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSearchBar.swift; sourceTree = "<group>"; };
+		COMP013A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineProgressBar.swift; sourceTree = "<group>"; };
 		DA38FC41A96F52CC43C2BE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E2F3A4B5C6D7E8F9A0B1C2D3 /* NotifiedNOTAMStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifiedNOTAMStore.swift; sourceTree = "<group>"; };
 		E56AECC454BC4598DE3045C5 /* NOTAMRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMRowView.swift; sourceTree = "<group>"; };
@@ -102,6 +98,10 @@
 		FA1D8DBE22D3310BD0600053 /* AddFIRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFIRView.swift; sourceTree = "<group>"; };
 		FDB2DEC8FA88FF9D23A3CF9B /* NOTAMChangeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChangeDetector.swift; sourceTree = "<group>"; };
 		FDEF4102D5405B506176529F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		THEME001A1B2C3D4E5F6A7B8C /* AviationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AviationTheme.swift; sourceTree = "<group>"; };
+		THEME003A1B2C3D4E5F6A7B8C /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		THEME005A1B2C3D4E5F6A7B8C /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		THEME007A1B2C3D4E5F6A7B8C /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -220,6 +220,20 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		COMP015A1B2C3D4E5F6A7B8C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				COMP007A1B2C3D4E5F6A7B8C /* FIRCodePill.swift */,
+				COMP001A1B2C3D4E5F6A7B8C /* GlassCard.swift */,
+				COMP005A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift */,
+				COMP011A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift */,
+				COMP009A1B2C3D4E5F6A7B8C /* SectionHeader.swift */,
+				COMP003A1B2C3D4E5F6A7B8C /* SeverityBadge.swift */,
+				COMP013A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		D4E5F6A7B8C9D0E1F2A3B4C5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,20 +252,6 @@
 				THEME003A1B2C3D4E5F6A7B8C /* Typography.swift */,
 			);
 			path = Theme;
-			sourceTree = "<group>";
-		};
-		COMP015A1B2C3D4E5F6A7B8C /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				COMP007A1B2C3D4E5F6A7B8C /* FIRCodePill.swift */,
-				COMP001A1B2C3D4E5F6A7B8C /* GlassCard.swift */,
-				COMP005A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift */,
-				COMP011A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift */,
-				COMP009A1B2C3D4E5F6A7B8C /* SectionHeader.swift */,
-				COMP003A1B2C3D4E5F6A7B8C /* SeverityBadge.swift */,
-				COMP013A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -472,7 +472,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -564,7 +564,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.notamapp.NOTAMApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
