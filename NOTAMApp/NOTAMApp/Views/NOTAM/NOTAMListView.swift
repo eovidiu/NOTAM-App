@@ -97,8 +97,7 @@ struct NOTAMListView: View {
                     }
                 }
             }
-            .navigationTitle("NOTAMs")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color("DeepSpace"), for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .navigationDestination(for: NOTAM.self) { notam in
@@ -109,6 +108,17 @@ struct NOTAMListView: View {
                 await appState.refresh()
             }
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    VStack(spacing: 2) {
+                        Text("NOTAMs")
+                            .font(.headline)
+                            .foregroundStyle(Color("TextPrimary"))
+                        Text(headerSubtitle)
+                            .font(AviationFont.caption())
+                            .foregroundStyle(Color("TextSecondary"))
+                    }
+                }
+
                 ToolbarItem(placement: .primaryAction) {
                     if appState.isLoading {
                         ProgressView()
@@ -159,15 +169,20 @@ struct NOTAMListView: View {
                     .font(.caption)
             }
         } label: {
+            // Pill badge showing count
             HStack(spacing: 4) {
-                Image(systemName: showInactiveNotams ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
-                if !showInactiveNotams {
-                    Text("Active")
-                        .font(AviationFont.label())
-                }
+                Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                Text(showInactiveNotams ? "All" : "Active")
+                    .font(AviationFont.label())
             }
             .foregroundStyle(Color("ElectricCyan"))
         }
+    }
+
+    /// Header subtitle showing active count (matches mockup "23 Active" style)
+    private var headerSubtitle: String {
+        let count = showInactiveNotams ? totalNotamsCount : activeNotamsCount
+        return "\(count) Active"
     }
 
     private var notamList: some View {
