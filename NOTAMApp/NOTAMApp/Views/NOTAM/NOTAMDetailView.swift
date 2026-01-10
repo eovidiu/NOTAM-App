@@ -82,22 +82,13 @@ struct NOTAMDetailView: View {
                     currentDate: Date()
                 )
 
-                // Summary card
-                GlassCard {
-                    VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
-                        Label("Summary", systemImage: "text.alignleft")
-                            .font(AviationFont.label())
-                            .foregroundStyle(Color("TextTertiary"))
-
-                        Text(translated.summary)
-                            .font(AviationFont.cardTitle())
-                            .foregroundStyle(Color("TextPrimary"))
-                    }
-                }
-
-                // Sections (filter out redundant Type and Location)
+                // Sections (filter out redundant ones already shown elsewhere)
                 ForEach(translated.sections.filter { section in
-                    section.title != "Type" && section.title != "Location"
+                    section.title != "Type" &&
+                    section.title != "Location" &&
+                    section.title != "Summary" &&
+                    section.title != "Effective Period" &&
+                    section.title != "Coordinates"
                 }) { section in
                     sectionCard(section)
                 }
@@ -145,6 +136,19 @@ struct NOTAMDetailView: View {
         .padding(AviationTheme.Spacing.md)
     }
 
+    /// Full location name from ATSUnitService (e.g., "Bucharest Henri Coanda")
+    private var locationFullName: String? {
+        ATSUnitService.shared.unit(byICAO: notam.location)?.name
+    }
+
+    /// Formatted location string (e.g., "LROP - Bucharest Henri Coanda")
+    private var formattedLocation: String {
+        if let fullName = locationFullName {
+            return "\(notam.location) - \(fullName)"
+        }
+        return notam.location
+    }
+
     private var heroHeader: some View {
         VStack(alignment: .leading, spacing: AviationTheme.Spacing.sm) {
             HStack {
@@ -153,13 +157,25 @@ struct NOTAMDetailView: View {
                 SeverityBadge(severity: notam.severity, style: .expanded)
             }
 
+            // Location with full name
             HStack(spacing: 6) {
                 Image(systemName: "mappin")
                     .font(.system(size: 14, weight: .medium))
-                Text(notam.location)
+                Text(formattedLocation)
                     .font(AviationFont.bodyPrimary())
             }
             .foregroundStyle(Color("TextSecondary"))
+
+            // Coordinates (if available)
+            if let coords = notam.coordinates {
+                HStack(spacing: 6) {
+                    Image(systemName: "location")
+                        .font(.system(size: 12, weight: .medium))
+                    Text(formatCoordinates(coords))
+                        .font(AviationFont.caption())
+                }
+                .foregroundStyle(Color("TextDisabled"))
+            }
         }
         .padding(AviationTheme.Spacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -178,6 +194,14 @@ struct NOTAMDetailView: View {
             RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.large)
                 .stroke(notam.severity.themeColor.opacity(0.3), lineWidth: 1)
         )
+    }
+
+    private func formatCoordinates(_ coords: Coordinates) -> String {
+        let latDir = coords.latitude >= 0 ? "N" : "S"
+        let lonDir = coords.longitude >= 0 ? "E" : "W"
+        let lat = abs(coords.latitude)
+        let lon = abs(coords.longitude)
+        return String(format: "%.4f°%@, %.4f°%@", lat, latDir, lon, lonDir)
     }
 
     private var statusCard: some View {
