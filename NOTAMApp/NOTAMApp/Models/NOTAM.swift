@@ -217,10 +217,26 @@ struct NOTAMResponseItem: Codable {
             ?? plainLanguageMessage
             ?? "No message available"
 
-        // Parse notam number for series (e.g., "LTA-N90-114" -> series="LTA", number="N90-114")
-        let parts = notamNum.split(separator: "-", maxSplits: 1)
-        let series = parts.count > 0 ? String(parts[0]) : "N"
-        let number = parts.count > 1 ? String(parts[1]) : notamNum
+        // Parse notam number for series and number
+        // Format 1: "LTA-N90-114" -> series="LTA", number="N90-114"
+        // Format 2: "A0172/26" -> series="A", number="0172/26"
+        let series: String
+        let number: String
+
+        if notamNum.contains("-") {
+            // Hyphen-separated format (e.g., "LTA-N90-114")
+            let parts = notamNum.split(separator: "-", maxSplits: 1)
+            series = parts.count > 0 ? String(parts[0]) : "N"
+            number = parts.count > 1 ? String(parts[1]) : notamNum
+        } else if let firstChar = notamNum.first, firstChar.isLetter {
+            // Letter-prefixed format (e.g., "A0172/26")
+            series = String(firstChar)
+            number = String(notamNum.dropFirst())
+        } else {
+            // Fallback: no series
+            series = ""
+            number = notamNum
+        }
 
         // Date formatter for FAA format: "MM/dd/yyyy HHmm"
         let faaDateFormatter = DateFormatter()
