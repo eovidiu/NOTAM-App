@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		COMP002A1B2C3D4E5F6A7B8C /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP001A1B2C3D4E5F6A7B8C /* GlassCard.swift */; };
+		COMP004A1B2C3D4E5F6A7B8C /* SeverityBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP003A1B2C3D4E5F6A7B8C /* SeverityBadge.swift */; };
+		COMP006A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP005A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift */; };
+		COMP008A1B2C3D4E5F6A7B8C /* FIRCodePill.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP007A1B2C3D4E5F6A7B8C /* FIRCodePill.swift */; };
+		COMP010A1B2C3D4E5F6A7B8C /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP009A1B2C3D4E5F6A7B8C /* SectionHeader.swift */; };
+		COMP012A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP011A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift */; };
+		COMP014A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP013A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift */; };
+		THEME002A1B2C3D4E5F6A7B8C /* AviationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME001A1B2C3D4E5F6A7B8C /* AviationTheme.swift */; };
+		THEME004A1B2C3D4E5F6A7B8C /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME003A1B2C3D4E5F6A7B8C /* Typography.swift */; };
+		THEME006A1B2C3D4E5F6A7B8C /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME005A1B2C3D4E5F6A7B8C /* Animation.swift */; };
+		THEME008A1B2C3D4E5F6A7B8C /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = THEME007A1B2C3D4E5F6A7B8C /* HapticManager.swift */; };
 		049F5C8E77375A2535672970 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4346817BF89EF2F0E0B30 /* NOTAM.swift */; };
 		0A1B2C3D4E5F6A7B8C9D0E1F /* fir_coordinates.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */; };
 		1A2B3C4D5E6F7A8B9C0D1E2F /* ATSUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2 /* ATSUnit.swift */; };
@@ -44,6 +55,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		COMP001A1B2C3D4E5F6A7B8C /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
+		COMP003A1B2C3D4E5F6A7B8C /* SeverityBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeverityBadge.swift; sourceTree = "<group>"; };
+		COMP005A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMIDBadge.swift; sourceTree = "<group>"; };
+		COMP007A1B2C3D4E5F6A7B8C /* FIRCodePill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRCodePill.swift; sourceTree = "<group>"; };
+		COMP009A1B2C3D4E5F6A7B8C /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		COMP011A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSearchBar.swift; sourceTree = "<group>"; };
+		COMP013A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineProgressBar.swift; sourceTree = "<group>"; };
+		THEME001A1B2C3D4E5F6A7B8C /* AviationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AviationTheme.swift; sourceTree = "<group>"; };
+		THEME003A1B2C3D4E5F6A7B8C /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		THEME005A1B2C3D4E5F6A7B8C /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		THEME007A1B2C3D4E5F6A7B8C /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		0E1D091D1CA230B52FC8F906 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMApp.swift; sourceTree = "<group>"; };
 		18F27F61073120598BAF9139 /* NOTAMChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMChange.swift; sourceTree = "<group>"; };
@@ -145,12 +167,14 @@
 			isa = PBXGroup;
 			children = (
 				C063F104388775531EB0C8B4 /* Assets.xcassets */,
+				COMP015A1B2C3D4E5F6A7B8C /* Components */,
 				1E247CC83F7FEF4ADA5829F1 /* ContentView.swift */,
 				DA38FC41A96F52CC43C2BE6C /* Info.plist */,
 				0E599E88AFC1AFC3A54D799A /* NOTAMApp.swift */,
 				15D8440CC19A75EF35B61605 /* Models */,
 				D4E5F6A7B8C9D0E1F2A3B4C5 /* Resources */,
 				9A934877F04BC7AE96B5463E /* Services */,
+				THEME009A1B2C3D4E5F6A7B8C /* Theme */,
 				430CDA8A1EB79AFC0BBAC633 /* Views */,
 			);
 			path = NOTAMApp;
@@ -203,6 +227,31 @@
 				1B2C3D4E5F6A7B8C9D0E1F2A /* fir_coordinates.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		THEME009A1B2C3D4E5F6A7B8C /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				THEME005A1B2C3D4E5F6A7B8C /* Animation.swift */,
+				THEME001A1B2C3D4E5F6A7B8C /* AviationTheme.swift */,
+				THEME007A1B2C3D4E5F6A7B8C /* HapticManager.swift */,
+				THEME003A1B2C3D4E5F6A7B8C /* Typography.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		COMP015A1B2C3D4E5F6A7B8C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				COMP007A1B2C3D4E5F6A7B8C /* FIRCodePill.swift */,
+				COMP001A1B2C3D4E5F6A7B8C /* GlassCard.swift */,
+				COMP005A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift */,
+				COMP011A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift */,
+				COMP009A1B2C3D4E5F6A7B8C /* SectionHeader.swift */,
+				COMP003A1B2C3D4E5F6A7B8C /* SeverityBadge.swift */,
+				COMP013A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,6 +377,17 @@
 				4A5B6C7D8E9F0A1B2C3D4E5F /* LocationManager.swift in Sources */,
 				6C7D8E9F0A1B2C3D4E5F6A7B /* FIRLocationService.swift in Sources */,
 				8E9F0A1B2C3D4E5F6A7B8C9D /* LocateFIRsView.swift in Sources */,
+				THEME002A1B2C3D4E5F6A7B8C /* AviationTheme.swift in Sources */,
+				THEME004A1B2C3D4E5F6A7B8C /* Typography.swift in Sources */,
+				THEME006A1B2C3D4E5F6A7B8C /* Animation.swift in Sources */,
+				THEME008A1B2C3D4E5F6A7B8C /* HapticManager.swift in Sources */,
+				COMP002A1B2C3D4E5F6A7B8C /* GlassCard.swift in Sources */,
+				COMP004A1B2C3D4E5F6A7B8C /* SeverityBadge.swift in Sources */,
+				COMP006A1B2C3D4E5F6A7B8C /* NOTAMIDBadge.swift in Sources */,
+				COMP008A1B2C3D4E5F6A7B8C /* FIRCodePill.swift in Sources */,
+				COMP010A1B2C3D4E5F6A7B8C /* SectionHeader.swift in Sources */,
+				COMP012A1B2C3D4E5F6A7B8C /* PremiumSearchBar.swift in Sources */,
+				COMP014A1B2C3D4E5F6A7B8C /* TimelineProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
