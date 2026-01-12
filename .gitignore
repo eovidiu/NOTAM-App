@@ -11,3 +11,4 @@ Local.xcconfig
 *.env
 *.env.local
 Secrets.swift
+firebase-debug.log
