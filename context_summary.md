@@ -1,9 +1,9 @@
 # Context Summary
 
 ## Active Context
-- Currently working on: Project complete, ready for testing
+- Currently working on: System specification complete
 - Blocking issues: None
-- Next up: Open in Xcode, build, test API connectivity
+- Next up: Continue development as needed
 
 ## Cross-Cutting Concerns
 - **iOS Version**: iOS 17+ minimum (enables NavigationStack, modern SwiftUI)
@@ -88,3 +88,7 @@
   - 42 features implemented
   - 4 models, 9 services, 11 views
   - Unit tests and UI tests included
+- System specification documented (2026-01-12)
+  - SYSTEM_SPECIFICATION.md created
+  - 13 sections covering all domains
+  - 10 ADRs documenting architectural decisions
