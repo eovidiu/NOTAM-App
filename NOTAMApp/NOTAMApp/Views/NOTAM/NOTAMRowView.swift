@@ -60,22 +60,7 @@ struct NOTAMRowView: View {
             }
         }
         .padding(AviationTheme.Spacing.md)
-        .background(Color("Graphite"))
-        .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium))
-        .overlay(
-            RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
-                .stroke(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(0.12),
-                            Color.white.opacity(0.04)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
-                    lineWidth: 1
-                )
-        )
+        .glassBackground()
     }
 
     private var summaryText: String {

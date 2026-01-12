@@ -214,7 +214,7 @@ struct NOTAMDetailView: View {
                         Text(notam.severity.label.uppercased())
                             .font(AviationFont.label())
                         Spacer()
-                        Text(severityDescription)
+                        Text(notam.severity.description)
                             .font(AviationFont.caption())
                     }
                     .foregroundStyle(.white)
@@ -263,23 +263,10 @@ struct NOTAMDetailView: View {
                             .foregroundStyle(Color("TextDisabled"))
                         Text(notam.type.displayName)
                             .font(AviationFont.cardTitle())
-                            .foregroundStyle(typeColor)
+                            .foregroundStyle(notam.type.color)
                     }
                 }
             }
-        }
-    }
-
-    private var severityDescription: String {
-        switch notam.severity {
-        case .critical:
-            return "Major operational impact"
-        case .warning:
-            return "Significant restriction"
-        case .caution:
-            return "Exercise caution"
-        case .info:
-            return "Informational"
         }
     }
 
@@ -374,14 +361,6 @@ struct NOTAMDetailView: View {
 
     // MARK: - Helpers
 
-    private var typeColor: Color {
-        switch notam.type {
-        case .new: return Color("ElectricCyan")
-        case .replacement: return Color("AmberAlert")
-        case .cancellation: return Color("CrimsonPulse")
-        }
-    }
-
     private var shareText: String {
         """
         NOTAM \(notam.displayId)
@@ -393,11 +372,15 @@ struct NOTAMDetailView: View {
     }
 
     private func formatDateTime(_ date: Date) -> String {
+        Self.dateTimeFormatter.string(from: date)
+    }
+
+    private static let dateTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
-        return formatter.string(from: date)
-    }
+        return formatter
+    }()
 }
 
 // MARK: - Tab

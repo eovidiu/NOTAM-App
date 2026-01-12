@@ -49,6 +49,15 @@ enum NOTAMSeverity: String, Codable, CaseIterable {
         case .info: return "Active"
         }
     }
+
+    var description: String {
+        switch self {
+        case .critical: return "Major operational impact"
+        case .warning: return "Significant restriction"
+        case .caution: return "Exercise caution"
+        case .info: return "Informational"
+        }
+    }
 }
 
 /// Represents a single NOTAM (Notice to Air Missions)
@@ -138,24 +147,27 @@ struct NOTAM: Codable, Identifiable, Hashable {
     }
 
     var effectivePeriodDescription: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-
-        let start = formatter.string(from: effectiveStart)
+        let start = Self.dateTimeFormatter.string(from: effectiveStart)
 
         if isPermanent {
             return "\(start) - PERMANENT"
         }
 
         if let end = effectiveEnd {
-            let endStr = formatter.string(from: end)
+            let endStr = Self.dateTimeFormatter.string(from: end)
             let suffix = isEstimatedEnd ? " (EST)" : ""
             return "\(start) - \(endStr)\(suffix)"
         }
 
         return "\(start) - Unknown"
     }
+
+    private static let dateTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
 }
 
 enum NOTAMType: String, Codable, CaseIterable {
@@ -168,6 +180,14 @@ enum NOTAMType: String, Codable, CaseIterable {
         case .new: return "New"
         case .replacement: return "Replacement"
         case .cancellation: return "Cancellation"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .new: return Color("ElectricCyan")
+        case .replacement: return Color("AmberAlert")
+        case .cancellation: return Color("CrimsonPulse")
         }
     }
 }

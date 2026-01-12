@@ -105,47 +105,23 @@ struct SettingsView: View {
 
             // Action buttons (with top spacing to separate from list)
             HStack(spacing: AviationTheme.Spacing.sm) {
-                Button {
+                ActionButton(
+                    title: "Add FIR",
+                    icon: "plus.circle",
+                    color: Color("ElectricCyan")
+                ) {
                     HapticManager.shared.buttonTap()
                     showAddFIR = true
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: "plus.circle")
-                        Text("Add FIR")
-                    }
-                    .font(AviationFont.cardTitle())
-                    .foregroundStyle(Color("ElectricCyan"))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, AviationTheme.Spacing.sm)
-                    .background(Color("ElectricCyan").opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
-                            .stroke(Color("ElectricCyan").opacity(0.3), lineWidth: 1)
-                    )
                 }
-                .buttonStyle(.plain)
 
-                Button {
+                ActionButton(
+                    title: "Near Me",
+                    icon: "location.circle",
+                    color: Color("AuroraGreen")
+                ) {
                     HapticManager.shared.buttonTap()
                     showLocateFIRs = true
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: "location.circle")
-                        Text("Near Me")
-                    }
-                    .font(AviationFont.cardTitle())
-                    .foregroundStyle(Color("AuroraGreen"))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, AviationTheme.Spacing.sm)
-                    .background(Color("AuroraGreen").opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
-                            .stroke(Color("AuroraGreen").opacity(0.3), lineWidth: 1)
-                    )
                 }
-                .buttonStyle(.plain)
             }
             .padding(.top, AviationTheme.Spacing.xs)
         }
@@ -386,6 +362,34 @@ struct SettingsView: View {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url)
         }
+    }
+}
+
+/// Reusable action button with consistent glass styling
+private struct ActionButton: View {
+    let title: String
+    let icon: String
+    let color: Color
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 6) {
+                Image(systemName: icon)
+                Text(title)
+            }
+            .font(AviationFont.cardTitle())
+            .foregroundStyle(color)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, AviationTheme.Spacing.sm)
+            .background(color.opacity(0.1))
+            .clipShape(RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium))
+            .overlay(
+                RoundedRectangle(cornerRadius: AviationTheme.CornerRadius.medium)
+                    .stroke(color.opacity(0.3), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
     }
 }
 
