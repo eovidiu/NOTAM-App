@@ -6,6 +6,7 @@ struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @StateObject private var changeStore = ChangeStore.shared
     @StateObject private var notificationManager = NotificationManager.shared
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         // Configure tab bar appearance
@@ -38,6 +39,12 @@ struct ContentView: View {
             // Request notification permissions on first launch
             if notificationManager.authorizationStatus == .notDetermined {
                 _ = await notificationManager.requestAuthorization()
+            }
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                // Clear app badge when app becomes active
+                notificationManager.clearBadge()
             }
         }
     }

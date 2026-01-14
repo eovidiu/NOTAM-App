@@ -54,6 +54,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
+        // Clear badge when user taps notification
+        NotificationManager.shared.clearBadge()
+
         if let notamId = response.notification.request.content.userInfo["notamId"] as? String {
             NotificationCenter.default.post(
                 name: .didTapNotification,
